@@ -15,7 +15,6 @@
     "vue-ribbon": "^1.0.1",
     "vue-router": "^3.3.4",
     "vue-stack-grid": "^1.2.1",
-<<<<<<< HEAD
     "vuetify": "^2.3.6",
     "vuex": "^3.5.1"
   },
@@ -24,42 +23,20 @@
     "@vue/cli-plugin-router": "^4.4.6",
     "@vue/cli-plugin-vuex": "^4.4.6",
     "@vue/cli-service": "^4.4.6",
-=======
-    "vuetify": "^2.3.1",
-    "vuex": "^3.4.0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.4.5",
-    "@vue/cli-plugin-router": "^4.4.5",
-    "@vue/cli-plugin-vuex": "^4.4.5",
-    "@vue/cli-service": "^4.4.5",
->>>>>>> 50ed1d82b7c2155071d2349ad2f8c8d4544c08e1
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-import-resolver-webpack": "^0.12.2",
     "eslint-loader": "^4.0.0",
-<<<<<<< HEAD
     "eslint-plugin-import": "^2.22.0",
-=======
-    "eslint-plugin-import": "^2.20.2",
->>>>>>> 50ed1d82b7c2155071d2349ad2f8c8d4544c08e1
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-vue": "^6.2.2",
     "prettier": "^2.0.4",
-<<<<<<< HEAD
     "sass": "^1.26.10",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-vuetify": "^2.0.7",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.6.0"
-=======
-    "sass": "^1.19.0",
-    "sass-loader": "^8.0.0",
-    "vue-cli-plugin-vuetify": "~2.0.5",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.5.0"
->>>>>>> 50ed1d82b7c2155071d2349ad2f8c8d4544c08e1
   }
 }
