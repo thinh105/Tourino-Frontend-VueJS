@@ -32,10 +32,6 @@
 </script>
 
 <style scoped>
-  /* clip-path: polygon(0 0, 100% 0%, 100% 90%, 0% 100%); */
-  .v-carousel {
-  }
-
   .image-link {
     /* background-color: green; */
     top: 12%;

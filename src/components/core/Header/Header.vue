@@ -2,15 +2,14 @@
   <v-app-bar color="#003C71CC" app absolute>
     <v-container>
       <v-row align="center" class="mx-1">
-        <v-app-bar-nav-icon left class="hidden-md-and-up" />
+        <v-app-bar-nav-icon left class="hidden-md-and-up mx-n4" />
         <router-link
           style="text-decoration: none;"
           class="text-h5 text-md-h4 text-sm-center white--text px-2 py-1"
           :to="'/'"
         >
           <v-img
-            height="100%"
-            width="25vw"
+            min-width="15 0px"
             max-width="200px"
             alt="tourino logo"
             :src="require('@/assets/tourino.png')"

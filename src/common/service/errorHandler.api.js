@@ -1,9 +1,12 @@
 import store from '@/store';
 
 export default function errorResponseHandler(error) {
-  // check for errorHandle config
-
-  if (error.config.errorHandle && error.config.errorHandle === false) {
+  // check for errorHandle config -- allow to turn off error handling
+  if (
+    Object.prototype.hasOwnProperty.call(error.config, 'errorHandle') &&
+    error.config.errorHandle === false
+  ) {
+    console.log('turn off Api Error Handler!! ');
     return Promise.reject(error);
   }
 
@@ -14,7 +17,7 @@ export default function errorResponseHandler(error) {
     console.log(error.response.data);
 
     store.dispatch('setError', {
-      message: error.response.data.message,
+      message: `[Tourino] ApiService: ${error.response.data.message}`,
     });
   } else if (error.request) {
     // The request was made but no response was received
@@ -24,7 +27,7 @@ export default function errorResponseHandler(error) {
     console.log(error.request);
 
     store.dispatch('setError', {
-      message: 'Error: Network Error!!!',
+      message: '[Tourino] API Server Error: Network Error!!!',
     });
   } else {
     // Something happened in setting up the request that triggered an Error

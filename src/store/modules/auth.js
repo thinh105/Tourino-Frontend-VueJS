@@ -1,5 +1,5 @@
-import ApiService from '@/common/service/api';
-import JwtService from '@/common/service/jwt';
+import authsService from '@/common/service/auth.api';
+import JwtService from '@/common/jwt';
 import {
   LOGIN,
   LOGOUT,
@@ -12,73 +12,71 @@ import { SET_AUTH, PURGE_AUTH, SET_ERROR } from '../type/mutations.js';
 
 const state = {
   user: null,
-  // // isAuthenticated: !!JwtService.getToken(),
-  // isAuthenticated: null,
 };
 
 const getters = {
   currentUser: (state) => state.user,
-  // isAuthenticated: (state) => state.isAuthenticated,
+};
+
+const catchErrors = (functionToHandle) => (...handledFunctionParams) => {
+  functionToHandle(...handledFunctionParams).catch((e) => {
+    console.log('catch cho vui!!!');
+  });
 };
 
 const actions = {
-  // async [LOGIN]({ dispatch }, credentials) {
-  //   const data = await ApiService.post('users/login', credentials);
-  //   console.log(data);
-  //   JwtService.saveToken(data.token);
-  //   dispatch(CHECK_AUTH, data.token);
+  // async [LOGIN]({ commit }, credentials) {
+  //   const { data } = await authsService.login(credentials);
+  //   if (data) commit(SET_AUTH, data.data);
   // },
-  [LOGIN]({ dispatch }, credentials) {
-    ApiService.post('users/login', credentials)
-      .then((ok) => console.log('ok', ok))
-      .catch((e) => console.log('e', e));
+
+  [LOGIN]: catchErrors(async ({ commit }, credentials) => {
+    const { data } = await authsService.login(credentials);
+    commit(SET_AUTH, data.data);
+  }),
+
+  [LOGOUT]({ commit }) {
+    commit(PURGE_AUTH);
   },
 
-  //     try {
-  // }
-  // catch (error) {
-  //   const loginError = error.response
-  //     ? error.response.data.error
-  //     : { message: 'Error: Network Error!!!' };
-
-  //   commit(SET_ERROR, loginError);
-  //   throw new Error(loginError);
-
-  [LOGOUT](context) {
-    context.commit(PURGE_AUTH);
+  async [REGISTER]({ commit }, newUser) {
+    const { data } = await authsService.register(newUser);
+    commit(SET_AUTH, data.data);
+    //     try {
+    // } catch ({ response }) {
+    //   commit(SET_ERROR, response.data.error);
+    //   throw new Error(response.data.error);
+    // }
   },
-  async [REGISTER]({ commit }, credentials) {
-    try {
-      const { data } = await ApiService.post('user/signup', credentials);
-      commit(SET_AUTH, data.data);
-    } catch ({ response }) {
-      commit(SET_ERROR, response.data.error);
-      throw new Error(response.data.error);
+
+  [CHECK_AUTH]: catchErrors(async ({ commit }) => {
+    const token = JwtService.getToken();
+    authsService.setHeader(token);
+    if (token && !state.user) {
+      const { data } = await authsService.checkAuth();
+      commit(SET_AUTH, { user: data.data, token });
     }
-  },
-
-  async [CHECK_AUTH]({ commit }, payload = null) {
-    const token = payload || JwtService.getToken();
-
-    if (token) {
-      ApiService.setHeader(token);
-
+  }),
+  /*    if (token && !state.user) {
       try {
-        const { data } = await ApiService.get('users/me');
-        console.log('data day nay:', data);
-
-        // commit(SET_AUTH, { data.data, token });
       } catch (error) {
-        const checkAuthError = error.response
+        const AuthError = error.response
           ? error.response.data.error
           : { message: error };
 
-        ApiService.deleteHeader();
-        commit(SET_ERROR, checkAuthError);
-        throw new Error(error.response.data.error);
+        console.log('loi check auth roi!!!!', AuthError);
+
+        authsService.deleteHeader();
+
+        commit(SET_ERROR, AuthError);
       }
-    }
-  },
+      // throw new Error(error.response.data.error);
+    } */
+  // else {
+  //   console.log('khong co token nen out nhe!!!');
+  //   commit(PURGE_AUTH);
+  // }
+  // },
 
   async [UPDATE_USER]({ commit }, updatedUser) {
     try {
@@ -93,26 +91,20 @@ const actions = {
 };
 
 const mutations = {
-  [SET_ERROR](state, error) {
-    state.errors = error;
-  },
   [SET_AUTH](state, payload) {
-    console.log(payload);
     const { user, token } = payload;
-    state.isAuthenticated = true;
-    console.log(user);
-    console.log(token);
-    state.user = user;
-    state.errors = {};
-  },
-  [PURGE_AUTH](state) {
-    state.isAuthenticated = false;
 
-    state.user = {};
-    state.errors = {};
+    state.user = user;
+
+    if (token) JwtService.saveToken(token);
+    authsService.setHeader(token);
+  },
+
+  [PURGE_AUTH](state) {
+    state.user = null;
 
     JwtService.destroyToken();
-    ApiService.deleteHeader();
+    authsService.deleteHeader();
   },
 };
 

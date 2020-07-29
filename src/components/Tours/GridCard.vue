@@ -131,9 +131,6 @@
     font-size: 1.8em;
   }
 
-  .grid-card {
-  }
-
   .v-image {
     clip-path: polygon(0 0, 100% 0%, 100% 85%, 0% 100%);
   }

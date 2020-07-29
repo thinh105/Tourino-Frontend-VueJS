@@ -13,6 +13,7 @@
     margin: auto;
     height: 100%;
     width: 100%;
+    background: white;
   }
 
   .base-card:hover {
@@ -31,22 +32,4 @@
     transition: transform 500ms;
     transform: scale(1);
   }
-
-  /* .base-card:active {
-    background: linear-gradient(
-      145deg,
-      #aee7ff 0%,
-      #f0f8ffd5 40%,
-      #aee7ff 64%,
-      #daf6fb 72%,
-      #aee7ff 95%
-    ) !important;
-    } */
-
-  /* background-size: cover !important; */
-
-  /* .card-header {
-    position: relative;
-    margin-bottom: 1.5em;
-  } */
 </style>

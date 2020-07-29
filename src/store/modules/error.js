@@ -21,6 +21,7 @@ const actions = {
     setTimeout(() => {
       commit('clearError');
     }, 4000);
+    // throw new Error(payload);
   },
   clearError({ commit }) {
     commit('clearError');

@@ -3,6 +3,7 @@
     <v-card-text>
       <v-form ref="form">
         <v-text-field
+          v-model="name"
           label="Name"
           name="name"
           prepend-icon="mdi-account"
@@ -12,6 +13,7 @@
           color="secondary"
         />
         <v-text-field
+          v-model="email"
           label="Email"
           name="email"
           prepend-icon="mdi-email"
@@ -22,6 +24,7 @@
 
         <v-text-field
           id="password"
+          v-model="password"
           label="Password"
           name="password"
           prepend-icon="mdi-lock"
@@ -33,6 +36,7 @@
         />
         <v-text-field
           id="passwordConfirm"
+          v-model="passwordConfirm"
           label="Password Confirm"
           name="passwordConfirm"
           prepend-icon="mdi-lock"
@@ -40,9 +44,11 @@
           :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
           clearable
           color="secondary"
+          @click:append="showPass = !showPass"
         />
         <v-text-field
           id="photo"
+          v-model="photo"
           label="URL of Profile Photo (Optional)"
           name="photo"
           prepend-icon="mdi-face-outline"
@@ -54,7 +60,15 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn fab small outlined class="mt-n5 mb-2" color="secondary">
+
+      <v-btn
+        fab
+        small
+        outlined
+        class="mt-n5 mb-2"
+        color="secondary"
+        @click="onSubmit()"
+      >
         <v-icon>mdi-pen</v-icon>
       </v-btn>
       <v-spacer />
@@ -63,10 +77,33 @@
 </template>
 
 <script>
+  import { REGISTER } from '@/store/type/actions';
+
   export default {
     data: () => ({
       showPass: false,
+      name: null,
+      email: null,
+      password: null,
+      passwordConfirm: null,
+      photo: null,
     }),
+    methods: {
+      onSubmit() {
+        this.$store
+          .dispatch(REGISTER, {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            passwordConfirm: this.passwordConfirm,
+            photo: this.photo,
+          })
+          .then(() => {
+            if (this.$route.path.includes('/Authentication'))
+              this.$router.push('/');
+          });
+      },
+    },
   };
 </script>
 

@@ -55,14 +55,14 @@
 
     methods: {
       onSubmit() {
-        console.log(this.email, this.password);
         this.$store
           .dispatch(LOGIN, {
             email: this.email,
             password: this.password,
           })
-          .catch((e) => {
-            console.log('Login Component', e);
+          .then(() => {
+            if (this.$route.path.includes('/Authentication'))
+              this.$router.push('/');
           });
       },
     },

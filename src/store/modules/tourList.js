@@ -1,4 +1,5 @@
-import { TagsService, ToursService } from '../../common/service/api';
+import ToursService from '@/common/service/tours.api';
+import { TagsService } from '../../common/service/api';
 import { FETCH_TOURS, FETCH_TAGS } from '../type/actions';
 import {
   FETCH_START,
