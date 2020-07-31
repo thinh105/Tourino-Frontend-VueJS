@@ -1,5 +1,5 @@
 <template>
-  <v-card class="base-card rounded-tr-xl rounded-bl-xl">
+  <v-card outlined class="base-card rounded-tr-xl rounded-bl-xl">
     <slot />
   </v-card>
 </template>
@@ -13,19 +13,13 @@
     margin: auto;
     height: 100%;
     width: 100%;
-    background: white;
+    background: #0000;
   }
 
   .base-card:hover {
-    background: linear-gradient(
-      145deg,
-      #b8e7fa 0%,
-      #f9fdfd 30%,
-      #cbedfcb7 51%,
-      #f3f9fb 76%
-    ) !important;
+    background: rgb(241, 252, 255);
     transition: transform 500ms;
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 
   .base-card:not(:hover) {

@@ -21,7 +21,8 @@
             <v-avatar class="my-4" size="150">
               <img :src="currentUser.photo" alt="" />
             </v-avatar>
-            <p class="white--text title">{{ currentUser.name }}</p>
+            <p class="white--text text-h5">{{ currentUser.name }}</p>
+            <p class="white--text">{{ currentUser.email }}</p>
           </div>
           <v-avatar v-else>
             <img :src="currentUser.photo" alt="" />

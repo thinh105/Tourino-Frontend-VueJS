@@ -1,11 +1,7 @@
 <template>
-  <v-menu
-    v-model="menu"
-    open-on-hover
-    close-delay="700"
-    offset-y
-    :close-on-content-click="false"
-  >
+  <!-- open-on-hover
+    close-delay="700" -->
+  <v-menu v-model="menu" offset-y :close-on-content-click="false">
     <template v-slot:activator="{ on, attrs }">
       <v-avatar v-bind="attrs" v-on="on">
         <img :src="currentUser.photo" />
@@ -13,7 +9,18 @@
     </template>
 
     <div>
-      <v-list rounded flat dark color="#003C71CC">
+      <v-list
+        class="rounded-tr-xl rounded-bl-xl"
+        rounded
+        flat
+        dark
+        color="#003C71CC"
+      >
+        <p class="text-h5 secondary--text text-center mt-2 mx-4">
+          {{ currentUser.name }}
+        </p>
+        <p class="text-body-2 text-center mt-n3">{{ currentUser.email }}</p>
+        <v-divider />
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
@@ -39,8 +46,8 @@
     data: () => ({
       menu: false,
       items: [
-        { title: 'My Profile', icon: 'mdi-heart', route: '' },
-        { title: 'My Tours', icon: 'mdi-star' },
+        { title: 'My Profile', icon: 'mdi-face', route: '' },
+        { title: 'My Tours', icon: 'mdi-heart' },
         { title: 'Password', icon: 'mdi-lock' },
         { title: 'Log Out', icon: 'mdi-logout' },
       ],

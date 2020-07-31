@@ -26,20 +26,18 @@
   };
 </script>
 
-<style>
+<style scope>
   .v-card__text,
   .v-card__title {
     word-break: normal !important;
   }
 
-  .v-application,
-  html,
-  body {
+  .v-application {
     background: linear-gradient(
         30deg,
-        #8ddfff 0%,
+        #b4eaff 0%,
         #f0feff 25%,
-        #6ed4ffb7 71%,
+        #a0e0fbb7 71%,
         #edfaff 92%
       )
       no-repeat center center fixed !important;

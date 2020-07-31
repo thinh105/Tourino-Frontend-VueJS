@@ -1,11 +1,7 @@
 <template>
-  <v-menu
-    v-model="menu"
-    offset-y
-    open-on-hover
-    close-delay="700"
-    :close-on-content-click="false"
-  >
+  <!-- open-on-hover
+    close-delay="700" -->
+  <v-menu v-model="menu" offset-y :close-on-content-click="false">
     <template v-slot:activator="{ on, attrs }">
       <v-btn outlined small fab color="secondary" v-bind="attrs" v-on="on">
         <v-icon large>mdi-account</v-icon>

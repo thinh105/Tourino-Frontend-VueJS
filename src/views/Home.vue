@@ -8,6 +8,7 @@
         <v-progress-linear indeterminate color="secondary" />
       </div>
       <div v-else>
+        <TrnSort />
         <TrnGrid ref="grid" :tours="tours" />
         <!-- <Grid v-if="(!isLoading)" :tours="tours" /> -->
       </div>
@@ -23,6 +24,7 @@
   import TrnSkewText from '@/components/base/SkewText.vue';
   import TrnGrid from '@/components/Tours/Grid.vue';
   import { mapGetters } from 'vuex';
+  import TrnSort from '@/components/Tours/Sort.vue';
   import { FETCH_TOURS } from '../store/type/actions';
 
   export default {
@@ -31,9 +33,9 @@
       TrnCoreCarousels,
       TrnSkewText,
       TrnGrid,
+      TrnSort,
     },
 
-    data: () => ({}),
     computed: {
       ...mapGetters(['isLoading', 'tours', 'getFeaturedTours']),
     },

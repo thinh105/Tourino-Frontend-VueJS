@@ -53,10 +53,8 @@
     background-color: #0000 !important;
   }
 
-  .theme--light.v-tabs-items,
-  .theme--light.v-card {
+  .theme--light.v-tabs-items {
     background-color: #0000 !important;
-    color: #0000;
   }
 
   .v-sheet.v-card {
