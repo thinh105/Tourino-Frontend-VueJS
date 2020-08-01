@@ -19,7 +19,7 @@
   .base-card:hover {
     background: rgb(241, 252, 255);
     transition: transform 500ms;
-    transform: scale(1.08);
+    transform: scale(1.05);
   }
 
   .base-card:not(:hover) {

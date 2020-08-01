@@ -26,7 +26,7 @@
   };
 </script>
 
-<style scope>
+<style scoped>
   .v-card__text,
   .v-card__title {
     word-break: normal !important;
@@ -35,10 +35,11 @@
   .v-application {
     background: linear-gradient(
         30deg,
-        #b4eaff 0%,
+        #12bcff 0%,
         #f0feff 25%,
-        #a0e0fbb7 71%,
-        #edfaff 92%
+        #85daffb7 51%,
+        #f6fcff 82%,
+        #4cccff 95%
       )
       no-repeat center center fixed !important;
     background-size: cover !important;

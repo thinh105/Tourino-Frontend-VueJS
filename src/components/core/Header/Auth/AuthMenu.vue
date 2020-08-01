@@ -22,4 +22,15 @@
   };
 </script>
 
-<style></style>
+<style scoped>
+  .v-toolbar__content,
+  .v-toolbar__extension {
+    padding: 0 !important;
+  }
+  .v-menu__content {
+    color: #0000;
+    top: 75px !important;
+    max-width: 100%;
+    box-shadow: none;
+  }
+</style>

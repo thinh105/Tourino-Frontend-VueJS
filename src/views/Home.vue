@@ -1,17 +1,32 @@
 <template>
-  <div class="home">
-    <TrnCoreCarousels class="mt-n16" :items="getFeaturedTours" />
-    <!-- <TrnSkewText /> -->
-    <div class="TrnGird">
+  <div>
+    <TrnCarousels class="mt-n16" :items="getFeaturedTours" />
+
+    <div class="TourList">
       <div v-if="isLoading">
         <div class="text-h5 text-center mt-16 mb-3">Loading tours...</div>
         <v-progress-linear indeterminate color="secondary" />
       </div>
       <div v-else>
-        <TrnSort />
-        <TrnGrid ref="grid" :tours="tours" />
+        <!-- <v-row v-if="!$vuetify.breakpoint.mobile">
+          <v-col cols="2">
+            <TrnFilter />
+          </v-col>
+          <v-col cols="10">
+            <TrnSort />
+            <TrnGrid ref="grid" :tours="tours" /> -->
         <!-- <Grid v-if="(!isLoading)" :tours="tours" /> -->
+        <!-- </v-col>
+        </v-row>
+
+        <div v-else> -->
+
+        <TrnSort />
+        <TrnFilter />
+
+        <TrnGrid ref="grid" :tours="tours" />
       </div>
+      <!-- </div> -->
     </div>
     <TrnSkewText />
   </div>
@@ -19,21 +34,25 @@
 
 <script>
   // @ is an alias to /src
-
-  import TrnCoreCarousels from '@/components/Carousels.vue';
-  import TrnSkewText from '@/components/base/SkewText.vue';
-  import TrnGrid from '@/components/Tours/Grid.vue';
   import { mapGetters } from 'vuex';
+
+  import TrnCarousels from '@/components/Carousels.vue';
+  import TrnSkewText from '@/components/base/SkewText.vue';
+
+  import TrnGrid from '@/components/Tours/Grid.vue';
   import TrnSort from '@/components/Tours/Sort.vue';
+  import TrnFilter from '@/components/Tours/Filter.vue';
+
   import { FETCH_TOURS } from '../store/type/actions';
 
   export default {
     name: 'Home',
     components: {
-      TrnCoreCarousels,
+      TrnCarousels,
       TrnSkewText,
       TrnGrid,
       TrnSort,
+      TrnFilter,
     },
 
     computed: {
@@ -52,9 +71,9 @@
 </script>
 
 <style scoped>
-  .TrnGird {
+  .TourList {
     max-width: 1280px;
-    min-height: 800px;
+    /* min-height: 800px; */
     margin: auto;
   }
 </style>

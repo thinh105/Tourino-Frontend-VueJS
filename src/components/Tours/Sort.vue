@@ -8,7 +8,7 @@
       rounded
       depressed
       text
-      class="text-body-1 ma-2"
+      class="text-body-1"
     >
       <v-icon left>{{ button.icon }}</v-icon>
 
