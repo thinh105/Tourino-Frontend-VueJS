@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-8">
+  <v-container>
     <stack
       ref="stackRef"
       :column-min-width="320"

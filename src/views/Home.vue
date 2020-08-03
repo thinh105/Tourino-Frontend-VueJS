@@ -25,6 +25,7 @@
         <TrnFilter />
 
         <TrnGrid ref="grid" :tours="tours" />
+        <TrnPagination />
       </div>
       <!-- </div> -->
     </div>
@@ -42,6 +43,7 @@
   import TrnGrid from '@/components/Tours/Grid.vue';
   import TrnSort from '@/components/Tours/Sort.vue';
   import TrnFilter from '@/components/Tours/Filter.vue';
+  import TrnPagination from '@/components/Pagination.vue';
 
   import { FETCH_TOURS } from '../store/type/actions';
 
@@ -53,6 +55,7 @@
       TrnGrid,
       TrnSort,
       TrnFilter,
+      TrnPagination,
     },
 
     computed: {
