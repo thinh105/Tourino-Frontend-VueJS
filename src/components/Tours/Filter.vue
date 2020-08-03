@@ -28,13 +28,18 @@
 
     <v-col>
       <v-col class="d-flex zing">
-        <v-select clearable :items="duration" label="Duration" />
+        <v-select
+          clearable
+          multiple
+          :items="travelStyles"
+          label="Travel Style"
+        />
       </v-col>
     </v-col>
 
     <v-col>
       <v-col class="d-flex">
-        <v-select clearable multiple :items="duration" label="Duration" />
+        <v-select clearable multiple :items="city" label="Must-see City" />
       </v-col>
     </v-col>
   </v-row>
@@ -48,6 +53,22 @@
       range: [0, 1000],
       rating: ['⭐⭐⭐⭐ & Up', '⭐⭐⭐ & Up', '⭐⭐ & Up', '⭐ & Up'],
       duration: ['1 day', '1 to 3 days', '4 to 7 days', '7+ days'],
+      travelStyles: [
+        'Discovery',
+        'Family',
+        'In-depth Cultural',
+        'Historical',
+        'Food & Culinary',
+        'Adventure',
+        'Beach',
+        'Hiking & Trekking',
+        'Bicycle',
+        'Sightseeing',
+        'Boat',
+        'River Cruise',
+        'Ocean Cruise',
+      ],
+      city: ['Hanoi', 'Da Nang', 'Hue', 'Ha Long', 'Sapa', 'Hoi An'],
     }),
   };
 </script>
