@@ -75,7 +75,7 @@
 
 <style scoped>
   .TourList {
-    max-width: 1280px;
+    max-width: 1200px;
     /* min-height: 800px; */
     margin: auto;
   }

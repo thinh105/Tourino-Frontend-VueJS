@@ -122,7 +122,8 @@
     methods: {
       deleteChip(removedItem, array) {
         for (let i = 0; i < array.length; i += 1) {
-          if (array[parseInt(i, 10)] === removedItem) {
+          // eslint-disable-next-line security/detect-object-injection
+          if (array[i] === removedItem) {
             array.splice(i, 1);
           }
         }

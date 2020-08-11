@@ -3,8 +3,8 @@
     <stack
       ref="stackRef"
       :column-min-width="320"
-      :gutter-width="50"
-      :gutter-height="50"
+      :gutter-width="30"
+      :gutter-height="40"
       :monitor-images-loaded="true"
     >
       <stack-item

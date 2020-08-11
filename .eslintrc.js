@@ -43,6 +43,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'import/no-unresolved': 0,
     'import/extensions': 0,
+
     // [
     //   'error',
     //   'ignorePackages',
