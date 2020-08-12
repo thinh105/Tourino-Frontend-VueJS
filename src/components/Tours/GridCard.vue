@@ -18,11 +18,13 @@
 
         <TrnGridCardName
           :class="
-            tour.name.length > 50
+            tour.name.length > 60
               ? 'longCardName'
               : tour.name.length > 30
               ? 'mediumCardName'
-              : 'shortCardName'
+              : tour.name.length > 17
+              ? 'shortCardName'
+              : 'veryShortCardName'
           "
         >
           {{ tour.name }}</TrnGridCardName
@@ -30,67 +32,121 @@
       </router-link>
     </div>
 
-    <v-chip
-      v-for="(tag, j) in tour.tags"
-      :key="j"
-      color="primary"
-      class="ml-4 mt-3 text-body-2"
-    >
-      Tour {{ tag }}
-    </v-chip>
+    <v-container class="px-4 py-0">
+      <!-- <v-col cols="12" class="d-flex align-center">
+          <v-icon class="primary--text">
+            mdi-calendar-clock
+          </v-icon>
+          <span class="pl-2 text-body-2">{{ tour.duration }} Day </span
+          ><span v-if="tour.duration > 1" class="text-body-2">s</span>
+        </v-col>
 
-    <v-container class="px-4">
-      <v-row>
+        <v-col cols="12" class="d-flex align-center">
+          <v-icon class="primary--text">
+            mdi-hiking
+          </v-icon>
+          <span class="pl-2 text-body-2">{{ tour.duration }} Day </span>
+        </v-col> -->
+
+      <v-row no-gutters class="pt-4">
+        <v-icon class="primary--text">
+          mdi-map-marker-outline
+        </v-icon>
+
+        <v-col class="mx-4">
+          <v-row>
+            <span
+              v-for="(destination, j) in tour.destinations"
+              :key="j"
+              class="text-body-2 mr-3 mb-1"
+            >
+              {{ destination }}
+            </span>
+          </v-row>
+        </v-col>
+      </v-row>
+
+      <v-row no-gutters class="py-2">
         <v-col
           v-for="(highlight, i) in tour.highlights"
           :key="i"
-          class="text-body-2 py-1 secondary--text text--darken-2 font-weight-medium"
+          class="text-caption secondary--text text--darken-3"
           cols="auto"
         >
           🌟 {{ highlight }}
         </v-col>
       </v-row>
 
-      <v-row no-gutters class="pt-2">
+      <v-row no-gutters class="py-2">
         <v-col cols="6" class="d-flex align-center">
           <v-icon class="primary--text">
-            mdi-clock
+            mdi-calendar-clock
           </v-icon>
-          <span class="pl-2 pr-1 text-body-2 justify-center"
-            >{{ tour.duration }} Ngày
+          <span class="pl-2 text-body-2">{{ tour.duration }} Day </span
+          ><span v-if="tour.duration > 1" class="text-body-2">s</span>
+        </v-col>
+
+        <v-col cols="6" class="d-flex align-center">
+          <v-icon class="primary--text">
+            mdi-cash-usd-outline
+          </v-icon>
+          <span class="pl-2 text-body-2"
+            >{{ pricePerDay(tour.price, tour.duration) }} $ per day
           </span>
-          <span v-if="tour.duration - 1" class="text-body-2 justify-center">
-            {{ tour.duration - 1 }} Đêm</span
-          >
+        </v-col>
+      </v-row>
+
+      <v-row no-gutters class="pt-2">
+        <v-icon class="primary--text">
+          mdi-hiking
+        </v-icon>
+
+        <v-col class="mx-4">
+          <v-row>
+            <span
+              v-for="(style, j) in tour.travelStyle"
+              :key="j"
+              class="text-body-2 mr-3 mb-1"
+            >
+              {{ style }}
+            </span>
+          </v-row>
         </v-col>
 
-        <v-col cols="6" class="d-flex align-center">
-          <v-icon class="primary--text">
-            mdi-car-child-seat
-          </v-icon>
-          <span class="px-2 text-body-2"> {{ tour.transportation }} </span>
-        </v-col>
+        <!-- <v-chip
+          v-for="(tag, j) in tour.travelStyle"
+          :key="j"
+          small
+          color="primary"
+          class="ml-2 mt-1 text-body-2"
+        >
+          {{ tag }}
+        </v-chip> -->
+      </v-row>
 
-        <v-col cols="12" class="py-2">
+      <v-row>
+        <v-col cols="12" class="pb-1">
           <v-divider />
         </v-col>
 
-        <v-col cols="5" class="d-flex align-center">
-          <div v-if="tour.rating">
+        <v-col cols="5" class="d-flex align-center py-1">
+          <div v-if="tour.ratingsQuantity">
             <v-chip class="px-1" small color="orange" text-color="white">
-              <h3 class="px-1">{{ tour.rating }}</h3>
+              <h3 class="px-1">{{ tour.ratingsAverage }}</h3>
               <v-icon>mdi-star</v-icon>
             </v-chip>
-            <span class="text-caption pl-2">{{ tour.reviews }} review</span
+            <span class="text-caption pl-2"
+              >{{ tour.ratingsQuantity }} review</span
             ><span v-if="tour.reviews > 1" class="text-caption">s</span>
           </div>
         </v-col>
 
-        <v-col cols="7" class="d-flex align-center justify-center">
-          <span class="text-h5 text-md-h4 primary--text text--lighten-2">{{
+        <v-col cols="7" class="d-flex align-center justify-center py-1">
+          <span class="text-h6 pr-1 primary--text">$</span>
+
+          <span class="text-h5 text-md-h4 primary--text">{{
             priceFormatted(tour.price)
           }}</span>
-          <span class="text-caption pl-2">VND</span>
         </v-col>
       </v-row>
     </v-container>
@@ -110,33 +166,40 @@
     },
     props: ['tour'],
     methods: {
-      priceFormatted: (num) => num.toLocaleString('vi-VN'),
+      pricePerDay: (price, duration) =>
+        (price / duration).toFixed(2).toLocaleString(),
+      priceFormatted: (num) => num.toLocaleString(),
     },
   };
 </script>
 
 <style scoped>
-  .longCardName {
-    bottom: -1.7em;
-    font-size: 1.4em;
-  }
-
-  .mediumCardName {
-    bottom: -1.2em;
-    font-size: 1.6em;
-  }
-
-  .shortCardName {
-    bottom: -0.5em;
-    font-size: 1.8em;
-  }
-
   .v-image {
     clip-path: polygon(0 0, 100% 0%, 100% 85%, 0% 100%);
   }
 
   .card-header {
     position: relative;
-    margin-bottom: 2em;
+    margin-bottom: 2.5em;
+  }
+
+  .longCardName {
+    bottom: -1.8em;
+    font-size: 1.4em;
+  }
+
+  .mediumCardName {
+    bottom: -1.3em;
+    font-size: 1.7em;
+  }
+
+  .shortCardName {
+    bottom: -1.3em;
+    font-size: 1.8em;
+  }
+
+  .veryShortCardName {
+    bottom: -0.5em;
+    font-size: 1.8em;
   }
 </style>

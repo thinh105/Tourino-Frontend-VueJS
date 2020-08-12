@@ -2,7 +2,7 @@
   <div>
     <TrnCarousels class="mt-n16" :items="getFeaturedTours" />
 
-    <div class="TourList">
+    <v-container class="TourList">
       <div v-if="isLoading">
         <div class="text-h5 text-center mt-16 mb-3">Loading tours...</div>
         <v-progress-linear indeterminate color="secondary" />
@@ -28,7 +28,7 @@
         <TrnPagination />
       </div>
       <!-- </div> -->
-    </div>
+    </v-container>
     <TrnSkewText />
   </div>
 </template>
@@ -75,7 +75,7 @@
 
 <style scoped>
   .TourList {
-    max-width: 1200px;
+    max-width: 1200px !important;
     /* min-height: 800px; */
     margin: auto;
   }

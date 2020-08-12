@@ -1,12 +1,13 @@
 <template>
   <div>
-    <v-row class="mx-4" align="center" justify="center">
+    <v-row class="my-n6" align="center" justify="center">
       <v-col cols="6">
         <v-autocomplete
           v-model="citySelection"
           clearable
           multiple
           :items="city"
+          prepend-inner-icon="mdi-map-marker-outline"
           label="Where do you want to go?"
           :search-input.sync="search"
           @change="search = ''"
@@ -29,6 +30,7 @@
           clearable
           multiple
           :items="travelStyles"
+          prepend-inner-icon="mdi-hiking"
           label="Travel Style"
         >
           <template #selection="{ item }">
@@ -43,11 +45,14 @@
       </v-col>
     </v-row>
 
-    <v-row class="mx-4" align="center" justify="center">
-      <v-col cols="6">
-        <p class="subtitle-1 text--secondary text-center">
+    <v-row class="my-n6" align="center" justify="center">
+      <v-col cols="4" align="center" class="pt-8">
+        <v-icon class="primary--text">
+          mdi-cash-usd-outline
+        </v-icon>
+        <span class="subtitle-1 primary--text">
           Price
-        </p>
+        </span>
 
         <v-range-slider
           v-model="range"
@@ -59,8 +64,13 @@
         />
       </v-col>
 
-      <v-col>
-        <v-select v-model="ratingSelection" :items="rating" label="Rating">
+      <v-col cols="4">
+        <v-select
+          v-model="ratingSelection"
+          :items="rating"
+          prepend-inner-icon="mdi-star-outline"
+          label="Rating"
+        >
           <template #selection="{ item }">
             <v-chip color="primary" close @click:close="ratingSelection = ''">{{
               item
@@ -69,10 +79,11 @@
         </v-select>
       </v-col>
 
-      <v-col>
+      <v-col cols="4">
         <v-select
           v-model="durationSelection"
           :items="duration"
+          prepend-inner-icon="mdi-calendar-clock"
           label="Duration"
         >
           <template #selection="{ item }">
@@ -96,8 +107,8 @@
       min: 0,
       max: 1000,
       range: [0, 1000],
-      rating: ['⭐⭐⭐⭐ & Up', '⭐⭐⭐ & Up', '⭐⭐ & Up', '⭐ & Up'],
-      duration: ['1 day', '1 to 3 days', '4 to 7 days', '7+ days'],
+      rating: ['⭐⭐⭐⭐ and up', '⭐⭐⭐ and up', '⭐⭐ and up', '⭐ and up'],
+      duration: ['1 day', '1 - 3 days', '4 - 7 days', '7+ days'],
       citySelection: [],
       styleSelection: [],
       ratingSelection: '',

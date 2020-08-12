@@ -4,7 +4,7 @@
     hide-delimiter-background
     delimiter-icon="mdi-star"
     show-arrows-on-hover
-    height="80vh"
+    height="75vh"
     transition="scroll-y-transition"
   >
     <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src">
