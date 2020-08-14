@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <stack
       ref="stackRef"
       :column-min-width="320"
@@ -12,23 +12,30 @@
         :key="i"
         style="transition: transform 1000ms;"
       >
-        <GridCard :tour="tour" />
+        <TrnTourCard :tour="tour" @reloadGrid="reloadGrid" />
       </stack-item>
     </stack>
-  </v-container>
+  </div>
 </template>
 
 <script>
   import { Stack, StackItem } from 'vue-stack-grid';
-  import GridCard from './GridCard';
+  import TrnTourCard from './TourCard/TourCard';
 
   export default {
     components: {
-      GridCard,
+      TrnTourCard,
       Stack,
       StackItem,
     },
     props: ['tours'],
+    methods: {
+      reloadGrid() {
+        this.$nextTick(() => {
+          this.$refs.stackRef.reflow();
+        });
+      },
+    },
   };
 </script>
 

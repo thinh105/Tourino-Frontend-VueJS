@@ -2,12 +2,13 @@
   <div>
     <TrnCarousels class="mt-n16" :items="getFeaturedTours" />
 
-    <v-container class="TourList">
-      <div v-if="isLoading">
+    <div class="TourList">
+      <!-- <div v-if="isLoading">
         <div class="text-h5 text-center mt-16 mb-3">Loading tours...</div>
         <v-progress-linear indeterminate color="secondary" />
       </div>
-      <div v-else>
+      <div v-else> -->
+      <div>
         <!-- <v-row v-if="!$vuetify.breakpoint.mobile">
           <v-col cols="2">
             <TrnFilter />
@@ -28,8 +29,8 @@
         <TrnPagination />
       </div>
       <!-- </div> -->
-    </v-container>
-    <TrnSkewText />
+    </div>
+    <!-- <TrnSkewText /> -->
   </div>
 </template>
 
@@ -40,7 +41,7 @@
   import TrnCarousels from '@/components/Carousels.vue';
   import TrnSkewText from '@/components/base/SkewText.vue';
 
-  import TrnGrid from '@/components/Tours/Grid.vue';
+  import TrnGrid from '@/components/Tours/Grid/Grid.vue';
   import TrnSort from '@/components/Tours/Sort.vue';
   import TrnFilter from '@/components/Tours/Filter.vue';
   import TrnPagination from '@/components/Pagination.vue';
@@ -67,7 +68,8 @@
     methods: {
       async fetchTours() {
         await this.$store.dispatch(FETCH_TOURS);
-        this.$refs.grid.$refs.stackRef.reflow();
+        // this.$refs.grid.$refs.stackRef.reflow();
+        this.$refs.grid.reloadGrid();
       },
     },
   };
@@ -75,7 +77,7 @@
 
 <style scoped>
   .TourList {
-    max-width: 1200px !important;
+    max-width: 1100px !important;
     /* min-height: 800px; */
     margin: auto;
   }

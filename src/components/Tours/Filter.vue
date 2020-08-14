@@ -45,7 +45,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="my-n6" align="center" justify="center">
+    <v-row class="mt-n6" align="center" justify="center">
       <v-col cols="4" align="center" class="pt-8">
         <v-icon class="primary--text">
           mdi-cash-usd-outline
@@ -105,8 +105,8 @@
     data: () => ({
       search: '',
       min: 0,
-      max: 1000,
-      range: [0, 1000],
+      max: 6000,
+      range: [0, 6000],
       rating: ['⭐⭐⭐⭐ and up', '⭐⭐⭐ and up', '⭐⭐ and up', '⭐ and up'],
       duration: ['1 day', '1 - 3 days', '4 - 7 days', '7+ days'],
       citySelection: [],
