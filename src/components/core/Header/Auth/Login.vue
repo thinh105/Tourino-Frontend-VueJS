@@ -54,16 +54,14 @@
     }),
 
     methods: {
-      onSubmit() {
-        this.$store
-          .dispatch(LOGIN, {
-            email: this.email,
-            password: this.password,
-          })
-          .then(() => {
-            if (this.$route.path.includes('/Authentication'))
-              this.$router.push('/');
-          });
+      async onSubmit() {
+        await this.$store.dispatch(LOGIN, {
+          email: this.email,
+          password: this.password,
+        });
+
+        if (this.$route.path.includes('/Authentication'))
+          this.$router.push('/');
       },
     },
   };

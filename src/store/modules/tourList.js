@@ -1,6 +1,7 @@
 import ToursService from '@/common/service/tours.api';
-import { TagsServicefasd } from '../../common/service/api';
-import { FETCH_TOURS, FETCH_TAGS } from '../type/actions';
+// import catchAsyncErrors from '@/common/catchAsyncErrors';
+import { TagsService } from '../../common/service/api';
+import { FETCH_TOURS, FETCH_FILTER_SELECTION } from '../type/actions';
 import {
   FETCH_START,
   FETCH_END,
@@ -8,31 +9,39 @@ import {
   UPDATE_ARTICLE_IN_LIST,
 } from '../type/mutations';
 
-export const state = () => ({
+// const catchAsyncErrors = (functionToHandle) => (...handledFunctionParams) => {
+//   functionToHandle(...handledFunctionParams).catch((e) => {
+//     console.log('catch cho vui!!!');
+//   });
+// };
+
+const state = () => ({
   tours: [],
   tags: [],
   isLoading: true,
+  destinationList: [],
+  travelStyleList: [],
 });
 
-export const getters = {
+const getters = {
   tours: (state) => state.tours,
   isLoading: (state) => state.isLoading,
   tags: (state) => state.tags,
 };
 
-export const actions = {
+const actions = {
   // [FETCH_TOURS]({ commit }, params) {
-  [FETCH_TOURS]({ commit }) {
+  [FETCH_TOURS]: async ({ commit }) => {
     commit(FETCH_START);
-    // return ToursService.query(params.filters)
-    return ToursService.query()
-      .then(({ data }) => {
-        commit(FETCH_END, data.data.result);
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
+    const result = await ToursService.query();
+
+    if (result) {
+      console.log('done: ', result);
+      commit(FETCH_END, result.data.data.result);
+    }
   },
+  // [FETCH_FILTER_SELECTION]: catchAsyncErrors(async )
+
   // [FETCH_TAGS]({ commit }) {
   //   return TagsService.get()
   //     .then(({ data }) => {
@@ -44,7 +53,7 @@ export const actions = {
   // },
 };
 
-export const mutations = {
+const mutations = {
   [FETCH_START](state) {
     state.isLoading = true;
   },

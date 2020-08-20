@@ -1,5 +1,5 @@
 export const FETCH_TOURS = 'fetchTour';
-export const FETCH_TAGS = 'fetchTag';
+export const FETCH_FILTER_SELECTION = 'fetchFilterSelection';
 export const LOGIN = 'login';
 export const LOGOUT = 'logout';
 export const REGISTER = 'register';

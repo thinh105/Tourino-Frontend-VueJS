@@ -1,14 +1,15 @@
 import authsService from '@/common/service/auth.api';
 import JwtService from '@/common/jwt';
+import { SET_AUTH, PURGE_AUTH, SET_ERROR } from '@/store/type/mutations.js';
 import {
   LOGIN,
   LOGOUT,
   REGISTER,
   CHECK_AUTH,
   UPDATE_USER,
-} from '../type/actions.js';
+} from '@/store/type/actions.js';
 
-import { SET_AUTH, PURGE_AUTH, SET_ERROR } from '../type/mutations.js';
+// import catchAsyncErrors from '@/common/catchAsyncErrors';
 
 const state = {
   user: null,
@@ -18,22 +19,17 @@ const getters = {
   currentUser: (state) => state.user,
 };
 
-const catchErrors = (functionToHandle) => (...handledFunctionParams) => {
-  functionToHandle(...handledFunctionParams).catch((e) => {
-    console.log('catch cho vui!!!');
-  });
-};
-
 const actions = {
   // async [LOGIN]({ commit }, credentials) {
   //   const { data } = await authsService.login(credentials);
   //   if (data) commit(SET_AUTH, data.data);
   // },
 
-  [LOGIN]: catchErrors(async ({ commit }, credentials) => {
-    const { data } = await authsService.login(credentials);
-    commit(SET_AUTH, data.data);
-  }),
+  [LOGIN]: async ({ commit }, credentials) => {
+    const result = await authsService.login(credentials);
+
+    if (result) commit(SET_AUTH, result.data.data);
+  },
 
   [LOGOUT]({ commit }) {
     commit(PURGE_AUTH);
@@ -49,14 +45,14 @@ const actions = {
     // }
   },
 
-  [CHECK_AUTH]: catchErrors(async ({ commit }) => {
+  [CHECK_AUTH]: async ({ commit }) => {
     const token = JwtService.getToken();
     authsService.setHeader(token);
     if (token && !state.user) {
-      const { data } = await authsService.checkAuth();
-      commit(SET_AUTH, { user: data.data, token });
+      const result = await authsService.checkAuth();
+      if (result) commit(SET_AUTH, { user: result.data.data, token });
     }
-  }),
+  },
   /*    if (token && !state.user) {
       try {
       } catch (error) {
