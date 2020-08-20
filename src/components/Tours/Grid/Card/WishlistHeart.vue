@@ -1,10 +1,10 @@
 <template>
-  <v-btn class="mt-2 ml-2" large icon @click="heart = !heart">
-    <v-icon v-if="heart" class="heart-beat pink--text">
-      mdi-heart
-    </v-icon>
-    <v-icon v-else class="primary--text text--lighten-4">
+  <v-btn large icon @click="heart = !heart">
+    <v-icon v-if="!heart" class="primary--text text--lighten-4">
       mdi-heart-outline
+    </v-icon>
+    <v-icon v-else class="heart-beat pink--text">
+      mdi-heart
     </v-icon>
   </v-btn>
 </template>

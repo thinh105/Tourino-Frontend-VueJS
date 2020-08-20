@@ -12,28 +12,76 @@
         :key="i"
         style="transition: transform 1000ms;"
       >
-        <TrnTourCard :tour="tour" @reloadGrid="reloadGrid" />
+        <TrnCard :tour="tour" @reloadGrid="reloadGrid" />
       </stack-item>
     </stack>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   import { Stack, StackItem } from 'vue-stack-grid';
-  import TrnTourCard from './TourCard/TourCard';
+  import { FETCH_TOURS } from '@/store/type/actions';
+
+  import TrnCard from './Card/Card';
 
   export default {
     components: {
-      TrnTourCard,
+      TrnCard,
       Stack,
       StackItem,
     },
-    props: ['tours'],
+
+    props: {
+      destination: {
+        type: String,
+        required: false,
+        default: 'all',
+      },
+      travelStyle: {
+        type: String,
+        required: false,
+        default: undefined,
+      },
+      price: {
+        type: Array,
+        required: false,
+        default: undefined,
+      },
+      rating: {
+        type: String,
+        required: false,
+        default: undefined,
+      },
+      duration: {
+        type: Number,
+        required: false,
+        default: 10,
+      },
+    },
+
+    computed: {
+      ...mapGetters(['isLoading', 'tours']),
+    },
+
+    watch: {
+      $route: 'fetchTours',
+    },
+
+    created() {
+      this.fetchTours();
+    },
+
     methods: {
       reloadGrid() {
         this.$nextTick(() => {
           this.$refs.stackRef.reflow();
         });
+      },
+      async fetchTours() {
+        await this.$store.dispatch(FETCH_TOURS);
+        this.reloadGrid();
       },
     },
   };

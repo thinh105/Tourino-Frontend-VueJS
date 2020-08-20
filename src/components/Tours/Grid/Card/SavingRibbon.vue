@@ -26,22 +26,22 @@
 
 <style scoped>
   .savingRibbon {
-    border-top-color: transparent;
-    border-left-color: rgb(149, 31, 18);
+    /* border-top-color: transparent;
+    border-left-color: rgb(255, 255, 255);
     border-bottom-color: transparent;
-    border-right-color: transparent;
+    border-right-color: transparent; */
 
     position: absolute;
 
-    width: 0;
-    height: 0;
+    width: 0px;
+    height: 0px;
 
     left: 0px;
     top: 0px;
 
     border-color: #0000 #0000 #0000 #e74c3c;
     border-style: solid;
-    border-width: 0 0 60px 60px;
+    border-width: 0px 0px 60px 60px;
   }
 
   .savingValue {

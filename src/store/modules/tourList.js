@@ -27,7 +27,7 @@ export const actions = {
     // return ToursService.query(params.filters)
     return ToursService.query()
       .then(({ data }) => {
-        commit(FETCH_END, data);
+        commit(FETCH_END, data.data.result);
       })
       .catch((error) => {
         throw new Error(error);
@@ -48,7 +48,7 @@ export const mutations = {
   [FETCH_START](state) {
     state.isLoading = true;
   },
-  [FETCH_END](state, { data }) {
+  [FETCH_END](state, data) {
     state.tours = data;
     state.isLoading = false;
   },

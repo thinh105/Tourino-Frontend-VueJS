@@ -10,6 +10,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('@/views/Home.vue'),
+    props: (route) => ({ query: route.query }),
   },
   {
     name: 'Tour',

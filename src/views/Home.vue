@@ -25,7 +25,7 @@
         <TrnSort />
         <TrnFilter />
 
-        <TrnGrid ref="grid" :tours="tours" />
+        <TrnGrid />
         <TrnPagination />
       </div>
       <!-- </div> -->
@@ -36,6 +36,7 @@
 
 <script>
   // @ is an alias to /src
+
   import { mapGetters } from 'vuex';
 
   import TrnCarousels from '@/components/Carousels.vue';
@@ -46,10 +47,11 @@
   import TrnFilter from '@/components/Tours/Filter.vue';
   import TrnPagination from '@/components/Pagination.vue';
 
-  import { FETCH_TOURS } from '../store/type/actions';
-
   export default {
     name: 'Home',
+    computed: {
+      ...mapGetters(['getFeaturedTours']),
+    },
     components: {
       TrnCarousels,
       TrnSkewText,
@@ -57,20 +59,6 @@
       TrnSort,
       TrnFilter,
       TrnPagination,
-    },
-
-    computed: {
-      ...mapGetters(['isLoading', 'tours', 'getFeaturedTours']),
-    },
-    mounted() {
-      this.fetchTours();
-    },
-    methods: {
-      async fetchTours() {
-        await this.$store.dispatch(FETCH_TOURS);
-        // this.$refs.grid.$refs.stackRef.reflow();
-        this.$refs.grid.reloadGrid();
-      },
     },
   };
 </script>

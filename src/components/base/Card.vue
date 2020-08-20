@@ -1,5 +1,5 @@
 <template>
-  <v-card outlined class="base-card rounded-tr-xl rounded-bl-xl">
+  <v-card class="base-card rounded-tr-xl rounded-bl-xl">
     <slot />
   </v-card>
 </template>
