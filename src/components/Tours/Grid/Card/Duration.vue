@@ -13,10 +13,6 @@
 <script>
   export default {
     props: {
-      price: {
-        type: Number,
-        required: true,
-      },
       duration: {
         type: Number,
         required: true,
