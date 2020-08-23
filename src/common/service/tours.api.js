@@ -5,7 +5,16 @@ export default {
     apiService.query('tours', {
       params,
     }),
-  get(slug) {
+  getTours() {
+    return apiService.get('tours?limit=12');
+  },
+  getDestinations() {
+    return apiService.get('tours/destinations');
+  },
+  getTravelStyle() {
+    return apiService.get('tours/travelStyle');
+  },
+  getTour(slug) {
     return apiService.get('tours', slug);
   },
   create(params) {

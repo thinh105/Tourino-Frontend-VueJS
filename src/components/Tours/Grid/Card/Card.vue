@@ -7,10 +7,7 @@
           class="white--text align-end rounded-tr-xl"
           :src="tour['imageCover']"
         >
-          <TrnSavingRibbon
-            v-if="tour.oldPrice && tour.oldPrice > tour.price"
-            :price="tour.price"
-            :old-price="tour.oldPrice"
+          <TrnSavingRibbon :price="tour.price" :old-price="tour.oldPrice"
         /></v-img>
 
         <TrnCardName
@@ -41,14 +38,13 @@
 
       <TrnTravelStyle :travel-style="tour.travelStyle" v-on="$listeners" />
 
-      <TrnDuration :duration="tour.duration" :price="tour.price" />
+      <TrnDuration :duration="tour.duration" />
 
-      <v-row no-gutters>
-        <v-col cols="12" class="py-1">
+      <!-- <v-row no-gutters>
+        <v-col cols="12" class="py-1 px-1">
           <v-divider />
         </v-col>
-      </v-row>
-
+      </v-row> -->
       <TrnPrice :old-price="tour.oldPrice" :price="tour.price" />
     </v-container>
   </TrnBaseCard>
@@ -56,7 +52,6 @@
 
 <script>
   import TrnBaseCard from '@/components/base/Card';
-
   import TrnCardName from './CardName.vue';
   import TrnSavingRibbon from './SavingRibbon.vue';
 
@@ -64,7 +59,7 @@
   import TrnHighlights from './Highlights.vue';
   import TrnDestinations from './Destinations.vue';
   import TrnTravelStyle from './TravelStyle.vue';
-  import TrnDuration from './DurationAndPriceperDay.vue';
+  import TrnDuration from './Duration.vue';
   import TrnPrice from './Price.vue';
 
   export default {
@@ -116,11 +111,12 @@
     font-size: 1.8em;
   }
 
-  .test {
-    /* display: flex; */
-    width: 30%;
-    margin: 0px;
-    text-align: center;
-    border: 3px solid green;
+  .testtenten {
+    background-color: #0056c7bc;
+    /* background-image: linear-gradient(
+      to bottom right,
+      #0056c7bc 0%,
+      #00a59791 84%
+    ); */
   }
 </style>

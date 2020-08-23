@@ -1,5 +1,5 @@
 <template>
-  <div class="savingRibbon">
+  <div v-if="sale > 0" class="savingRibbon">
     <span class="savingValue white--text text-h6">-{{ sale }}%</span>
   </div>
 </template>

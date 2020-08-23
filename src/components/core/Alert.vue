@@ -7,7 +7,7 @@
       dense
       :prominent="$vuetify.breakpoint.mdAndUp"
       class="TrnAlert rounded-tr-xl rounded-bl-xl text-center text-caption text-md-body-1"
-      @input="closeAlert"
+      @input="clearError"
     >
       {{ getErrors.message }}
     </v-alert>
@@ -16,6 +16,8 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+
+  import { CLEAR_ERROR } from '../../store/type/actions';
 
   export default {
     data() {
@@ -28,10 +30,7 @@
     },
 
     methods: {
-      ...mapActions(['clearError']),
-      closeAlert() {
-        this.clearError();
-      },
+      ...mapActions([CLEAR_ERROR]),
     },
   };
 </script>

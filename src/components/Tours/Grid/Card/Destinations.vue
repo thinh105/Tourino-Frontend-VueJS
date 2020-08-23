@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters>
+  <v-row no-gutters class="py-1">
     <v-icon class="primary--text">
       mdi-map-marker-outline
     </v-icon>

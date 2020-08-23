@@ -1,30 +1,33 @@
+import { UPDATE_ERROR, REMOVE_ERROR } from '../type/mutations';
+import { SET_ERROR, CLEAR_ERROR } from '../type/actions';
+
 const state = () => ({
-  errors: null,
+  error: null,
 });
 
 const getters = {
   getErrors: (state) => state.errors,
 };
 
-const mutations = {
-  updateError: (state, payload) => {
-    state.errors = { message: payload.message, type: payload.type || 'error' };
-  },
-  clearError: (state) => {
-    state.errors = null;
-  },
-};
-
 const actions = {
-  setError({ commit }, payload) {
-    commit('updateError', payload);
+  [SET_ERROR]({ commit }, payload) {
+    commit(UPDATE_ERROR, payload);
     setTimeout(() => {
-      commit('clearError');
+      commit(REMOVE_ERROR);
     }, 4000);
     // throw new Error(payload);
   },
-  clearError({ commit }) {
-    commit('clearError');
+  [CLEAR_ERROR]({ commit }) {
+    commit(REMOVE_ERROR);
+  },
+};
+
+const mutations = {
+  [UPDATE_ERROR]: (state, payload) => {
+    state.error = { message: payload.message, type: payload.type || 'error' };
+  },
+  [REMOVE_ERROR]: (state) => {
+    state.error = null;
   },
 };
 

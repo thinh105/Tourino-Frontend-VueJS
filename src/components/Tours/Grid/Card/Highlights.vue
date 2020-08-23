@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-row v-if="!expand" no-gutters class="py-1">
+  <div class="py-1">
+    <v-row v-if="!expand" no-gutters>
       <v-col
         v-for="index in 3"
         :key="index"
@@ -22,7 +22,7 @@
         <span class="ml-2">+{{ highlights.length - 3 }} more</span>
       </div>
     </v-row>
-    <v-row v-if="expand" no-gutters class="py-1">
+    <v-row v-if="expand" no-gutters>
       <div
         v-for="(highlight, i) in highlights"
         :key="i"

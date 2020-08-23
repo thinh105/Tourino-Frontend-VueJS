@@ -1,14 +1,14 @@
 <template>
-  <TitleBox class="card-name text-h4 text-sm-h3 text-md-h2">
+  <SkewText class="card-name text-h4 text-sm-h3 text-md-h2">
     <slot />
-  </TitleBox>
+  </SkewText>
 </template>
 
 <script>
-  import TitleBox from '../base/TitleBox.vue';
+  import SkewText from '../base/SkewText.vue';
 
   export default {
-    components: { TitleBox },
+    components: { SkewText },
   };
 </script>
 

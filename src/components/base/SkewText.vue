@@ -1,37 +1,55 @@
 <template>
-  <section class="stripe">
-    <div class="stripe__content">
-      <h1 class="text-h3">
-        Check this rotation with the straight edges and non-skewed text!!!
-      </h1>
-      <p class="text-h4">
-        If you're wanting to get into punk-rock design, rotated areas are really
-        cool and you'll look hip and cool.
-      </p>
-    </div>
-  </section>
+  <div class="title-box">
+    <!-- <span :class="{ background }"><slot /></span> -->
+    <span v-if="background" class="background"><slot /></span>
+    <div v-else class="d-flex align-center justify-end"><slot /></div>
+  </div>
 </template>
 
 <script>
-  export default {};
+  export default {
+    props: {
+      background: {
+        type: Boolean,
+      },
+    },
+  };
 </script>
 
 <style scoped>
-  .stripe {
-    background-image: linear-gradient(240deg, #eaee44, #90ec19);
-    padding: 10em 5em 15em 5em;
-    /* transform: skew(0deg, -10deg); */
-    margin-top: 0em;
-    clip-path: polygon(0 0, 100% 0%, 100% 70%, 0% 100%);
+  .title-box {
+    transform: rotate(-6deg) skew(-6deg);
   }
-  /* .stripe {
-    background-image: linear-gradient(240deg, #eaee44, #90ec19);
-    padding: 30em 5em 5em 5em;
-    transform: skew(0deg, -10deg);
-    margin-top: -10em;
-    z-index: -1;
-  } */
-  /* .stripe__content {
-    transform: skew(5deg);
-  } */
+
+  /*   text-align: right;
+     position: absolute;
+     bottom: 0.3em;
+     line-height: 1.5em;
+     right: 1em;
+     width: 70%;
+   } */
+
+  .title-box span {
+    font-weight: 500;
+    padding: 0.3em;
+    box-decoration-break: clone;
+    /* background-image: linear-gradient(to bottom, #0084ff, #65b5f694); */
+    /* background-image: linear-gradient(
+       160deg,
+       rgb(0, 98, 211) 0%,
+       rgba(4, 136, 151, 0.65) 51%,
+       rgb(0, 132, 255) 75%
+     ); */
+    /* background-color: #03e5b898; */
+  }
+
+  .background {
+    /* background-color: #03e5b7; */
+    background-image: linear-gradient(
+      to bottom right,
+      #0056c7 0%,
+      #00a597af 84%
+    );
+    color: white;
+  }
 </style>

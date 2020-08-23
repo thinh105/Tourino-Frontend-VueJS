@@ -1,14 +1,14 @@
 <template>
-  <TitleBox class="card-name">
+  <TrnSkewText background class="card-name">
     <slot />
-  </TitleBox>
+  </TrnSkewText>
 </template>
 
 <script>
-  import TitleBox from '@/components/base/TitleBox.vue';
+  import TrnSkewText from '@/components/base/SkewText.vue';
 
   export default {
-    components: { TitleBox },
+    components: { TrnSkewText },
   };
 </script>
 

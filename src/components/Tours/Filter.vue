@@ -3,10 +3,13 @@
     <v-row class="my-n6" align="center" justify="center">
       <v-col cols="6">
         <v-autocomplete
-          v-model="citySelection"
+          ref="select"
+          v-model="destinationsSelection"
           clearable
           multiple
-          :items="city"
+          :items="destinations"
+          :loading="isDestinationsLoading"
+          item-text="value"
           prepend-inner-icon="mdi-map-marker-outline"
           label="Where do you want to go?"
           :search-input.sync="search"
@@ -16,9 +19,15 @@
             <v-chip
               close
               color="primary"
-              @click:close="deleteChip(item, citySelection)"
-              >{{ item }}</v-chip
+              @click:close="deleteChip(item.value, destinationsSelection)"
+              >{{ item.value }}</v-chip
             >
+          </template>
+
+          <template #item="{ item }">
+            <v-list-item-content>
+              <span>{{ item.value }} - ( {{ item.count }} tours)</span>
+            </v-list-item-content>
           </template>
         </v-autocomplete>
       </v-col>
@@ -29,7 +38,7 @@
           :menu-props="{ maxHeight: 800 }"
           clearable
           multiple
-          :items="travelStyles"
+          :items="travelStyle"
           prepend-inner-icon="mdi-hiking"
           label="Travel Style"
         >
@@ -101,6 +110,12 @@
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex';
+  import {
+    FETCH_DESTINATIONS,
+    FETCH_TRAVELSTYLE,
+  } from '../../store/type/actions.js';
+
   export default {
     data: () => ({
       search: '',
@@ -109,28 +124,47 @@
       range: [0, 6000],
       rating: ['⭐⭐⭐⭐ and up', '⭐⭐⭐ and up', '⭐⭐ and up', '⭐ and up'],
       duration: ['1 day', '1 - 3 days', '4 - 7 days', '7+ days'],
-      citySelection: [],
+      destinationsSelection: [],
       styleSelection: [],
       ratingSelection: '',
       durationSelection: '',
-      travelStyles: [
-        'Discovery',
-        'Family',
-        'In-depth Cultural',
-        'Historical',
-        'Food & Culinary',
-        'Adventure',
-        'Beach',
-        'Hiking & Trekking',
-        'Bicycle',
-        'Sightseeing',
-        'Boat',
-        'River Cruise',
-        'Ocean Cruise',
-      ],
-      city: ['Hanoi', 'Da Nang', 'Hue', 'Ha Long', 'Sapa', 'Hoi An'],
     }),
+    computed: {
+      ...mapGetters(['destinations', 'travelStyle']),
+    },
+
+    // watch: {
+    //   destinationsSelection() {
+    //     // setTimeout(() => {
+    //     //   this.$refs.select.isMenuActive = false;
+    //     // }, 2000);
+    //   },
+    //   // async search(val) {
+    //   //   // Items have already been loaded
+    //   //   if (this.items.length > 0) return;
+
+    //   //   this.isDestinationsLoading = true;
+
+    //   //   // Lazily load input items
+    //   //   await fetch('https://api.coingecko.com/api/v3/coins/list')
+    //   //     .then((res) => res.clone().json())
+    //   //     .then((res) => {
+    //   //       this.items = res;
+    //   //     })
+    //   //     .catch((err) => {
+    //   //       console.log(err);
+    //   //     })
+    //   //     .finally(() => (this.isDestinationsLoading = false));
+    //   // },
+    // },
+
+    mounted() {
+      this.$watch('$refs.select.isMenuActive', () => {
+        if (this.destinationsSelection.length > 0) console.log('ten');
+      });
+    },
     methods: {
+      ...mapActions([FETCH_DESTINATIONS, FETCH_TRAVELSTYLE]),
       deleteChip(removedItem, array) {
         for (let i = 0; i < array.length; i += 1) {
           // eslint-disable-next-line security/detect-object-injection

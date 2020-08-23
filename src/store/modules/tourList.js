@@ -1,13 +1,12 @@
 import ToursService from '@/common/service/tours.api';
 // import catchAsyncErrors from '@/common/catchAsyncErrors';
 import { TagsService } from '../../common/service/api';
-import { FETCH_TOURS, FETCH_FILTER_SELECTION } from '../type/actions';
 import {
-  FETCH_START,
-  FETCH_END,
-  SET_TAGS,
-  UPDATE_ARTICLE_IN_LIST,
-} from '../type/mutations';
+  FETCH_TOURS,
+  FETCH_DESTINATIONS,
+  FETCH_TRAVELSTYLE,
+} from '../type/actions';
+import { FETCH_START, FETCH_END, SET_TAGS } from '../type/mutations';
 
 // const catchAsyncErrors = (functionToHandle) => (...handledFunctionParams) => {
 //   functionToHandle(...handledFunctionParams).catch((e) => {
@@ -17,30 +16,49 @@ import {
 
 const state = () => ({
   tours: [],
-  tags: [],
+  destinations: [],
+  travelStyle: [],
+
   isLoading: true,
-  destinationList: [],
-  travelStyleList: [],
 });
 
 const getters = {
   tours: (state) => state.tours,
+  travelStyle: (state) => state.travelStyle,
+  destinations: (state) => state.destinations,
+
   isLoading: (state) => state.isLoading,
-  tags: (state) => state.tags,
 };
 
 const actions = {
   // [FETCH_TOURS]({ commit }, params) {
   [FETCH_TOURS]: async ({ commit }) => {
     commit(FETCH_START);
-    const result = await ToursService.query();
+    const result = await ToursService.getTours();
 
-    if (result) {
-      console.log('done: ', result);
-      commit(FETCH_END, result.data.data.result);
-    }
+    if (result) commit(FETCH_END, result.data.data.result);
   },
-  // [FETCH_FILTER_SELECTION]: catchAsyncErrors(async )
+  [FETCH_DESTINATIONS]: async ({ commit }) => {
+    const result = await ToursService.getDestinations();
+
+    if (result) commit(FETCH_END, result.data.data);
+  },
+  [FETCH_TRAVELSTYLE]: async ({ commit }) => {
+    const result = await ToursService.getTravelStyle();
+
+    if (result) commit(FETCH_END, result.data.data);
+  },
+
+  // const payload = {
+  //   tours: ,
+  //   destinations: destinationsResult.data.data,
+  //   travelStyle: travelStyleResult.data.data,
+  // };
+
+  // ToursService.getDestinations(),
+  // ToursService.getTravelStyle(),
+
+  // [FETCH_FILTER_SELECTION]: async,
 
   // [FETCH_TAGS]({ commit }) {
   //   return TagsService.get()
@@ -57,9 +75,18 @@ const mutations = {
   [FETCH_START](state) {
     state.isLoading = true;
   },
-  [FETCH_END](state, data) {
-    state.tours = data;
+
+  [FETCH_END](state, tours) {
+    state.tours = tours;
+
     state.isLoading = false;
+  },
+
+  fetchDestination(state, destinations) {
+    state.destinations = destinations;
+  },
+  fetchTravelStyle(state, travelStyle) {
+    state.travelStyle = travelStyle;
   },
   // [SET_TAGS](state, tags) {
   //   state.tags = tags;

@@ -1,39 +1,32 @@
 <template>
   <v-row no-gutters>
-    <v-col cols="2">
+    <v-col>
       <TrnWishlistHeart class="ml-n2" />
     </v-col>
 
-    <v-col cols="5" class="text-right">
-      <div
-        v-if="oldPrice"
-        class="text-decoration-line-through text-h6 primary--text text--lighten-2 mt-n1"
-      >
-        ${{ priceFormatted(oldPrice) }}
-      </div>
-      <div
-        v-if="oldPrice"
-        class="text-body-2 secondary--text text--darken-2 mt-n1"
-      >
-        You save: ${{ oldPrice - price }}
-      </div>
-    </v-col>
+    <v-col cols="10">
+      <TrnSkewText class="mt-n3 pr-2">
+        <div class="text-h6 primary--text text--lighten-1 px-0">$</div>
+        <div class="text-h4 primary--text text--lighten-1 pr-3">
+          {{ priceFormatted(price) }}
+        </div>
 
-    <v-col cols="5" class="text-center">
-      <span class="text-h5 primary--text">$</span>
-      <span class="text-h5 text-md-h4 primary--text">{{
-        priceFormatted(price)
-      }}</span>
+        <span v-if="oldPrice" class="strikeout text-h6 secondary--text px-0">
+          ${{ priceFormatted(oldPrice) }}
+        </span>
+      </TrnSkewText>
     </v-col>
   </v-row>
 </template>
 
 <script>
   import TrnWishlistHeart from './WishlistHeart.vue';
+  import TrnSkewText from '../../../base/SkewText';
 
   export default {
     components: {
       TrnWishlistHeart,
+      TrnSkewText,
     },
     props: {
       price: {
@@ -51,4 +44,19 @@
   };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .strikeout {
+    font-size: 4em;
+    line-height: 1em;
+    position: relative;
+  }
+  .strikeout::after {
+    border-bottom: 0.15em solid #ff73006c;
+    content: '';
+    left: 0;
+    /* margin-top: calc(0.125em / 2 * -1); */
+    position: absolute;
+    right: 0;
+    top: 45%;
+  }
+</style>

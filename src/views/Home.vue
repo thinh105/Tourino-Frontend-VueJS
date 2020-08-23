@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TrnCarousels class="mt-n16" :items="getFeaturedTours" />
+    <!-- <TrnCarousels class="mt-n16" :items="getFeaturedTours" /> -->
 
     <div class="TourList">
       <!-- <div v-if="isLoading">
@@ -30,7 +30,7 @@
       </div>
       <!-- </div> -->
     </div>
-    <!-- <TrnSkewText /> -->
+    <!-- <TrnSkewTextBox /> -->
   </div>
 </template>
 
@@ -40,7 +40,7 @@
   import { mapGetters } from 'vuex';
 
   import TrnCarousels from '@/components/Carousels.vue';
-  import TrnSkewText from '@/components/base/SkewText.vue';
+  import TrnSkewTextBox from '@/components/base/SkewTextBox.vue';
 
   import TrnGrid from '@/components/Tours/Grid/Grid.vue';
   import TrnSort from '@/components/Tours/Sort.vue';
@@ -54,7 +54,7 @@
     },
     components: {
       TrnCarousels,
-      TrnSkewText,
+      TrnSkewTextBox,
       TrnGrid,
       TrnSort,
       TrnFilter,
