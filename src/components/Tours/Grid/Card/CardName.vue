@@ -17,7 +17,7 @@
     text-align: right;
     position: absolute;
     line-height: 1.5em;
-    right: 0.8em;
+    right: 18px;
     width: 70%;
     /* font-size: 1.5em; */
   }
