@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-if="reviewsQuantity"
-    style="width: 24%;"
-    class="mt-n6 pb-0 text-center"
-  >
+  <div v-if="reviewsQuantity" style="width: 23%;" class="text-center">
     <v-chip class="px-1" small color="orange" text-color="white">
       <h3 class="px-1">{{ ratingsAverage }}</h3>
       <v-icon>mdi-star</v-icon>

@@ -28,17 +28,26 @@
 
     <v-container class="px-4 mt-6 pb-0">
       <TrnRating
+        class="mt-n8 pb-0"
         :ratings-average="tour.ratingsAverage"
         :reviews-quantity="tour.reviewsQuantity"
       />
 
-      <TrnHighlights :highlights="tour.highlights" v-on="$listeners" />
+      <TrnHighlights
+        class="py-1"
+        :highlights="tour.highlights"
+        v-on="$listeners"
+      />
 
-      <TrnDestinations :destinations="tour.destinations" />
+      <TrnDestinations class="py-1" :destinations="tour.destinations" />
 
-      <TrnTravelStyle :travel-style="tour.travelStyle" v-on="$listeners" />
+      <TrnTravelStyle
+        class="py-1"
+        :travel-style="tour.travelStyle"
+        v-on="$listeners"
+      />
 
-      <TrnDuration :duration="tour.duration" />
+      <TrnDuration class="py-2" :duration="tour.duration" />
 
       <!-- <v-row no-gutters>
         <v-col cols="12" class="py-1 px-1">
@@ -77,7 +86,12 @@
       TrnPrice,
     },
 
-    props: ['tour'],
+    props: {
+      tour: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>
 
@@ -88,35 +102,26 @@
 
   .card-header {
     position: relative;
-    /* margin-bottom: 2em; */
+    margin-bottom: 2em;
   }
 
   .longCardName {
-    bottom: -1em;
+    bottom: -1.7em;
     font-size: 1.45em;
   }
 
   .mediumCardName {
-    bottom: -1em;
+    bottom: -1.2em;
     font-size: 1.6em;
   }
 
   .shortCardName {
-    bottom: -0.6em;
+    bottom: -1.3em;
     font-size: 1.8em;
   }
 
   .veryShortCardName {
-    bottom: -0.4em;
+    bottom: -0.7em;
     font-size: 1.8em;
-  }
-
-  .testtenten {
-    background-color: #0056c7bc;
-    /* background-image: linear-gradient(
-      to bottom right,
-      #0056c7bc 0%,
-      #00a59791 84%
-    ); */
   }
 </style>

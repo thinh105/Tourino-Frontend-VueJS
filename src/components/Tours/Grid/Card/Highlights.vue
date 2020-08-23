@@ -1,5 +1,5 @@
 <template>
-  <div class="py-1">
+  <div>
     <v-row v-if="!expand" no-gutters>
       <v-col
         v-for="index in 3"

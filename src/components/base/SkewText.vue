@@ -31,20 +31,11 @@
 
   .title-box span {
     font-weight: 500;
-    padding: 0.3em;
+    padding: 0.35em;
     box-decoration-break: clone;
-    /* background-image: linear-gradient(to bottom, #0084ff, #65b5f694); */
-    /* background-image: linear-gradient(
-       160deg,
-       rgb(0, 98, 211) 0%,
-       rgba(4, 136, 151, 0.65) 51%,
-       rgb(0, 132, 255) 75%
-     ); */
-    /* background-color: #03e5b898; */
   }
 
   .background {
-    /* background-color: #03e5b7; */
     background-image: linear-gradient(
       to bottom right,
       #0056c7 0%,

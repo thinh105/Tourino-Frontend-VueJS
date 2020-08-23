@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters class="py-2">
+  <v-row no-gutters>
     <v-col class="d-flex align-center">
       <v-icon class="primary--text">
         mdi-calendar-clock
