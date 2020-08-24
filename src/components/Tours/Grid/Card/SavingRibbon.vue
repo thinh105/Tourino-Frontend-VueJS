@@ -1,6 +1,8 @@
 <template>
   <div v-if="sale > 0" class="savingRibbon">
-    <span class="savingValue white--text text-h6">-{{ sale }}%</span>
+    <span class="savingValue white--text text-h6 text-center"
+      >-{{ sale }}%</span
+    >
   </div>
 </template>
 
@@ -39,7 +41,7 @@
     left: 0px;
     top: 0px;
 
-    border-color: #0000 #0000 #0000 #e74c3c;
+    border-color: #0000 #0000 #0000 #e6480a;
     border-style: solid;
     border-width: 0px 0px 60px 60px;
   }
@@ -52,5 +54,6 @@
     width: 60px;
 
     transform: rotate(315deg);
+    padding-right: 0.9rem;
   }
 </style>
