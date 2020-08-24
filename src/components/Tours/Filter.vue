@@ -11,9 +11,10 @@
           :loading="isDestinationsLoading"
           item-text="value"
           prepend-inner-icon="mdi-map-marker-outline"
-          label="Where do you want to go?"
+          label="What places do you want to travel?"
           :search-input.sync="search"
           @change="search = ''"
+          @click="getDes"
         >
           <template #selection="{ item }">
             <v-chip
@@ -118,53 +119,50 @@
 
   export default {
     data: () => ({
-      search: '',
+      search: null,
       min: 0,
       max: 6000,
       range: [0, 6000],
-      rating: ['⭐⭐⭐⭐ and up', '⭐⭐⭐ and up', '⭐⭐ and up', '⭐ and up'],
+      rating: ['⭐⭐⭐⭐ and up', '⭐⭐⭐ and up', '⭐⭐ and up'],
       duration: ['1 day', '1 - 3 days', '4 - 7 days', '7+ days'],
       destinationsSelection: [],
       styleSelection: [],
       ratingSelection: '',
       durationSelection: '',
+      isDestinationsLoading: false,
     }),
     computed: {
       ...mapGetters(['destinations', 'travelStyle']),
     },
 
-    // watch: {
-    //   destinationsSelection() {
-    //     // setTimeout(() => {
-    //     //   this.$refs.select.isMenuActive = false;
-    //     // }, 2000);
-    //   },
-    //   // async search(val) {
-    //   //   // Items have already been loaded
-    //   //   if (this.items.length > 0) return;
-
-    //   //   this.isDestinationsLoading = true;
-
-    //   //   // Lazily load input items
-    //   //   await fetch('https://api.coingecko.com/api/v3/coins/list')
-    //   //     .then((res) => res.clone().json())
-    //   //     .then((res) => {
-    //   //       this.items = res;
-    //   //     })
-    //   //     .catch((err) => {
-    //   //       console.log(err);
-    //   //     })
-    //   //     .finally(() => (this.isDestinationsLoading = false));
-    //   // },
-    // },
+    watch: {
+      //   destinationsSelection() {
+      //     // setTimeout(() => {
+      //     //   this.$refs.select.isMenuActive = false;
+      //     // }, 2000);
+      //   },
+      // async search() {
+      //   // Items have already been loaded
+      //   if (this.destinations.length > 0) return;
+      //   this.isDestinationsLoading = true;
+      //   // Lazily load input items
+      //   // FETCH_DESTINATIONS();
+      //   await store.dispatch(FETCH_DESTINATIONS);
+      //   this.isDestinationsLoading = false;
+      // },
+    },
 
     mounted() {
       this.$watch('$refs.select.isMenuActive', () => {
-        if (this.destinationsSelection.length > 0) console.log('ten');
+        if (this.destinationsSelection.length > 0);
       });
     },
     methods: {
       ...mapActions([FETCH_DESTINATIONS, FETCH_TRAVELSTYLE]),
+      getDes() {
+        console.log('heng');
+        return this.FETCH_DESTINATIONS;
+      },
       deleteChip(removedItem, array) {
         for (let i = 0; i < array.length; i += 1) {
           // eslint-disable-next-line security/detect-object-injection

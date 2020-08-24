@@ -3,7 +3,12 @@
     <TrnAlert />
     <TrnHeader />
     <v-main>
-      <router-view />
+      <!-- <router-view /> -->
+      <!-- <v-scroll-y-transition mode="in" hide-on-leave="true"> -->
+      <TrnTransition>
+        <router-view />
+      </TrnTransition>
+      <!-- </v-scroll-y-transition> -->
     </v-main>
     <TrnFooter />
     <CallHotline />

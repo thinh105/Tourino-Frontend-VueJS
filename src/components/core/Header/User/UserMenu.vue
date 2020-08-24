@@ -1,7 +1,12 @@
 <template>
   <!-- open-on-hover
     close-delay="700" -->
-  <v-menu v-model="menu" offset-y :close-on-content-click="false">
+  <v-menu
+    v-model="menu"
+    offset-y
+    :transition="TRN_GLOBAL_TRANSITION"
+    :close-on-content-click="false"
+  >
     <template v-slot:activator="{ on, attrs }">
       <v-avatar v-bind="attrs" v-on="on">
         <img :src="currentUser.photo" />
@@ -42,6 +47,8 @@
   import { mapGetters } from 'vuex';
   import { LOGOUT } from '@/store/type/actions';
 
+  import { TRN_GLOBAL_TRANSITION } from '@/common/config.js';
+
   export default {
     data: () => ({
       menu: false,
@@ -51,6 +58,8 @@
         { title: 'Password', icon: 'mdi-lock' },
         { title: 'Log Out', icon: 'mdi-logout' },
       ],
+
+      TRN_GLOBAL_TRANSITION,
     }),
     computed: {
       ...mapGetters(['currentUser']),

@@ -2,7 +2,10 @@ import { UPDATE_ERROR, REMOVE_ERROR } from '../type/mutations';
 import { SET_ERROR, CLEAR_ERROR } from '../type/actions';
 
 const state = () => ({
-  error: null,
+  error: {
+    message: undefined,
+    type: undefined,
+  },
 });
 
 const getters = {
@@ -27,7 +30,7 @@ const mutations = {
     state.error = { message: payload.message, type: payload.type || 'error' };
   },
   [REMOVE_ERROR]: (state) => {
-    state.error = null;
+    state.error.message = undefined;
   },
 };
 

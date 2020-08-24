@@ -1,5 +1,6 @@
 // tourList
 export const FETCH_TOURS = 'fetchTour';
+
 export const FETCH_DESTINATIONS = 'fetchDestinations';
 export const FETCH_TRAVELSTYLE = 'fetchTravelStyle';
 

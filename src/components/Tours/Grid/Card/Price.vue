@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-col>
-      <TrnWishlistHeart class="ml-n2" />
+      <TrnHeart class="ml-n2" />
     </v-col>
 
     <v-col cols="10">
@@ -23,12 +23,12 @@
 </template>
 
 <script>
-  import TrnWishlistHeart from './WishlistHeart.vue';
+  import TrnHeart from './Heart';
   import TrnSkewText from '../../../base/SkewText';
 
   export default {
     components: {
-      TrnWishlistHeart,
+      TrnHeart,
       TrnSkewText,
     },
     props: {

@@ -1,12 +1,19 @@
 import ToursService from '@/common/service/tours.api';
 // import catchAsyncErrors from '@/common/catchAsyncErrors';
 import { TagsService } from '../../common/service/api';
+
 import {
   FETCH_TOURS,
   FETCH_DESTINATIONS,
   FETCH_TRAVELSTYLE,
 } from '../type/actions';
-import { FETCH_START, FETCH_END, SET_TAGS } from '../type/mutations';
+
+import {
+  FETCH_START,
+  FETCH_END,
+  SET_DESTINATIONS,
+  SET_TRAVELSTYLE,
+} from '../type/mutations';
 
 // const catchAsyncErrors = (functionToHandle) => (...handledFunctionParams) => {
 //   functionToHandle(...handledFunctionParams).catch((e) => {
@@ -38,15 +45,17 @@ const actions = {
 
     if (result) commit(FETCH_END, result.data.data.result);
   },
+
   [FETCH_DESTINATIONS]: async ({ commit }) => {
     const result = await ToursService.getDestinations();
 
-    if (result) commit(FETCH_END, result.data.data);
+    if (result) commit(SET_DESTINATIONS, result.data.data);
   },
+
   [FETCH_TRAVELSTYLE]: async ({ commit }) => {
     const result = await ToursService.getTravelStyle();
 
-    if (result) commit(FETCH_END, result.data.data);
+    if (result) commit(SET_TRAVELSTYLE, result.data.data);
   },
 
   // const payload = {
@@ -82,10 +91,10 @@ const mutations = {
     state.isLoading = false;
   },
 
-  fetchDestination(state, destinations) {
+  [SET_DESTINATIONS](state, destinations) {
     state.destinations = destinations;
   },
-  fetchTravelStyle(state, travelStyle) {
+  [SET_TRAVELSTYLE](state, travelStyle) {
     state.travelStyle = travelStyle;
   },
   // [SET_TAGS](state, tags) {
