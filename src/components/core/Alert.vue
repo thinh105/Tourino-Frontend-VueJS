@@ -1,17 +1,16 @@
 <template>
-  <div v-if="!!getErrors">
-    <v-alert
-      :type="getErrors.type"
-      transition="scale-transition"
-      :dismissible="$vuetify.breakpoint.mdAndUp"
-      dense
-      :prominent="$vuetify.breakpoint.mdAndUp"
-      class="TrnAlert rounded-tr-xl rounded-bl-xl text-center text-caption text-md-body-1"
-      @input="clearError"
-    >
-      {{ getErrors.message }}
-    </v-alert>
-  </div>
+  <v-alert
+    v-if="!!getError"
+    :type="getError.type"
+    transition="scroll-x-transition"
+    :dismissible="$vuetify.breakpoint.mdAndUp"
+    dense
+    :prominent="$vuetify.breakpoint.mdAndUp"
+    class="TrnAlert rounded-tr-xl rounded-bl-xl text-center text-caption text-md-body-1"
+    @input="[CLEAR_ERROR]"
+  >
+    {{ getError.message }}
+  </v-alert>
 </template>
 
 <script>
@@ -20,13 +19,8 @@
   import { CLEAR_ERROR } from '../../store/type/actions';
 
   export default {
-    data() {
-      return {
-        alert: true,
-      };
-    },
     computed: {
-      ...mapGetters(['getErrors']),
+      ...mapGetters(['getError']),
     },
 
     methods: {

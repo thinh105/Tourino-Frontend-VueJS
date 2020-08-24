@@ -41,7 +41,7 @@
     left: 0px;
     top: 0px;
 
-    border-color: #0000 #0000 #0000 #e6480a;
+    border-color: #0000 #0000 #0000 #ff6600;
     border-style: solid;
     border-width: 0px 0px 60px 60px;
   }

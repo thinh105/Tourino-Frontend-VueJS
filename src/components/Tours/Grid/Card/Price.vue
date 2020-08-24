@@ -11,7 +11,10 @@
           {{ priceFormatted(price) }}
         </div>
 
-        <span v-if="oldPrice" class="strikeout text-h6 secondary--text px-0">
+        <span
+          v-if="oldPrice"
+          class="strikeout text-h6 secondary--text text--darken-1 px-0"
+        >
           ${{ priceFormatted(oldPrice) }}
         </span>
       </TrnSkewText>

@@ -1,4 +1,5 @@
 import store from '@/store';
+import { SET_ERROR } from '@/store/type/actions';
 
 export default function errorResponseHandler(error) {
   // check for errorHandle config -- allow to turn off error handling
@@ -16,7 +17,7 @@ export default function errorResponseHandler(error) {
     console.log('error.response!!!');
     console.log(error.response.data);
 
-    store.dispatch('setError', {
+    store.dispatch(SET_ERROR, {
       message: `[Tourino] ApiService: ${error.response.data.message}`,
     });
   } else if (error.request) {
@@ -26,7 +27,7 @@ export default function errorResponseHandler(error) {
     console.log('error.request!!!');
     console.log(error.request);
 
-    store.dispatch('setError', {
+    store.dispatch(SET_ERROR, {
       message: '[Tourino] API Server Error: Network Error!!!',
     });
   } else {

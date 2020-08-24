@@ -5,7 +5,7 @@
         v-for="index in 3"
         :key="index"
         cols="12"
-        class="text-body-2 secondary--text text--darken-1"
+        class="text-body-2 secondary--text text--darken-2"
       >
         <span class="ml-1">🌟</span>
         <span class="ml-2">{{ highlights[index - 1] }}</span>

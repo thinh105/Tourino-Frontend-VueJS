@@ -11,10 +11,11 @@
 </template>
 
 <script>
-  import TrnFooter from '@/components/core/Footer';
   import TrnHeader from '@/components/core/Header/Header';
   import TrnAlert from '@/components/core/Alert.vue';
+
   import CallHotline from '@/components/core/CallHotline';
+  import TrnFooter from '@/components/core/Footer';
 
   export default {
     components: {

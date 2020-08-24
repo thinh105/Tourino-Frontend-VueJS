@@ -6,7 +6,7 @@ const state = () => ({
 });
 
 const getters = {
-  getErrors: (state) => state.errors,
+  getError: (state) => state.error,
 };
 
 const actions = {
