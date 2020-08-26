@@ -33,7 +33,7 @@
 
   import TrnGrid from '@/components/Tours/Grid/Grid.vue';
   import TrnSort from '@/components/Tours/Sort.vue';
-  import TrnFilter from '@/components/Tours/Filter.vue';
+  import TrnFilter from '@/components/Tours/Filter/Filter.vue';
 
   export default {
     name: 'Home',
