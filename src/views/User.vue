@@ -5,7 +5,7 @@
       v-model="drawer"
       dark
       :mini-variant="mini"
-      mobile-break-point="960"
+      mobile-breakpoint="960"
     >
       <template v-slot:img>
         <v-img

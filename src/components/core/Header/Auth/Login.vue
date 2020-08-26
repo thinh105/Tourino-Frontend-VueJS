@@ -60,7 +60,10 @@
           password: this.password,
         });
 
-        if (this.$route.path.includes('/Authentication'))
+        if (
+          this.$route.path.includes('/Authentication') &&
+          this.$store.getters.isAuthenticated
+        )
           this.$router.push('/');
       },
     },

@@ -1,20 +1,28 @@
 <template>
   <div>
-    <stack
-      ref="stackRef"
-      :column-min-width="320"
-      :gutter-width="30"
-      :gutter-height="40"
-      :monitor-images-loaded="true"
-    >
-      <stack-item
-        v-for="(tour, i) in tours"
-        :key="i"
-        style="transition: transform 1000ms;"
+    <div v-if="isLoading" class="text-h5 text-center TrnLoading mb-3">
+      <div>Loading tours...</div>
+      <v-progress-linear indeterminate color="secondary" />
+    </div>
+    <div v-else>
+      <stack
+        ref="stackRef"
+        :column-min-width="320"
+        :gutter-width="30"
+        :gutter-height="40"
+        :monitor-images-loaded="true"
       >
-        <TrnCard :tour="tour" @reloadGrid="reloadGrid" />
-      </stack-item>
-    </stack>
+        <stack-item
+          v-for="(tour, i) in tours"
+          :key="i"
+          style="transition: transform 1000ms;"
+        >
+          <TrnCard :tour="tour" @reloadGrid="reloadGrid" />
+        </stack-item>
+      </stack>
+
+      <TrnPagination />
+    </div>
   </div>
 </template>
 
@@ -22,15 +30,17 @@
   import { mapGetters } from 'vuex';
 
   import { Stack, StackItem } from 'vue-stack-grid';
-  import { FETCH_TOURS } from '@/store/type/actions';
 
+  import TrnPagination from '@/components/Pagination.vue';
+  import { FETCH_TOURS } from '@/store/type/actions';
   import TrnCard from './Card/Card';
 
   export default {
     components: {
-      TrnCard,
       Stack,
       StackItem,
+      TrnCard,
+      TrnPagination,
     },
 
     props: {
@@ -66,7 +76,7 @@
     },
 
     watch: {
-      $route: 'fetchTours',
+      tours: 'reloadGrid',
     },
 
     created() {
@@ -79,12 +89,19 @@
           this.$refs.stackRef.reflow();
         });
       },
+
       async fetchTours() {
-        await this.$store.dispatch(FETCH_TOURS);
-        this.reloadGrid();
+        if (!this.tours.length) {
+          await this.$store.dispatch(FETCH_TOURS);
+          this.reloadGrid();
+        }
       },
     },
   };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .TrnLoading {
+    margin-top: 180px;
+  }
+</style>

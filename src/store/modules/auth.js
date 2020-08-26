@@ -17,6 +17,7 @@ const state = {
 
 const getters = {
   currentUser: (state) => state.user,
+  isAuthenticated: (state) => !!state.user,
 };
 
 const actions = {
@@ -26,9 +27,9 @@ const actions = {
   // },
 
   [LOGIN]: async ({ commit }, credentials) => {
-    const result = await authsService.login(credentials);
+    const response = await authsService.login(credentials);
 
-    if (result) commit(SET_AUTH, result.data.data);
+    if (response) commit(SET_AUTH, response.data.data);
   },
 
   [LOGOUT]({ commit }) {
@@ -48,9 +49,12 @@ const actions = {
   [CHECK_AUTH]: async ({ commit }) => {
     const token = JwtService.getToken();
     authsService.setHeader(token);
+
     if (token && !state.user) {
-      const result = await authsService.checkAuth();
-      if (result) commit(SET_AUTH, { user: result.data.data, token });
+      const response = await authsService.checkAuth();
+      if (response) {
+        commit(SET_AUTH, { user: response.data.data, token });
+      } else JwtService.destroyToken();
     }
   },
   /*    if (token && !state.user) {

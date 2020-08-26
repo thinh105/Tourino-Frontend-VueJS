@@ -1,16 +1,24 @@
+import qs from 'qs';
 import { apiService } from './api';
 
 export default {
-  query: (type, params) =>
-    apiService.query('tours', {
-      params,
-    }),
-  getTours() {
-    return apiService.get('tours?limit=12');
+  query: (params) => apiService.query('tours', { params }),
+
+  getTours: (query) => {
+    const queryStringify = qs.stringify(query, {
+      encode: false,
+      indices: false,
+    });
+
+    const queryFilter = queryStringify
+      ? `tours?limit=12&${queryStringify}`
+      : 'tours?limit=12';
+
+    return apiService.get(queryFilter);
+    // return apiService.get('tours?limit=12', { params });
   },
-  getDestinations() {
-    return apiService.get('tours/destinations');
-  },
+
+  getDestinations: () => apiService.get('tours/destinations'),
   getTravelStyle() {
     return apiService.get('tours/travelStyle');
   },

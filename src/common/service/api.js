@@ -25,8 +25,8 @@ export const apiService = {
 
   get(resourse) {
     return TrnApi.get(resourse);
+    // return TrnApi.get(resourse, params);
   },
-
   // get(resource, slug = '') {
   //   return TrnApi.get(`${resource}/${slug}`);
   //   // .catch((error) => {

@@ -40,7 +40,7 @@
 
   .v-application {
     background: linear-gradient(
-        30deg,
+        160deg,
         #12bcff 0%,
         #f0feff 25%,
         #85daffb7 51%,

@@ -3,35 +3,24 @@
     <!-- <TrnCarousels class="mt-n16" :items="getFeaturedTours" /> -->
 
     <div class="TourList">
-      <!-- <div v-if="isLoading">
-        <div class="text-h5 text-center mt-16 mb-3">Loading tours...</div>
-        <v-progress-linear indeterminate color="secondary" />
-      </div>
-      <div v-else> -->
-      <div>
-        <!-- <v-row v-if="!$vuetify.breakpoint.mobile">
+      <!-- <v-row v-if="!$vuetify.breakpoint.mobile">
           <v-col cols="2">
             <TrnFilter />
           </v-col>
           <v-col cols="10">
             <TrnSort />
-            <TrnGrid ref="grid" :tours="tours" /> -->
-        <!-- <Grid v-if="(!isLoading)" :tours="tours" /> -->
-        <!-- </v-col>
-        </v-row>
+            <TrnGrid ref="grid" :tours="tours" />  -->
+      <!-- <Grid v-if="(!isLoading)" :tours="tours" /> -->
+      <!-- </v-col>
+        </v-row> -->
 
-        <div v-else> -->
-
-        <TrnSort />
-        <TrnFilter />
-
-        <TrnGrid />
-        <TrnPagination />
-      </div>
-      <!-- </div> -->
+      <TrnSort />
+      <TrnFilter />
+      <TrnGrid />
     </div>
-    <!-- <TrnSkewTextBox /> -->
+    <!-- </div> -->
   </div>
+  <!-- <TrnSkewTextBox /> -->
 </template>
 
 <script>
@@ -45,12 +34,11 @@
   import TrnGrid from '@/components/Tours/Grid/Grid.vue';
   import TrnSort from '@/components/Tours/Sort.vue';
   import TrnFilter from '@/components/Tours/Filter.vue';
-  import TrnPagination from '@/components/Pagination.vue';
 
   export default {
     name: 'Home',
     computed: {
-      ...mapGetters(['getFeaturedTours']),
+      ...mapGetters(['getFeaturedTours', 'isLoading']),
     },
     components: {
       TrnCarousels,
@@ -58,7 +46,6 @@
       TrnGrid,
       TrnSort,
       TrnFilter,
-      TrnPagination,
     },
   };
 </script>

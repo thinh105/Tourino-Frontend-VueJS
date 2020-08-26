@@ -39,23 +39,22 @@ const getters = {
 
 const actions = {
   // [FETCH_TOURS]({ commit }, params) {
-  [FETCH_TOURS]: async ({ commit }) => {
+  [FETCH_TOURS]: async ({ commit }, query) => {
     commit(FETCH_START);
-    const result = await ToursService.getTours();
-
-    if (result) commit(FETCH_END, result.data.data.result);
+    const response = await ToursService.getTours(query);
+    if (response) commit(FETCH_END, response.data.data.result);
   },
 
   [FETCH_DESTINATIONS]: async ({ commit }) => {
-    const result = await ToursService.getDestinations();
+    const response = await ToursService.getDestinations();
 
-    if (result) commit(SET_DESTINATIONS, result.data.data);
+    if (response) commit(SET_DESTINATIONS, response.data.data);
   },
 
   [FETCH_TRAVELSTYLE]: async ({ commit }) => {
-    const result = await ToursService.getTravelStyle();
+    const response = await ToursService.getTravelStyle();
 
-    if (result) commit(SET_TRAVELSTYLE, result.data.data);
+    if (response) commit(SET_TRAVELSTYLE, response.data.data);
   },
 
   // const payload = {

@@ -22,11 +22,17 @@ const routes = [
     name: 'User',
     path: '/User/',
     component: () => import('@/views/User.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     name: 'UserProfile',
     path: '/User/Profile',
     component: () => import('@/views/User.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     name: 'NotFound',
@@ -48,17 +54,23 @@ const router = new VueRouter({
 
 // Ensure we checked auth before each page load.
 router.beforeEach((to, from, next) => {
-  store.dispatch(CHECK_AUTH).then(next);
-});
+  if (store.getters.isAuthenticated) {
+    next();
+    return;
+  }
 
-// router.beforeEach((to, from, next) => {
-//   if (to.meta.requiresAuth) {
-//     if (!store.currentUser) {
-//       next({
-//         name: 'Home',
-//       });
-//     }
-//   }
-// });
+  // check auth before first load or page reload to get token to get the user data
+  store.dispatch(CHECK_AUTH).then(() => {
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+      if (store.getters.isAuthenticated) {
+        next();
+        return;
+      }
+      next('/Authentication');
+    } else {
+      next();
+    }
+  });
+});
 
 export default router;

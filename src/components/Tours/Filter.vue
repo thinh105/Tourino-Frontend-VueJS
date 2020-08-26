@@ -14,7 +14,7 @@
           label="What places do you want to travel?"
           :search-input.sync="search"
           @change="search = ''"
-          @click="getDes"
+          @click="getDestinations"
         >
           <template #selection="{ item }">
             <v-chip
@@ -115,6 +115,7 @@
   import {
     FETCH_DESTINATIONS,
     FETCH_TRAVELSTYLE,
+    FETCH_TOURS,
   } from '../../store/type/actions.js';
 
   export default {
@@ -136,11 +137,12 @@
     },
 
     watch: {
-      //   destinationsSelection() {
-      //     // setTimeout(() => {
-      //     //   this.$refs.select.isMenuActive = false;
-      //     // }, 2000);
-      //   },
+      destinationsSelection() {
+        // setTimeout(() => {
+        //   this.$refs.select.isMenuActive = false;
+        // }, 1000);
+        this.getFilteredTours();
+      },
       // async search() {
       //   // Items have already been loaded
       //   if (this.destinations.length > 0) return;
@@ -152,16 +154,24 @@
       // },
     },
 
-    mounted() {
-      this.$watch('$refs.select.isMenuActive', () => {
-        if (this.destinationsSelection.length > 0);
-      });
-    },
+    // mounted() {
+    //   this.$watch('$refs.select.isMenuActive', () => {
+    //     if (this.destinationsSelection.length > 0);
+    //   });
+    // },
     methods: {
-      ...mapActions([FETCH_DESTINATIONS, FETCH_TRAVELSTYLE]),
-      getDes() {
-        console.log('heng');
-        return this.FETCH_DESTINATIONS;
+      ...mapActions([FETCH_DESTINATIONS, FETCH_TRAVELSTYLE, FETCH_TOURS]),
+      getDestinations() {
+        if (!this.destinations.length) this[FETCH_DESTINATIONS]();
+      },
+      getFilteredTours() {
+        const filterQuery = this.destinationsSelection.length
+          ? {
+              destinations: { all: this.destinationsSelection },
+            }
+          : undefined;
+
+        this[FETCH_TOURS](filterQuery);
       },
       deleteChip(removedItem, array) {
         for (let i = 0; i < array.length; i += 1) {
