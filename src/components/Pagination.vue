@@ -1,10 +1,9 @@
 <template>
   <v-pagination
     v-model="page"
-    circle
+    :total-visible="visible"
     :length="length"
     :page="page"
-    :total-visible="visible"
     class="mb-4"
   />
 </template>
@@ -12,11 +11,17 @@
 <script>
   export default {
     data: () => ({
-      length: 16,
       page: 1,
       visible: 10,
+      length: 16,
     }),
   };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .v-pagination__more,
+  .v-pagination__navigation,
+  button {
+    outline: none !important;
+  }
+</style>

@@ -1,5 +1,13 @@
 # Tourino
 
+## TODO
+
+- [x] Filter: Now the chip selections are sync to URL.
+
+User now can visit the copy/reload URL and still get the chip selections
+
+- [ ] Vue Router - the chip filter will not update when go back old page
+
 ## Project setup
 
 ```

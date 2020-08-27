@@ -6,7 +6,6 @@ export const state = () => ({
 
 export const getters = {
   tours: (state) => state.tours,
-  tour,
 };
 
 export const mutations = {

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store';
 import { CHECK_AUTH } from '@/store/type/actions';
+import qs from 'qs';
 
 Vue.use(VueRouter);
 
@@ -10,7 +11,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('@/views/Home.vue'),
-    props: (route) => ({ query: route.query }),
   },
   {
     name: 'Tour',
@@ -50,9 +50,26 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { x: 0, y: 0 };
+  },
+  stringifyQuery: (query) =>
+    qs.stringify(query, {
+      encode: false,
+      indices: false,
+      arrayFormat: 'comma',
+      addQueryPrefix: true,
+    }),
+  parseQuery: (query) =>
+    qs.parse(query, {
+      comma: true,
+    }),
 });
 
-// Ensure we checked auth before each page load.
+// Ensure checked auth before each page load.
 router.beforeEach((to, from, next) => {
   if (store.getters.isAuthenticated) {
     next();

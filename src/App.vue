@@ -41,11 +41,14 @@
   .v-application {
     background: linear-gradient(
         172deg,
-        #12bcff 0%,
-        #f0feff 25%,
-        #85daffb7 51%,
-        #f6fcff 82%,
-        #4cccff 95%
+        #29f8ff 0%,
+        #f0feff 8%,
+        #9aebffde 42%,
+        #d5f4f6 50%,
+        #c1ebf8 66%,
+        #adf3ff 72%,
+        #ddf4ff 83%,
+        #65faff 100%
       )
       no-repeat center center fixed !important;
     background-size: cover !important;

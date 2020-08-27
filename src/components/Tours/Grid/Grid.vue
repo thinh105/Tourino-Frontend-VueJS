@@ -12,11 +12,10 @@
         :gutter-height="40"
         :monitor-images-loaded="true"
       >
-        <!--          style="transition: transform 1000ms;" -->
         <stack-item
           v-for="(tour, i) in tours"
           :key="i"
-          style="transition: transform 800ms"
+          style="transition: transform 1000ms"
         >
           <TrnCard :tour="tour" @reloadGrid="reloadGrid" />
         </stack-item>
@@ -70,6 +69,11 @@
         required: false,
         default: 10,
       },
+      path: {
+        type: String,
+        required: false,
+        default: undefined,
+      },
     },
 
     computed: {
@@ -78,6 +82,10 @@
 
     watch: {
       tours: 'reloadGrid',
+
+      $route(to, from) {
+        this.fetchTours();
+      },
     },
 
     created() {
@@ -92,10 +100,10 @@
       },
 
       async fetchTours() {
-        if (!this.tours.length) {
-          await this.$store.dispatch(FETCH_TOURS);
-          if (this.tours.length) this.reloadGrid();
-        }
+        await this.$store.dispatch(
+          FETCH_TOURS,
+          this.$route.fullPath.substring(2) // remove '/?' from fullPath
+        );
       },
     },
   };
