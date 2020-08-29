@@ -12,12 +12,8 @@
 
     <v-row class="mt-n6" align="center" justify="center">
       <v-col cols="4" align="center" class="pt-8">
-        <v-icon class="primary--text">
-          mdi-cash-usd-outline
-        </v-icon>
-        <span class="subtitle-1 primary--text">
-          Price
-        </span>
+        <v-icon class="primary--text">mdi-cash-usd-outline</v-icon>
+        <span class="subtitle-1 primary--text">Price</span>
 
         <v-range-slider
           v-model="range"

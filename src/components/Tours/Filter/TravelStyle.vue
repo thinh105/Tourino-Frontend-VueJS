@@ -8,6 +8,7 @@
     prepend-inner-icon="mdi-hiking"
     label="Travel Style"
     :search-input.sync="search"
+    no-data-text=""
     @change="search = ''"
     @click="getFieldList"
   >

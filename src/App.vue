@@ -12,6 +12,7 @@
     </v-main>
     <TrnFooter />
     <CallHotline />
+    <TrnJumpTop />
   </v-app>
 </template>
 
@@ -20,6 +21,8 @@
   import TrnAlert from '@/components/core/Alert.vue';
 
   import CallHotline from '@/components/core/CallHotline';
+  import TrnJumpTop from '@/components/core/JumpTop.vue';
+
   import TrnFooter from '@/components/core/Footer';
 
   export default {
@@ -28,6 +31,7 @@
       TrnFooter,
       CallHotline,
       TrnAlert,
+      TrnJumpTop,
     },
   };
 </script>

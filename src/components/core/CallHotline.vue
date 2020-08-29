@@ -6,6 +6,9 @@
         :href="`tel:${trimSpace}`"
         depressed
         fab
+        fixed
+        bottom
+        left
         color="secondary"
         v-bind="attrs"
         v-on="on"
@@ -30,11 +33,4 @@
   };
 </script>
 
-<style scoped>
-  .TrnFloatingCallBtn {
-    position: fixed;
-    bottom: 2em;
-    left: 2em;
-    z-index: 3;
-  }
-</style>
+<style scoped></style>

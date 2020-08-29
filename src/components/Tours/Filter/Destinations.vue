@@ -8,6 +8,8 @@
     prepend-inner-icon="mdi-map-marker-outline"
     label="What places do you want to travel?"
     :search-input.sync="search"
+    :loading="isLoading"
+    no-data-text=""
     @change="search = ''"
     @click="getFieldList"
   >

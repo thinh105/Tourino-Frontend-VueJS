@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-if="isLoading" class="text-h5 text-center TrnLoading mb-3">
-      <div>Loading tours...</div>
-      <v-progress-linear indeterminate color="secondary" />
+      <!-- <v-progress-linear indeterminate color="secondary" /> -->
+      <TrnLoadingAnimation />
     </div>
     <div v-else>
       <stack
@@ -16,6 +16,7 @@
           v-for="(tour, i) in tours"
           :key="i"
           style="transition: transform 1000ms"
+          :class="$vuetify.breakpoint.xs ? 'TrnGridMobile' : ''"
         >
           <TrnCard :tour="tour" @reloadGrid="reloadGrid" />
         </stack-item>
@@ -33,6 +34,7 @@
 
   import TrnPagination from '@/components/Pagination.vue';
   import { FETCH_TOURS } from '@/store/type/actions';
+  import TrnLoadingAnimation from '@/components/core/LoadingAnimation.vue';
   import TrnCard from './Card/Card';
 
   export default {
@@ -41,6 +43,7 @@
       StackItem,
       TrnCard,
       TrnPagination,
+      TrnLoadingAnimation,
     },
 
     props: {
@@ -112,5 +115,12 @@
 <style scoped>
   .TrnLoading {
     margin-top: 180px;
+  }
+  .TrnGridMobile {
+    max-width: 350px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>

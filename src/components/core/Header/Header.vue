@@ -4,13 +4,14 @@
       <v-row align="center" class="mx-1">
         <v-app-bar-nav-icon left class="hidden-md-and-up mx-n4" />
         <router-link
-          style="text-decoration: none;"
+          style="text-decoration: none"
           class="text-h5 text-md-h4 text-sm-center white--text px-2 py-1"
           :to="'/'"
         >
+          <!-- min-width="150px"
+            max-width="250px" -->
           <v-img
-            min-width="15 0px"
-            max-width="200px"
+            :class="$vuetify.breakpoint.xs ? 'TrnLogoMobile' : 'TrnLogo'"
             alt="tourino logo"
             :src="require('@/assets/tourino.png')"
           />
@@ -30,7 +31,7 @@
           {{ item.text }}
         </v-btn>
 
-        <TrnUserMenu v-if="currentUser" />
+        <TrnUserMenu v-if="isAuthenticated" />
         <TrnAuthMenu v-else />
       </v-row>
     </v-container>
@@ -65,9 +66,17 @@
       ],
     }),
     computed: {
-      ...mapGetters(['currentUser']),
+      ...mapGetters(['isAuthenticated']),
     },
   };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .TrnLogoMobile {
+    max-width: 150px;
+  }
+
+  .TrnLogo {
+    max-width: 250px;
+  }
+</style>

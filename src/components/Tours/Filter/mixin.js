@@ -6,6 +6,7 @@ export default (field, fetchFieldAction) => ({
     items: [],
     search: null,
     selection: [],
+    isLoading: false,
   }),
 
   computed: {
@@ -13,8 +14,8 @@ export default (field, fetchFieldAction) => ({
   },
 
   watch: {
-    selection() {
-      this.getFilteredTours(field);
+    async selection() {
+      await this.getFilteredTours(field);
     },
     // $route(to, from) {
     //   this.selection = [];
@@ -29,8 +30,12 @@ export default (field, fetchFieldAction) => ({
   methods: {
     ...mapActions([FETCH_TOURS, fetchFieldAction]),
 
-    getFieldList() {
-      if (!this[field].length) this[fetchFieldAction]();
+    async getFieldList() {
+      if (!this[field].length) {
+        this.isLoading = true;
+        await this[fetchFieldAction]();
+        this.isLoading = false;
+      }
     },
 
     getFilteredTours() {
@@ -49,11 +54,9 @@ export default (field, fetchFieldAction) => ({
     },
 
     removeFilterItem(removedItem, array) {
-      console.log('hey', removedItem, array);
       for (let i = 0; i < array.length; i += 1) {
         // eslint-disable-next-line security/detect-object-injection
         if (array[i] === removedItem) {
-          console.log('sao ko xoa');
           array.splice(i, 1);
         }
       }
