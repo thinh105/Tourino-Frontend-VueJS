@@ -1,5 +1,8 @@
 <template>
-  <div class="TrnAlert">
+  <div
+    class="TrnAlert"
+    :class="$vuetify.breakpoint.mobile ? 'TrnAlertMobile' : 'TrnAlertDesktop'"
+  >
     <v-alert
       :value="!!getError.message"
       :type="getError.type"
@@ -48,12 +51,19 @@
 
 <style scoped>
   .TrnAlert {
-    position: absolute;
-    top: 0%;
+    position: fixed;
     left: 50%;
-    z-index: 4;
-    transform: translate(-50%);
 
-    /* position the left edge of the element at the middle of the parent */
+    z-index: 4;
+    transform: translate(
+      -50%
+    ); /* position the left edge of the element at the middle of the parent */
+  }
+  .TrnAlertMobile {
+    bottom: 0%;
+  }
+
+  .TrnAlertDesktop {
+    top: 0%;
   }
 </style>

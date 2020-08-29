@@ -3,7 +3,7 @@
     <template v-slot:activator="{ on, attrs }">
       <v-btn
         class="TrnFloatingCallBtn"
-        :href="`tel:+${trimSpace}`"
+        :href="`tel:${trimSpace}`"
         depressed
         fab
         color="secondary"
