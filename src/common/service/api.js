@@ -1,5 +1,6 @@
 // import Vue from 'vue';
 import axios from 'axios';
+import qs from 'qs';
 
 import errorResponseHandler from '@/common/service/errorHandler.api.js';
 import { TRN_API_URL, TRN_TIME_OUT } from '@/common/config';
@@ -16,15 +17,22 @@ TrnApi.interceptors.response.use((response) => response, errorResponseHandler);
 // Vue.prototype.$http = TrnApi;
 
 export const apiService = {
-  query(resource, params) {
-    return TrnApi.get(resource, params);
+  query(resource) {
+    return TrnApi.get(resource);
     // .catch((error) => {
     //   throw new Error(`[Tourino] ApiService ${error}`);
     // });
   },
 
-  get(resourse) {
-    return TrnApi.get(resourse);
+  get(resourse, query) {
+    const queryString = qs.stringify(query, {
+      encode: false,
+      indices: false,
+      arrayFormat: 'comma',
+      addQueryPrefix: true,
+    });
+
+    return TrnApi.get(resourse + queryString);
     // return TrnApi.get(resourse, params);
   },
   // get(resource, slug = '') {

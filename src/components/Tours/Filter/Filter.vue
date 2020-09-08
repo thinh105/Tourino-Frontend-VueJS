@@ -70,6 +70,7 @@
       TrnDestinations,
       TrnTravelStyle,
     },
+
     data: () => ({
       search: null,
       travelStyle: null,

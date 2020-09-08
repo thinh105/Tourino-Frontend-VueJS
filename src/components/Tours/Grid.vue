@@ -1,10 +1,19 @@
 <template>
   <div>
-    <div v-if="isLoading" class="text-h5 text-center TrnLoading mb-3">
-      <!-- <v-progress-linear indeterminate color="secondary" /> -->
-      <TrnLoadingAnimation />
+    <TrnSort />
+    <TrnFilter />
+    <div v-if="isToursLoading" class="text-center TrnLoading mb-3">
+      <TrnLoadingAnimation style="" />
     </div>
     <div v-else>
+      <div v-if="tours.length === 0" class="text-center text-h5 TrnLoading">
+        <TrnCompass style="font-size: 6em" />
+        <br />
+        No results for your search criteria!!!
+        <br />
+        Try clearing your filters to get more results!!!
+      </div>
+
       <stack
         ref="stackRef"
         :column-min-width="320"
@@ -32,6 +41,11 @@
 
   import { Stack, StackItem } from 'vue-stack-grid';
 
+  import TrnCompass from '@/components/base/Compass';
+
+  import TrnSort from '@/components/Tours/Sort.vue';
+  import TrnFilter from '@/components/Tours/Filter/Filter.vue';
+
   import TrnPagination from '@/components/Pagination.vue';
   import { FETCH_TOURS } from '@/store/type/actions';
   import TrnLoadingAnimation from '@/components/core/LoadingAnimation.vue';
@@ -39,48 +53,18 @@
 
   export default {
     components: {
+      TrnSort,
+      TrnFilter,
       Stack,
       StackItem,
       TrnCard,
       TrnPagination,
       TrnLoadingAnimation,
-    },
-
-    props: {
-      destination: {
-        type: String,
-        required: false,
-        default: 'all',
-      },
-      travelStyle: {
-        type: String,
-        required: false,
-        default: undefined,
-      },
-      price: {
-        type: Array,
-        required: false,
-        default: undefined,
-      },
-      rating: {
-        type: String,
-        required: false,
-        default: undefined,
-      },
-      duration: {
-        type: Number,
-        required: false,
-        default: 10,
-      },
-      path: {
-        type: String,
-        required: false,
-        default: undefined,
-      },
+      TrnCompass,
     },
 
     computed: {
-      ...mapGetters(['isLoading', 'tours']),
+      ...mapGetters(['isToursLoading', 'tours']),
     },
 
     watch: {
@@ -103,10 +87,7 @@
       },
 
       async fetchTours() {
-        await this.$store.dispatch(
-          FETCH_TOURS,
-          this.$route.fullPath.substring(2) // remove '/?' from fullPath
-        );
+        await this.$store.dispatch(FETCH_TOURS, this.$route.query);
       },
     },
   };
@@ -114,7 +95,8 @@
 
 <style scoped>
   .TrnLoading {
-    margin-top: 180px;
+    /* margin-top: 1vh; */
+    height: 500px;
   }
   .TrnGridMobile {
     max-width: 350px;

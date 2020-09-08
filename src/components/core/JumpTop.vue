@@ -24,7 +24,7 @@
       onScroll() {
         if (typeof window === 'undefined') return;
         const top = window.pageYOffset || 0; // e.target.scrollTop
-        this.fab = top > 300;
+        this.fab = top > 350;
       },
       toTop() {
         this.$vuetify.goTo(0);

@@ -23,8 +23,8 @@
 </template>
 
 <script>
+  import TrnSkewText from '@/components/base/SkewText';
   import TrnHeart from './Heart';
-  import TrnSkewText from '../../../base/SkewText';
 
   export default {
     components: {

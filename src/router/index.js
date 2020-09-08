@@ -13,14 +13,20 @@ const routes = [
     component: () => import('@/views/Home.vue'),
   },
   {
+    name: 'Tours',
+    path: '/tours',
+    component: () => import('@/views/Tours.vue'),
+  },
+  {
     name: 'Tour',
     path: '/tours/:slug',
+    // path: '/tour/',
     component: () => import('@/views/Tour.vue'),
     props: true,
   },
   {
     name: 'User',
-    path: '/User/',
+    path: '/user',
     component: () => import('@/views/User.vue'),
     meta: {
       requiresAuth: true,
@@ -28,7 +34,7 @@ const routes = [
   },
   {
     name: 'UserProfile',
-    path: '/User/Profile',
+    path: '/user/profile',
     component: () => import('@/views/User.vue'),
     meta: {
       requiresAuth: true,
@@ -41,7 +47,7 @@ const routes = [
   },
   {
     name: 'Auth',
-    path: '/Authentication',
+    path: '/authentication',
     component: () => import('@/views/Authentication.vue'),
   },
 ];
@@ -56,6 +62,7 @@ const router = new VueRouter({
     }
     return { x: 0, y: 0 };
   },
+
   stringifyQuery: (query) =>
     qs.stringify(query, {
       encode: false,
@@ -63,6 +70,7 @@ const router = new VueRouter({
       arrayFormat: 'comma',
       addQueryPrefix: true,
     }),
+
   parseQuery: (query) =>
     qs.parse(query, {
       comma: true,
@@ -83,7 +91,7 @@ router.beforeEach((to, from, next) => {
         next();
         return;
       }
-      next('/Authentication');
+      next('/authentication');
     } else {
       next();
     }

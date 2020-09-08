@@ -3,7 +3,6 @@
     <TrnAlert />
     <TrnHeader />
     <v-main>
-      <!-- <router-view /> -->
       <!-- <v-scroll-y-transition mode="in" hide-on-leave="true"> -->
       <TrnTransition>
         <router-view />
@@ -44,7 +43,7 @@
 
   .v-application {
     background: linear-gradient(
-        172deg,
+        173deg,
         #29f8ff 0%,
         #f0feff 8%,
         #9aebffde 42%,

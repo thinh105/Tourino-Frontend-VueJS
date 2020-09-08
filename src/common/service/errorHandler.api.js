@@ -17,8 +17,11 @@ export default function errorResponseHandler(error) {
     // console.log('error.response!!!');
     // console.log(error.response.data);
 
+    const errorMessage =
+      error.response.data.message || 'Sorry! Something went wrong!';
+
     store.dispatch(SET_ERROR, {
-      message: `[Tourino]: ${error.response.data.message}`,
+      message: `[Tourino]: ${errorMessage}`,
     });
   } else if (error.request) {
     // The request was made but no response was received

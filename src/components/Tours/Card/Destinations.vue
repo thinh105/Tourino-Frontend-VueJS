@@ -1,8 +1,6 @@
 <template>
   <v-row no-gutters>
-    <v-icon class="primary--text">
-      mdi-map-marker-outline
-    </v-icon>
+    <v-icon class="primary--text">mdi-map-marker-outline</v-icon>
 
     <v-col class="mx-4">
       <v-row>
@@ -11,7 +9,12 @@
           :key="j"
           class="text-body-2 pr-3 pb-1"
         >
-          {{ destination }}
+          <router-link
+            style="text-decoration: none"
+            :to="'/?destinations=' + destination"
+          >
+            {{ destination }}
+          </router-link>
         </span>
       </v-row>
     </v-col>

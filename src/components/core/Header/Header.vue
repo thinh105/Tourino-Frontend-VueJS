@@ -77,6 +77,6 @@
   }
 
   .TrnLogo {
-    max-width: 250px;
+    max-width: 230px;
   }
 </style>

@@ -1,10 +1,16 @@
 # Tourino
 
+## Bug
+
+- [ ] Deadlock : Watcher watch Selection change to visit the desired URL ~> URL set selection chip ~~> watcher try to revisit that URL again
+
+- [ ] Visit link on cards does not load the filter chip
+
 ## TODO
 
 - [ ] Vue Router - the chip filter will not update when go back old page
 
-- [x] Filter: Now the chip selections are sync to URL.
+  - [x] Filter: Now the chip selections are sync to URL.
 
 User now can visit the copy/reload URL and still get the chip selections
 

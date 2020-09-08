@@ -1,7 +1,5 @@
 <template>
   <div>
-    <TrnCarousels class="mt-n16" :items="getFeaturedTours" />
-
     <div class="TourList">
       <!-- <v-row v-if="!$vuetify.breakpoint.mobile">
           <v-col cols="2">
@@ -24,16 +22,11 @@
 
   import { mapGetters } from 'vuex';
 
-  import TrnCarousels from '@/components/Carousels.vue';
-  import TrnSkewTextBox from '@/components/base/SkewTextBox.vue';
-
   import TrnGrid from '@/components/Tours/Grid.vue';
 
   export default {
     name: 'Home',
     components: {
-      TrnCarousels,
-      TrnSkewTextBox,
       TrnGrid,
     },
     computed: {

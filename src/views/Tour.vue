@@ -1,6 +1,6 @@
 <template>
   <div class="tour">
-    <div style="position: relative;" class="mt-n16">
+    <div style="position: relative" class="mt-n16">
       <v-img
         height="70vh"
         class="white--text align-end tourino-clip-path-bottom"
@@ -9,36 +9,37 @@
       <TrnTourTitle> {{ tour.name }}</TrnTourTitle>
     </div>
 
-    <v-container style="max-width: 1280px; margin: auto;">
+    <v-container style="max-width: 1100px; margin: auto">
       <TrnTourSubtitle> Những điểm đến bạn sẽ ghé thăm</TrnTourSubtitle>
 
-      <p>
-        - Đà Nẵng - Hội An - Huế
-      </p>
+      <p>- Đà Nẵng - Hội An - Huế</p>
 
       <v-divider />
+      <v-row>
+        <v-col cols="12" md="6">
+          <TrnSubtitle
+            class="text-h4"
+            style="position: relative; max-width: 200px; text-align: center"
+          >
+            Tour này có gì hay</TrnSubtitle
+          >
+          <p>
+            - Chiêm ngưỡng sự phát triển hưng thịnh của thành phố Đà Nẵng – mệnh
+            danh là thành phố đáng sống nhất Việt Nam. - Tham quan Phố cổ Hội An
+            với nét đẹp cổ kính bên dòng sông Hoài. - Viếng chùa Linh Ứng Bãi
+            Bụt - chiêm bái tượng Phật Quan Thế Âm cao nhất Việt Nam. - Khám phá
+            Bà Nà Hills - bằng hệ thống cáp treo đạt 2 kỷ lục Guinness, ngắm
+            toàn cảnh núi non hùng vỹ và tận hưởng khí hậu trong lành.
+          </p>
+        </v-col>
 
-      <TrnSubtitle
-        class="text-h4"
-        style="position: relative; max-width: 200px; text-align: center;"
-      >
-        Tour này có gì hay</TrnSubtitle
-      >
-      <p>
-        - Chiêm ngưỡng sự phát triển hưng thịnh của thành phố Đà Nẵng – mệnh
-        danh là thành phố đáng sống nhất Việt Nam. - Tham quan Phố cổ Hội An với
-        nét đẹp cổ kính bên dòng sông Hoài. - Viếng chùa Linh Ứng Bãi Bụt -
-        chiêm bái tượng Phật Quan Thế Âm cao nhất Việt Nam. - Khám phá Bà Nà
-        Hills - bằng hệ thống cáp treo đạt 2 kỷ lục Guinness, ngắm toàn cảnh núi
-        non hùng vỹ và tận hưởng khí hậu trong lành.
-      </p>
+        <v-col cols="12" md="6">
+          <!-- max-width: 70%; -->
+          <!-- style="max-width: 70%; margin: auto" -->
+          <TrnCarousels class="tourino-clip-path my-16" :items="items" />
+        </v-col>
+      </v-row>
 
-      <!-- max-width: 70%; -->
-      <TrnCarousels
-        style="max-width: 70%; margin: auto;"
-        class="tourino-clip-path my-16"
-        :items="items"
-      />
       <TrnTourSubtitle> Bạn sẽ đi đâu?</TrnTourSubtitle>
       <TrnTimeline />
     </v-container>

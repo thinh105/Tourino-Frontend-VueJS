@@ -99,7 +99,7 @@
             photo: this.photo,
           })
           .then(() => {
-            if (this.$route.path.includes('/Authentication'))
+            if (this.$route.path.includes('/authentication'))
               this.$router.push('/');
           });
       },

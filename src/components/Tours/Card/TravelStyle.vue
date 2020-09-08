@@ -1,13 +1,16 @@
 <template>
   <v-row no-gutters>
-    <v-icon class="primary--text">
-      mdi-hiking
-    </v-icon>
+    <v-icon class="primary--text"> mdi-hiking </v-icon>
 
-    <v-col class="mx-4">
+    <v-col class="mx-4" align="center">
       <v-row v-if="!expand">
         <span v-for="index in 2" :key="index" class="text-body-2 mr-3 mb-1">
-          {{ travelStyle[index - 1] }}
+          <router-link
+            style="text-decoration: none"
+            :to="'/?travelStyle=' + travelStyle[index - 1]"
+          >
+            {{ travelStyle[index - 1] }}
+          </router-link>
         </span>
         <span
           v-if="travelStyle.length - 2 > 0"
@@ -27,7 +30,12 @@
           :key="j"
           class="text-body-2 mr-3 mb-1"
         >
-          {{ style }}
+          <router-link
+            style="text-decoration: none"
+            :to="'/?travelStyle=' + style"
+          >
+            {{ style }}
+          </router-link>
         </span>
       </v-row>
     </v-col>

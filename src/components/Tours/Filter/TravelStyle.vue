@@ -1,5 +1,5 @@
 <template>
-  <v-autocomplete
+  <v-select
     v-model="selection"
     clearable
     multiple
@@ -8,6 +8,7 @@
     prepend-inner-icon="mdi-hiking"
     label="Travel Style"
     :search-input.sync="search"
+    :loading="isFieldLoading"
     no-data-text=""
     @change="search = ''"
     @click="getFieldList"
@@ -26,7 +27,7 @@
         <span>{{ item.value }} - ( {{ item.count }} tours)</span>
       </v-list-item-content>
     </template>
-  </v-autocomplete>
+  </v-select>
 </template>
 
 <script>

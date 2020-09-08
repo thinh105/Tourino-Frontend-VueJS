@@ -1,5 +1,5 @@
 <template>
-  <TrnBaseCard class="grid-card" style="max-width: 400px;">
+  <TrnBaseCard class="grid-card" style="max-width: 400px">
     <div class="card-header">
       <router-link :to="'/tours/' + tour.slug">
         <v-img

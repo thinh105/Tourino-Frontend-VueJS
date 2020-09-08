@@ -61,7 +61,7 @@
         });
 
         if (
-          this.$route.path.includes('/Authentication') &&
+          this.$route.path.includes('/authentication') &&
           this.$store.getters.isAuthenticated
         )
           this.$router.push('/');
