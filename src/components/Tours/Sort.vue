@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center" align="center" class="my-6">
+  <v-row justify="center" align="center" class="mt-4 mb-2">
     <span class="text-body-1">Sort by:</span>
     <v-btn
       v-for="(button, i) in sortBy"

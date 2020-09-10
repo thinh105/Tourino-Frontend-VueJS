@@ -2,6 +2,7 @@
   <div>
     <TrnSort />
     <TrnFilter />
+
     <div v-if="isToursLoading" class="text-center TrnLoading mb-3">
       <TrnLoadingAnimation style="" />
     </div>

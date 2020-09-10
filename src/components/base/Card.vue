@@ -18,12 +18,12 @@
 
   .base-card:hover {
     background: rgb(241, 252, 255);
-    transition: transform 500ms;
+    transition: transform 500ms ease-in-out;
     transform: scale(1.05);
   }
 
   .base-card:not(:hover) {
-    transition: transform 500ms;
+    transition: transform 500ms ease-in-out;
     transform: scale(1);
   }
 </style>

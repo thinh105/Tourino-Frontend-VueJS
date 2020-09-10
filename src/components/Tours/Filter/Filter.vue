@@ -10,19 +10,9 @@
       </v-col>
     </v-row>
 
-    <v-row class="mt-n6" align="center" justify="center">
+    <v-row class="mt-n8" align="center" justify="center">
       <v-col cols="4" align="center" class="pt-8">
-        <v-icon class="primary--text">mdi-cash-usd-outline</v-icon>
-        <span class="subtitle-1 primary--text">Price</span>
-
-        <v-range-slider
-          v-model="range"
-          :max="max"
-          :min="min"
-          step="100"
-          ticks
-          thumb-label="always"
-        />
+        <TrnPrice />
       </v-col>
 
       <v-col cols="4">
@@ -64,23 +54,23 @@
 <script>
   import TrnDestinations from './Destinations';
   import TrnTravelStyle from './TravelStyle';
+  import TrnPrice from './Price';
 
   export default {
     components: {
       TrnDestinations,
       TrnTravelStyle,
+      TrnPrice,
     },
 
     data: () => ({
-      search: null,
-      travelStyle: null,
-      min: 0,
-      max: 6000,
-      range: [0, 6000],
+      // search: null,
+      // travelStyle: null,
+
       rating: ['⭐⭐⭐⭐ and up', '⭐⭐⭐ and up', '⭐⭐ and up'],
       duration: ['1 day', '1 - 3 days', '4 - 7 days', '7+ days'],
 
-      styleSelection: [],
+      // styleSelection: [],
       ratingSelection: '',
       durationSelection: '',
     }),

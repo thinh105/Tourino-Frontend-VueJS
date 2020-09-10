@@ -8,10 +8,10 @@
     prepend-inner-icon="mdi-map-marker-outline"
     label="What places do you want to travel?"
     :search-input.sync="search"
-    :loading="isFieldLoading"
+    :loading="isOptionListLoading"
     no-data-text=""
     @change="search = ''"
-    @click="getFieldList"
+    @click="getOptionList"
   >
     <template #selection="{ item }">
       <v-chip
@@ -32,10 +32,17 @@
 
 <script>
   import { FETCH_DESTINATIONS } from '@/store/type/actions.js';
-  import filterMixin from './mixin';
+  import getPredefinedOption from './mixins/getPredefinedOption';
+  import syncSelectionWithUrl from './mixins/syncSelectionWithUrl';
 
   export default {
-    mixins: [filterMixin('destinations', FETCH_DESTINATIONS)],
+    mixins: [
+      getPredefinedOption('destinations', FETCH_DESTINATIONS),
+      syncSelectionWithUrl('destinations'),
+    ],
+    data: () => ({
+      search: null,
+    }),
   };
 </script>
 

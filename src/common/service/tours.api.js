@@ -14,15 +14,39 @@ export default {
   getTours: (query) => {
     const apiQuery = { ...query };
 
+    // let { destination, travelStyle, price } = { ...query };
+
     // convert from `tour?destination=Hue,Hanoi` to
     // `tour?destination[all]=Hue,Hanoi` to fit with backend
+
     Object.keys(apiQuery).forEach((item) => {
-      apiQuery[item] = Array.isArray(apiQuery[item])
-        ? { all: [...apiQuery[item]] }
-        : { all: apiQuery[item] };
+      if (item === 'price') {
+        apiQuery.price = {
+          gt: apiQuery.price[0],
+          lt: apiQuery.price[1],
+        };
+      } else {
+        apiQuery[item] = Array.isArray(apiQuery[item])
+          ? { all: [...apiQuery[item]] }
+          : { all: apiQuery[item] };
+      }
     });
 
+    // destination = Array.isArray(destination)
+    //   ? { all: [...destination] }
+    //   : { all: destination };
+
+    // travelStyle = Array.isArray(travelStyle)
+    //   ? { all: [...travelStyle] }
+    //   : { all: travelStyle };
+
+    // price = {
+    //   gt: price[0],
+    //   lt: price[1],
+    // };
+
     return apiService.get('tours', apiQuery);
+    // return apiService.get('tours', { destination, travelStyle, price });
   },
 
   getDestinations: () => apiService.get('tours/destinations'),

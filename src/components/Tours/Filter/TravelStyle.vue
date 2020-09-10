@@ -1,4 +1,6 @@
 <template>
+  <!-- :search-input.sync="search"
+    @change="search = ''" -->
   <v-select
     v-model="selection"
     clearable
@@ -7,11 +9,9 @@
     item-text="value"
     prepend-inner-icon="mdi-hiking"
     label="Travel Style"
-    :search-input.sync="search"
-    :loading="isFieldLoading"
+    :loading="isOptionListLoading"
     no-data-text=""
-    @change="search = ''"
-    @click="getFieldList"
+    @click="getOptionList"
   >
     <template #selection="{ item }">
       <v-chip
@@ -32,10 +32,15 @@
 
 <script>
   import { FETCH_TRAVELSTYLE } from '@/store/type/actions.js';
-  import filterMixin from './mixin';
+
+  import getPredefinedOption from './mixins/getPredefinedOption';
+  import syncSelectionWithUrl from './mixins/syncSelectionWithUrl';
 
   export default {
-    mixins: [filterMixin('travelStyle', FETCH_TRAVELSTYLE)],
+    mixins: [
+      getPredefinedOption('travelStyle', FETCH_TRAVELSTYLE),
+      syncSelectionWithUrl('travelStyle'),
+    ],
   };
 </script>
 
