@@ -32,7 +32,7 @@ export default function errorResponseHandler(error) {
     // console.log(error.request);
 
     store.dispatch(SET_ERROR, {
-      message: '[API Server]: Network Error! Please try again later!',
+      message: '[Tourino]: Network Error! Please try again later!',
     });
   } else {
     // Something happened in setting up the request that triggered an Error

@@ -1,16 +1,15 @@
+const isSelectionEqualUrlQuery = (selection, urlQuery) =>
+  JSON.stringify(selection) === JSON.stringify(urlQuery);
+
 export default function (field) {
   return {
     data: () => ({
       selection: [],
-      stopWatcher: false,
     }),
+
     watch: {
       selection() {
-        if (this.stopWatcher) {
-          this.stopWatcher = false;
-        } else {
-          this.visitFilteredLink();
-        }
+        this.setUrlFromSelection();
       },
 
       // Watch the route changed when using Back/Foward in browser
@@ -24,10 +23,13 @@ export default function (field) {
     },
 
     methods: {
-      visitFilteredLink() {
+      setUrlFromSelection() {
+        if (isSelectionEqualUrlQuery(this.selection, this.$route.query[field]))
+          return;
+
         const filterObject = { ...this.$route.query }; // The route object is immutable
 
-        if (this.selection.length > 0) {
+        if (this.selection && this.selection.length > 0) {
           filterObject[field] = this.selection;
         } else {
           delete filterObject[field];
@@ -35,42 +37,34 @@ export default function (field) {
 
         if (
           field === 'price' &&
+          filterObject.price &&
           filterObject.price.includes(0) &&
           filterObject.price.includes(1000)
-        )
+        ) {
           delete filterObject.price;
+        }
+
+        console.log(field, 'visit Link');
 
         this.$router.push({ path: 'tours', query: filterObject });
+        // .catch(() => {});
       },
 
       async setSelectionFromURL() {
-        this.stopWatcher = true;
-        if (
-          // ESlint - Disallow use of Object.prototypes builtins directly
-          // this.$route.query.hasOwnProperty(field)
-          Object.prototype.hasOwnProperty.call(this.$route.query, field)
-          // &&
-          // this.$route.query[field]
-        ) {
-          if (typeof this.getOptionList === 'function')
-            await this.getOptionList();
-
-          const selectionFromURL = this.$route.query[field];
-
-          this.selection = Array.isArray(selectionFromURL)
-            ? [...selectionFromURL] // The route object is immutable
-            : [selectionFromURL];
-        } else {
-          // this.selection = this.$options.data.selection;
-
-          // console.log(this.$options.data);
-          // if (field === 'price') this.resetData();
-
-          // this.selection = field === 'price' ? undefined : [];
+        if (!this.$route.query[field]) {
+          // clean selection when use back/foward in browser
+          // to another URL not contains this field
           this.selection = undefined;
+          return;
         }
-        // this.resetData();
-        // clean selection when use back/foward in browser
+
+        if (isSelectionEqualUrlQuery(this.selection, this.$route.query[field]))
+          return;
+
+        if (typeof this.getOptionList === 'function')
+          await this.getOptionList();
+
+        this.selection = [...this.$route.query[field]]; // The route object is immutable
       },
     },
   };

@@ -25,11 +25,13 @@ export default {
           gt: apiQuery.price[0],
           lt: apiQuery.price[1],
         };
-      } else {
-        apiQuery[item] = Array.isArray(apiQuery[item])
-          ? { all: [...apiQuery[item]] }
-          : { all: apiQuery[item] };
-      }
+      } else apiQuery[item] = { all: [...apiQuery[item]] };
+
+      // {
+      //   apiQuery[item] = Array.isArray(apiQuery[item])
+      //     ? { all: [...apiQuery[item]] }
+      //     : { all: apiQuery[item] };
+      // }
     });
 
     // destination = Array.isArray(destination)

@@ -63,13 +63,21 @@ const router = new VueRouter({
     return { x: 0, y: 0 };
   },
 
-  stringifyQuery: (query) =>
-    qs.stringify(query, {
+  stringifyQuery: (query) => {
+    Object.keys(query).forEach((item) => {
+      if (Array.isArray(query[item]) && query[item].length === 1) {
+        query[`${item}[]`] = query[item];
+        delete query[item];
+      }
+    });
+
+    return qs.stringify(query, {
       encode: false,
       indices: false,
       arrayFormat: 'comma',
       addQueryPrefix: true,
-    }),
+    });
+  },
 
   parseQuery: (query) =>
     qs.parse(query, {
