@@ -1,18 +1,19 @@
 <template>
-  <div v-if="reviewsQuantity" style="width: 23%;" class="text-center">
+  <div v-if="reviewsQuantity" style="width: 23%" class="text-center">
     <v-chip class="px-1" small color="secondary" text-color="white">
       <h3 class="px-1">{{ ratingsAverage }}</h3>
       <v-icon color="white">mdi-star</v-icon>
     </v-chip>
 
     <div class="mt-n1">
-      <span class="text-caption">{{ reviewsQuantity }} review</span>
-      <span v-if="reviewsQuantity > 1" class="text-caption">s</span>
+      <span class="text-caption">{{ pluralizedReviewsQuantity }}</span>
     </div>
   </div>
 </template>
 
 <script>
+  import pluralize from '@/common/pluralize.js';
+
   export default {
     props: {
       ratingsAverage: {
@@ -22,6 +23,11 @@
       reviewsQuantity: {
         type: Number,
         required: true,
+      },
+    },
+    computed: {
+      pluralizedReviewsQuantity() {
+        return pluralize(this.reviewsQuantity, 'review');
       },
     },
   };

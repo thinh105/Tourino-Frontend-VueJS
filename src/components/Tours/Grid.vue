@@ -7,32 +7,40 @@
       <TrnLoadingAnimation style="" />
     </div>
     <div v-else>
-      <div v-if="tours.length === 0" class="text-center text-h5 TrnLoading">
+      <div v-if="returned === 0" class="text-center text-h5 TrnLoading">
         <TrnCompass style="font-size: 6em" />
         <br />
         No results for your search criteria!!!
         <br />
         Try clearing your filters to get more results!!!
       </div>
-
-      <stack
-        ref="stackRef"
-        :column-min-width="320"
-        :gutter-width="30"
-        :gutter-height="40"
-        :monitor-images-loaded="true"
-      >
-        <stack-item
-          v-for="(tour, i) in tours"
-          :key="i"
-          style="transition: transform 1000ms"
-          :class="$vuetify.breakpoint.xs ? 'TrnGridMobile' : ''"
+      <div v-else>
+        <div class="text-center mx-auto mt-n8 mb-4 text-body-1 primary--text">
+          We found
+          <span class="text-h6 secondary--text text--darken-1">{{
+            tourQuantity
+          }}</span>
+          for you!
+        </div>
+        <stack
+          ref="stackRef"
+          :column-min-width="320"
+          :gutter-width="30"
+          :gutter-height="40"
+          :monitor-images-loaded="true"
         >
-          <TrnCard :tour="tour" @reloadGrid="reloadGrid" />
-        </stack-item>
-      </stack>
+          <stack-item
+            v-for="(tour, i) in tours"
+            :key="i"
+            style="transition: transform 1000ms"
+            :class="$vuetify.breakpoint.xs ? 'TrnGridMobile' : ''"
+          >
+            <TrnCard :tour="tour" @reloadGrid="reloadGrid" />
+          </stack-item>
+        </stack>
 
-      <TrnPagination />
+        <TrnPagination />
+      </div>
     </div>
   </div>
 </template>
@@ -40,7 +48,7 @@
 <script>
   import { mapGetters } from 'vuex';
 
-  import { Stack, StackItem } from 'vue-stack-grid';
+  import { FETCH_TOURS } from '@/store/type/actions';
 
   import TrnCompass from '@/components/base/Compass';
 
@@ -48,9 +56,11 @@
   import TrnFilter from '@/components/Tours/Filter/Filter.vue';
 
   import TrnPagination from '@/components/Pagination.vue';
-  import { FETCH_TOURS } from '@/store/type/actions';
   import TrnLoadingAnimation from '@/components/core/LoadingAnimation.vue';
-  import TrnCard from './Card/Card';
+  import TrnCard from '@/components/Tours/Card/Card.vue';
+
+  import { Stack, StackItem } from 'vue-stack-grid';
+  import pluralize from '@/common/pluralize.js';
 
   export default {
     components: {
@@ -65,11 +75,14 @@
     },
 
     computed: {
-      ...mapGetters(['isToursLoading', 'tours']),
+      ...mapGetters(['isToursLoading', 'tours', 'total', 'returned']),
+      tourQuantity() {
+        return pluralize(this.total, 'tour');
+      },
     },
 
     watch: {
-      tours: 'reloadGrid',
+      // tours: 'reloadGrid',
 
       $route(to, from) {
         this.fetchTours();

@@ -15,6 +15,8 @@ import {
 
 const state = () => ({
   tours: [],
+  total: undefined,
+  returned: undefined,
   destinations: [],
   travelStyle: [],
   isToursLoading: true,
@@ -22,6 +24,9 @@ const state = () => ({
 
 const getters = {
   tours: (state) => state.tours,
+  total: (state) => state.total,
+  returned: (state) => state.returned,
+
   travelStyle: (state) => state.travelStyle,
   destinations: (state) => state.destinations,
 
@@ -33,7 +38,7 @@ const actions = {
   [FETCH_TOURS]: async ({ commit }, query) => {
     commit(FETCH_START);
     const response = await ToursService.getTours(query);
-    if (response) commit(FETCH_END, response.data.data.result);
+    if (response) commit(FETCH_END, response.data.data);
   },
 
   [FETCH_DESTINATIONS]: async ({ commit }) => {
@@ -54,8 +59,10 @@ const mutations = {
     state.isToursLoading = true;
   },
 
-  [FETCH_END](state, tours) {
-    state.tours = tours;
+  [FETCH_END](state, data) {
+    state.tours = data.result;
+    state.total = data.total;
+    state.returned = data.returned;
 
     state.isToursLoading = false;
   },

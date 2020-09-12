@@ -1,3 +1,4 @@
+import { TRN_ITEMS_PER_PAGE } from '@/common/config';
 import { apiService } from './api';
 
 export default {
@@ -46,6 +47,8 @@ export default {
     //   gt: price[0],
     //   lt: price[1],
     // };
+
+    apiQuery.limit = TRN_ITEMS_PER_PAGE;
 
     return apiService.get('tours', apiQuery);
     // return apiService.get('tours', { destination, travelStyle, price });

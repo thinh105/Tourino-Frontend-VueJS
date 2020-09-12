@@ -44,8 +44,6 @@ export default function (field) {
           delete filterObject.price;
         }
 
-        console.log(field, 'visit Link');
-
         this.$router.push({ path: 'tours', query: filterObject });
         // .catch(() => {});
       },
