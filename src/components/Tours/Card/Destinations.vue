@@ -11,7 +11,7 @@
         >
           <router-link
             style="text-decoration: none"
-            :to="'/?destinations=' + destination"
+            :to="{ path: 'tours', query: { destinations: [destination] } }"
           >
             {{ destination }}
           </router-link>

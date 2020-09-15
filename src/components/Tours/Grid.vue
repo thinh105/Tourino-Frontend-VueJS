@@ -17,7 +17,7 @@
       <div v-else>
         <div class="text-center mx-auto mt-n8 mb-4 text-body-1 primary--text">
           We found
-          <span class="text-h6 secondary--text text--darken-1">{{
+          <span class="font-weight-medium secondary--text text--darken-1">{{
             tourQuantity
           }}</span>
           for you!
@@ -35,7 +35,7 @@
             style="transition: transform 1000ms"
             :class="$vuetify.breakpoint.xs ? 'TrnGridMobile' : ''"
           >
-            <TrnCard :tour="tour" @reloadGrid="reloadGrid" />
+            <TrnCard :tour="tour" @reload-grid="reloadGrid" />
           </stack-item>
         </stack>
 
@@ -82,21 +82,18 @@
     },
 
     watch: {
-      // tours: 'reloadGrid',
+      tours: 'reloadGrid',
 
-      $route(to, from) {
-        this.fetchTours();
+      $route: {
+        handler: 'fetchTours',
+        immediate: true,
       },
-    },
-
-    created() {
-      this.fetchTours();
     },
 
     methods: {
       reloadGrid() {
         this.$nextTick(() => {
-          this.$refs.stackRef.reflow();
+          if (this.$refs.stackRef) this.$refs.stackRef.reflow();
         });
       },
 

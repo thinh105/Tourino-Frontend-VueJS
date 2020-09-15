@@ -64,20 +64,37 @@ const router = new VueRouter({
   },
 
   stringifyQuery: (query) => {
-    Object.keys(query).forEach((item) => {
-      if (Array.isArray(query[item]) && query[item].length === 1) {
-        query[`${item}[]`] = query[item];
-        delete query[item];
+    // add square brackkets to identify array with single value
+    // https://github.com/ljharb/qs/issues/315
+
+    const cloneQuery = { ...query };
+    Object.keys(cloneQuery).forEach((item) => {
+      if (
+        Array.isArray(cloneQuery[item]) &&
+        cloneQuery[item].length === 1 &&
+        !item.includes('[]')
+      ) {
+        cloneQuery[`${item}[]`] = cloneQuery[item];
+        delete cloneQuery[item];
       }
     });
 
-    return qs.stringify(query, {
+    return qs.stringify(cloneQuery, {
       encode: false,
       indices: false,
       arrayFormat: 'comma',
       addQueryPrefix: true,
     });
   },
+
+  // parseQuery: (query) => {
+  //   console.log('queryString', query);
+  //   const a = qs.parse(query, {
+  //     comma: true,
+  //   });
+  //   console.log('after parse:', a);
+  //   return a;
+  // },
 
   parseQuery: (query) =>
     qs.parse(query, {

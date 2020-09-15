@@ -23,8 +23,8 @@ export default {
     Object.keys(apiQuery).forEach((item) => {
       if (item === 'price') {
         apiQuery.price = {
-          gt: apiQuery.price[0],
-          lt: apiQuery.price[1],
+          gt: apiQuery.price[0], // || undefined,
+          lt: apiQuery.price[1], // !== 1050 ? apiQuery.price[1] : undefined,
         };
       } else apiQuery[item] = { all: [...apiQuery[item]] };
 
@@ -34,19 +34,6 @@ export default {
       //     : { all: apiQuery[item] };
       // }
     });
-
-    // destination = Array.isArray(destination)
-    //   ? { all: [...destination] }
-    //   : { all: destination };
-
-    // travelStyle = Array.isArray(travelStyle)
-    //   ? { all: [...travelStyle] }
-    //   : { all: travelStyle };
-
-    // price = {
-    //   gt: price[0],
-    //   lt: price[1],
-    // };
 
     apiQuery.limit = TRN_ITEMS_PER_PAGE;
 

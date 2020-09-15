@@ -15,7 +15,7 @@
       :max="max"
       :min="min"
       step="50"
-      :thumb-size="35"
+      :thumb-size="40"
       thumb-label="always"
       @change="selection = $event"
     >
@@ -34,13 +34,14 @@
     mixins: [syncSelectionWithUrl('price')],
     data: () => ({
       min: 0,
-      max: 1000,
-      // selection: undefined,
+      max: 1050,
+      selection: [0, 1050],
+      initialSelection: [0, 1050],
     }),
 
     methods: {
       sliderValue(value) {
-        return value === 1000 ? '$999+' : `$${value.toString()}`;
+        return value === 1050 ? '$1000+' : `$${value.toString()}`;
       },
     },
   };

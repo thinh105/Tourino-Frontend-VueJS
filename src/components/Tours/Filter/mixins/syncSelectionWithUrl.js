@@ -4,7 +4,8 @@ const isSelectionEqualUrlQuery = (selection, urlQuery) =>
 export default function (field) {
   return {
     data: () => ({
-      selection: [],
+      selection: undefined,
+      initialSelection: undefined,
     }),
 
     watch: {
@@ -13,14 +14,19 @@ export default function (field) {
       },
 
       // Watch the route changed when using Back/Foward in browser
-      async $route(to, from) {
-        await this.setSelectionFromURL();
+      // async $route(to, from) {
+      //   await this.setSelectionFromUrl();
+      // },
+
+      $route: {
+        handler: 'setSelectionFromUrl',
+        immediate: true,
       },
     },
 
-    async created() {
-      await this.setSelectionFromURL();
-    },
+    // async created() {
+    //   await this.setSelectionFromUrl();
+    // },
 
     methods: {
       setUrlFromSelection() {
@@ -39,28 +45,36 @@ export default function (field) {
           field === 'price' &&
           filterObject.price &&
           filterObject.price.includes(0) &&
-          filterObject.price.includes(1000)
+          filterObject.price.includes(1050)
         ) {
           delete filterObject.price;
+          return;
         }
 
         this.$router.push({ path: 'tours', query: filterObject });
         // .catch(() => {});
       },
 
-      async setSelectionFromURL() {
+      async setSelectionFromUrl() {
+        console.log('tour Query nay', this.$route.query);
         if (!this.$route.query[field]) {
           // clean selection when use back/foward in browser
-          // to another URL not contains this field
-          this.selection = undefined;
+          // to another Url not contains this field
+          // but selection still have value
+
+          this.selection = this.selection ? this.initialSelection : undefined;
+
           return;
         }
 
-        if (isSelectionEqualUrlQuery(this.selection, this.$route.query[field]))
+        if (
+          isSelectionEqualUrlQuery(this.selection, this.$route.query[field])
+        ) {
           return;
+        }
 
         if (typeof this.getOptionList === 'function')
-          await this.getOptionList();
+          await this.getOptionList(); // from ./getPredefinedOption.js
 
         this.selection = [...this.$route.query[field]]; // The route object is immutable
       },

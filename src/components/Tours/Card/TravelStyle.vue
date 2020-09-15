@@ -7,7 +7,10 @@
         <span v-for="index in 2" :key="index" class="text-body-2 mr-3 mb-1">
           <router-link
             style="text-decoration: none"
-            :to="'/?travelStyle=' + travelStyle[index - 1]"
+            :to="{
+              path: 'tours',
+              query: { travelStyle: [travelStyle[index - 1]] },
+            }"
           >
             {{ travelStyle[index - 1] }}
           </router-link>
@@ -17,7 +20,7 @@
           class="text-caption secondary--text text--darken-2"
           @click="
             expand = true;
-            $emit('reloadGrid');
+            $emit('reload-grid');
           "
         >
           +{{ travelStyle.length - 2 }} more
@@ -32,7 +35,10 @@
         >
           <router-link
             style="text-decoration: none"
-            :to="'/?travelStyle=' + style"
+            :to="{
+              path: 'tours',
+              query: { travelStyle: [style] },
+            }"
           >
             {{ style }}
           </router-link>
