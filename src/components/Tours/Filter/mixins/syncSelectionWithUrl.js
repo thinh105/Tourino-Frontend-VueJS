@@ -1,80 +1,62 @@
-const isSelectionEqualUrlQuery = (selection, urlQuery) =>
-  JSON.stringify(selection) === JSON.stringify(urlQuery);
+import isEqual from '../ultils/doArraysHasSameElements';
 
 export default function (field) {
   return {
     data: () => ({
       selection: undefined,
-      initialSelection: undefined,
     }),
 
     watch: {
-      selection() {
-        this.setUrlFromSelection();
-      },
+      selection: 'setUrlFromSelection',
 
       // Watch the route changed when using Back/Foward in browser
-      // async $route(to, from) {
-      //   await this.setSelectionFromUrl();
-      // },
-
       $route: {
         handler: 'setSelectionFromUrl',
-        immediate: true,
+        immediate: true, // run that above function in the create hook
       },
     },
 
-    // async created() {
-    //   await this.setSelectionFromUrl();
-    // },
-
     methods: {
       setUrlFromSelection() {
-        if (isSelectionEqualUrlQuery(this.selection, this.$route.query[field]))
-          return;
+        // avoid deadlock after set selection based on URL
+        if (this.isDeadlock()) return;
 
-        const filterObject = { ...this.$route.query }; // The route object is immutable
+        const routeQueryClone = { ...this.$route.query };
+        const filterQuery = this.setFilterQuery(routeQueryClone);
 
-        if (this.selection && this.selection.length > 0) {
-          filterObject[field] = this.selection;
-        } else {
-          delete filterObject[field];
-        }
-
-        if (
-          field === 'price' &&
-          filterObject.price &&
-          filterObject.price.includes(0) &&
-          filterObject.price.includes(1050)
-        ) {
-          delete filterObject.price;
-          return;
-        }
-
-        this.$router.push({ path: 'tours', query: filterObject });
+        this.$router.push({ path: 'tours', query: filterQuery });
         // .catch(() => {});
       },
 
+      isDeadlock() {
+        return isEqual(this.selection, this.$route.query[field]);
+      },
+
+      setFilterQuery(filterQuery) {
+        if (this.selection && this.selection.length > 0) {
+          filterQuery[field] = this.selection;
+        } else {
+          // clean URL query when use back/foward in browser
+          delete filterQuery[field];
+        }
+        return filterQuery;
+      },
+
       async setSelectionFromUrl() {
-        console.log('tour Query nay', this.$route.query);
+        // avoid deadlock after set URL based on selection
+        if (this.isDeadlock()) return;
+
+        // clean selection when use back/foward in browser
+        // to another Url not contains this field
+        // but selection still have value
         if (!this.$route.query[field]) {
-          // clean selection when use back/foward in browser
-          // to another Url not contains this field
-          // but selection still have value
-
-          this.selection = this.selection ? this.initialSelection : undefined;
-
+          this.selection = this.defaultSelection;
           return;
         }
 
-        if (
-          isSelectionEqualUrlQuery(this.selection, this.$route.query[field])
-        ) {
-          return;
-        }
-
+        // get Option List from API | from ./getPredefinedOption.js
         if (typeof this.getOptionList === 'function')
-          await this.getOptionList(); // from ./getPredefinedOption.js
+          await this.getOptionList();
 
         this.selection = [...this.$route.query[field]]; // The route object is immutable
       },

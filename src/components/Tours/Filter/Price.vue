@@ -15,7 +15,7 @@
       :max="max"
       :min="min"
       step="50"
-      :thumb-size="40"
+      :thumb-size="38"
       thumb-label="always"
       @change="selection = $event"
     >
@@ -28,20 +28,21 @@
 </template>
 
 <script>
-  import syncSelectionWithUrl from './mixins/syncSelectionWithUrl';
+  import { TRN_FILTER_MAX_PRICE } from '@/common/config.js';
+  import syncPriceWithUrl from './mixins/syncPriceWithUrl';
 
   export default {
-    mixins: [syncSelectionWithUrl('price')],
+    mixins: [syncPriceWithUrl],
     data: () => ({
       min: 0,
-      max: 1050,
-      selection: [0, 1050],
-      initialSelection: [0, 1050],
+      max: TRN_FILTER_MAX_PRICE,
+      selection: [0, TRN_FILTER_MAX_PRICE],
+      defaultSelection: [0, TRN_FILTER_MAX_PRICE],
     }),
 
     methods: {
       sliderValue(value) {
-        return value === 1050 ? '$1000+' : `$${value.toString()}`;
+        return value === TRN_FILTER_MAX_PRICE ? 'MAX' : `$${value.toString()}`;
       },
     },
   };

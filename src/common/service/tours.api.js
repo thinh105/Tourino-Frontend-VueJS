@@ -1,4 +1,4 @@
-import { TRN_ITEMS_PER_PAGE } from '@/common/config';
+import { TRN_ITEMS_PER_PAGE, TRN_FILTER_MAX_PRICE } from '@/common/config';
 import { apiService } from './api';
 
 export default {
@@ -23,8 +23,11 @@ export default {
     Object.keys(apiQuery).forEach((item) => {
       if (item === 'price') {
         apiQuery.price = {
-          gt: apiQuery.price[0], // || undefined,
-          lt: apiQuery.price[1], // !== 1050 ? apiQuery.price[1] : undefined,
+          gt: +apiQuery.price[0] || undefined,
+          lt:
+            +apiQuery.price[1] !== TRN_FILTER_MAX_PRICE
+              ? apiQuery.price[1]
+              : undefined,
         };
       } else apiQuery[item] = { all: [...apiQuery[item]] };
 

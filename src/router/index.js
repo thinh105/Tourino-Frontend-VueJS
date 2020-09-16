@@ -87,15 +87,6 @@ const router = new VueRouter({
     });
   },
 
-  // parseQuery: (query) => {
-  //   console.log('queryString', query);
-  //   const a = qs.parse(query, {
-  //     comma: true,
-  //   });
-  //   console.log('after parse:', a);
-  //   return a;
-  // },
-
   parseQuery: (query) =>
     qs.parse(query, {
       comma: true,
