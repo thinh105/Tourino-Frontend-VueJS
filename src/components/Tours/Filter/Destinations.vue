@@ -2,14 +2,16 @@
   <v-autocomplete
     v-model="selection"
     clearable
+    hide-details
     multiple
     :items="destinations"
     item-text="value"
-    prepend-inner-icon="mdi-map-marker-outline"
+    prepend-icon="mdi-map-marker-outline"
     label="What places do you want to travel?"
     :search-input.sync="search"
     :loading="isOptionListLoading"
     no-data-text=""
+    :class="{ 'trn-no-border': hasSelectionValue() }"
     @change="search = ''"
     @focus="getOptionList"
   >

@@ -1,15 +1,21 @@
 <template>
   <v-select
     v-model="selection"
+    hide-details
     item-text="label"
     :items="duration"
-    prepend-inner-icon="mdi-calendar-clock"
+    prepend-icon="mdi-calendar-clock"
     label="Duration"
+    :class="{ 'trn-no-border': hasSelectionValue() }"
   >
     <template #selection="{ item }">
-      <v-chip color="primary" close @click:close="selection = ''">{{
-        item.label
-      }}</v-chip>
+      <v-chip
+        class="trn-chip-center"
+        color="primary"
+        close
+        @click:close="selection = ''"
+        >{{ item.label }}</v-chip
+      >
     </template>
   </v-select>
 </template>
@@ -33,5 +39,3 @@
     }),
   };
 </script>
-
-<style scoped></style>

@@ -1,53 +1,84 @@
 <template>
-  <v-row justify="center" align="center" class="mt-4 mb-2">
-    <span class="text-body-1">Sort by:</span>
-    <v-btn
-      v-for="(button, i) in sortBy"
-      :key="i"
-      color="primary"
-      rounded
-      depressed
-      text
-      class="text-body-2"
-    >
-      <v-icon left>{{ button.icon }}</v-icon>
+  <!-- <v-row justify="center" align="center" class="my-2"> -->
 
-      {{ button.name }}
-    </v-btn>
-  </v-row>
+  <!-- prepend-icon="mdi-filter-variant" -->
+  <v-select
+    v-model="selection"
+    :items="sortBy"
+    clearable
+    label="Sort By"
+    :menu-props="{ maxHeight: 400 }"
+    class="trn-no-border text-center"
+    hide-details
+  >
+    <template #selection="{ item }">
+      <!-- close @click:close="selection = ''" -->
+      <!-- <v-chip class="trn-chip-center" color="primary"> -->
+      <v-icon class="pr-2">{{ item.prependIcon }}</v-icon> {{ item.label
+      }}<v-icon right>{{ item.appendIcon }}</v-icon>
+      <!-- </v-chip> -->
+    </template>
+
+    <template #item="{ item }">
+      <v-list-item-content>
+        <span
+          ><v-icon left>{{ item.prependIcon }}</v-icon> {{ item.label
+          }}<v-icon right>{{ item.appendIcon }}</v-icon></span
+        >
+      </v-list-item-content>
+    </template>
+  </v-select>
 </template>
 
 <script>
+  import syncSelectionWithUrl from './Filter/mixins/syncSelectionWithUrl';
+  import { singleSelection } from './Filter/mixins/selection';
+
   export default {
+    mixins: [syncSelectionWithUrl('sort'), singleSelection('sort')],
     data: () => ({
       sortBy: [
         {
-          name: 'Price',
-          icon: 'mdi-arrow-down',
+          value: 'price',
+          label: 'Price',
+          appendIcon: 'mdi-arrow-up',
+          prependIcon: 'mdi-cash-usd-outline',
         },
         {
-          name: 'Price',
-          icon: 'mdi-arrow-up',
+          value: '-price',
+          label: 'Price',
+          appendIcon: 'mdi-arrow-down',
+          prependIcon: 'mdi-cash-usd-outline',
         },
         {
-          name: 'Avg. Rating',
-          icon: 'mdi-star-outline',
+          value: '-rating',
+          label: 'Rating',
+          appendIcon: '',
+          prependIcon: 'mdi-star-outline',
         },
         {
-          name: 'Reviews',
-          icon: 'mdi-account-check-outline',
+          value: '-reviewsQuantity',
+          label: 'Reviews',
+          appendIcon: '',
+          prependIcon: 'mdi-account-check-outline',
         },
         {
-          name: 'New on Tourino',
-          icon: 'mdi-clock-check-outline',
+          value: '-createAt',
+          label: 'New on Tourino',
+          appendIcon: '',
+          prependIcon: 'mdi-clock-check-outline',
         },
         {
-          name: 'Duration',
-          icon: 'mdi-arrow-down',
+          value: '-duration',
+          label: 'Duration',
+          appendIcon: 'mdi-arrow-down',
+          prependIcon: 'mdi-calendar-clock',
         },
         {
-          name: 'Duration',
-          icon: 'mdi-arrow-up',
+          value: 'duration',
+          label: 'Duration',
+          appendIcon: 'mdi-arrow-up',
+          prependIcon: 'mdi-calendar-clock',
         },
       ],
     }),

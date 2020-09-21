@@ -1,48 +1,48 @@
 import { TRN_ITEMS_PER_PAGE, TRN_FILTER_MAX_PRICE } from '@/common/config';
 import { apiService } from './api';
 
+const getBackendQuery = function (query) {
+  let { destinations, travelStyle, price, rating, duration, sort } = {
+    ...query,
+  };
+
+  if (price)
+    price = {
+      gte: +price[0] || undefined,
+      lte: +price[1] !== TRN_FILTER_MAX_PRICE ? price[1] : undefined,
+    };
+
+  rating = rating ? { gte: rating } : undefined;
+
+  if (duration) {
+    duration = {
+      gte: +duration[0] || undefined,
+      lte: +duration[1] || undefined,
+    };
+  }
+
+  destinations = destinations ? { all: [...destinations] } : undefined;
+
+  travelStyle = travelStyle ? { all: [...travelStyle] } : undefined;
+  const limit = TRN_ITEMS_PER_PAGE;
+  return {
+    destinations,
+    travelStyle,
+    price,
+    rating,
+    duration,
+    sort,
+    limit,
+  };
+};
+
 export default {
   query: (params) => apiService.query('tours', { params }),
 
-  /*
   getTours: (query) => {
-    // const queryString = query ? `tours?limit=12&${query}` : 'tours?limit=12';
+    const backendQuery = getBackendQuery(query);
 
-    return apiService.get(`tours${query}`);
-  },
-*/
-
-  getTours: (query) => {
-    const apiQuery = { ...query };
-
-    // let { destination, travelStyle, price } = { ...query };
-
-    // convert from `tour?destination=Hue,Hanoi` to
-    // `tour?destination[all]=Hue,Hanoi` to fit with backend
-
-    Object.keys(apiQuery).forEach((item) => {
-      if (item === 'price') {
-        apiQuery.price = {
-          gte: +apiQuery.price[0] || undefined,
-          lte:
-            +apiQuery.price[1] !== TRN_FILTER_MAX_PRICE
-              ? apiQuery.price[1]
-              : undefined,
-        };
-      } else if (item === 'rating') {
-        apiQuery.rating = { gte: apiQuery.rating };
-      } else if (item === 'duration') {
-        apiQuery.duration = {
-          gte: +apiQuery.duration[0] || undefined,
-          lte: +apiQuery.duration[1] || undefined,
-        };
-      } else apiQuery[item] = { all: [...apiQuery[item]] };
-    });
-
-    apiQuery.limit = TRN_ITEMS_PER_PAGE;
-
-    return apiService.get('tours', apiQuery);
-    // return apiService.get('tours', { destination, travelStyle, price });
+    return apiService.get('tours', backendQuery);
   },
 
   getDestinations: () => apiService.get('tours/destinations'),

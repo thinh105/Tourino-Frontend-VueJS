@@ -55,9 +55,8 @@
     left: 50%;
 
     z-index: 4;
-    transform: translate(
-      -50%
-    ); /* position the left edge of the element at the middle of the parent */
+    transform: translate(-50%);
+    /* position the left edge of the element at the middle of the parent */
   }
   .TrnAlertMobile {
     bottom: 0%;

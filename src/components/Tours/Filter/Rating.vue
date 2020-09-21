@@ -3,11 +3,18 @@
     v-model="selection"
     item-text="label"
     :items="rating"
-    prepend-inner-icon="mdi-star-outline"
+    prepend-icon="mdi-star-outline"
     label="Rating"
+    hide-details
+    :class="{ 'trn-no-border': hasSelectionValue() }"
   >
     <template #selection="{ item }">
-      <v-chip color="primary" close @click:close="selection = ''">
+      <v-chip
+        class="trn-chip-center"
+        color="primary"
+        close
+        @click:close="selection = ''"
+      >
         {{ item.label }}</v-chip
       >
     </template>

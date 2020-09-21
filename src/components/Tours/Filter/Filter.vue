@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row class="my-n6" align="center" justify="center">
+    <v-row align="center" justify="center">
       <v-col cols="6">
         <TrnDestinations />
       </v-col>
@@ -10,16 +10,16 @@
       </v-col>
     </v-row>
 
-    <v-row class="mt-n8" align="center" justify="center">
-      <v-col cols="4" align="center" class="pt-8">
+    <v-row class="mt-1" justify="center">
+      <v-col cols="6" align="center">
         <TrnPrice />
       </v-col>
 
-      <v-col cols="4">
+      <v-col cols="3">
         <TrnRating />
       </v-col>
 
-      <v-col cols="4">
+      <v-col cols="3">
         <TrnDuration />
       </v-col>
     </v-row>

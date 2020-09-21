@@ -2,13 +2,15 @@
   <v-select
     v-model="selection"
     clearable
+    hide-details
     multiple
     :items="travelStyle"
     item-text="value"
-    prepend-inner-icon="mdi-hiking"
+    prepend-icon="mdi-hiking"
     label="Travel Style"
     :loading="isOptionListLoading"
     no-data-text=""
+    :class="{ 'trn-no-border': hasSelectionValue() }"
     @focus="getOptionList"
   >
     <template #selection="{ item }">

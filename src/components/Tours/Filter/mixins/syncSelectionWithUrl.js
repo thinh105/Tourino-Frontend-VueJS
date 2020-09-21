@@ -35,17 +35,6 @@ export default function (field) {
         // .catch(() => {});
       },
 
-      // setFilterQuery(filterQuery) {
-      //   if (this.hasSelectionValue()) {
-      //     filterQuery[field] = this.selection;
-      //   } else {
-      //     // clean URL query when clean Selection
-      //     delete filterQuery[field];
-      //   }
-
-      //   return filterQuery;
-      // },
-
       isSynced() {
         return isEqual(this.selection, this.$route.query[field]);
       },
@@ -58,10 +47,6 @@ export default function (field) {
           this.clearSelection();
         } else this.setSelection();
       },
-
-      // setSelection() {
-      //   this.selection = +this.$route.query[field];
-      // },
 
       clearSelection() {
         // clear selection when use back/foward in browser

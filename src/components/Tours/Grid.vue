@@ -1,6 +1,5 @@
 <template>
   <div>
-    <TrnSort />
     <TrnFilter />
 
     <div v-if="isToursLoading" class="text-center TrnLoading mb-3">
@@ -15,13 +14,20 @@
         Try clearing your filters to get more!
       </div>
       <div v-else>
-        <div class="text-center mx-auto mt-n8 mb-4 text-body-1 primary--text">
-          We found
-          <span class="font-weight-medium secondary--text text--darken-1">{{
-            tourQuantity
-          }}</span>
-          for you!
-        </div>
+        <v-row align="center" class="mb-4">
+          <v-col cols="3">
+            <TrnSort class="pt-0 pb-1" />
+          </v-col>
+          <!-- <v-spacer /> -->
+          <v-col class="text-center text-h6 font-weight-light primary--text">
+            We found
+            <span class="font-weight-medium secondary--text text--darken-1">{{
+              tourQuantity
+            }}</span>
+            for you!
+          </v-col>
+        </v-row>
+
         <stack
           ref="stackRef"
           :column-min-width="320"
@@ -104,7 +110,7 @@
   };
 </script>
 
-<style scoped>
+<style>
   .TrnLoading {
     /* margin-top: 1vh; */
     height: 500px;
@@ -115,5 +121,17 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .trn-no-border.v-text-field > .v-input__control > .v-input__slot:before {
+    border-style: none;
+  }
+  .trn-no-border.v-text-field > .v-input__control > .v-input__slot:after {
+    border-style: none;
+  }
+  .trn-chip-center {
+    left: 50%;
+    z-index: 4;
+    transform: translate(-50%);
   }
 </style>

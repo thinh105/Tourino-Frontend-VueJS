@@ -33,7 +33,6 @@ export const apiService = {
     });
 
     return TrnApi.get(resourse + queryString);
-    // return TrnApi.get(resourse, params);
   },
   // get(resource, slug = '') {
   //   return TrnApi.get(`${resource}/${slug}`);

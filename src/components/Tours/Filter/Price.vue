@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-icon class="primary--text">mdi-cash-usd-outline</v-icon>
-    <span class="subtitle-1 primary--text pl-2">Price</span>
+    <span class="subtitle-1 grey--text text--darken-2 pl-2">Price</span>
 
     <!-- @change="log" -->
     <!-- :value.sync="selection" -->
@@ -11,7 +10,9 @@
     <!-- the watcher will get the value one time after mouse up -->
     <!-- not every value slider move through -->
     <v-range-slider
+      prepend-icon="mdi-cash-usd-outline"
       :value="selection"
+      hide-details
       :max="max"
       :min="min"
       step="50"
