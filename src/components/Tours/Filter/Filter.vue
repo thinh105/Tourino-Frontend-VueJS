@@ -16,36 +16,11 @@
       </v-col>
 
       <v-col cols="4">
-        <v-select
-          v-model="ratingSelection"
-          :items="rating"
-          prepend-inner-icon="mdi-star-outline"
-          label="Rating"
-        >
-          <template #selection="{ item }">
-            <v-chip color="primary" close @click:close="ratingSelection = ''">{{
-              item
-            }}</v-chip>
-          </template>
-        </v-select>
+        <TrnRating />
       </v-col>
 
       <v-col cols="4">
-        <v-select
-          v-model="durationSelection"
-          :items="duration"
-          prepend-inner-icon="mdi-calendar-clock"
-          label="Duration"
-        >
-          <template #selection="{ item }">
-            <v-chip
-              color="primary"
-              close
-              @click:close="durationSelection = ''"
-              >{{ item }}</v-chip
-            >
-          </template>
-        </v-select>
+        <TrnDuration />
       </v-col>
     </v-row>
   </div>
@@ -55,25 +30,17 @@
   import TrnDestinations from './Destinations';
   import TrnTravelStyle from './TravelStyle';
   import TrnPrice from './Price';
+  import TrnRating from './Rating';
+  import TrnDuration from './Duration';
 
   export default {
     components: {
       TrnDestinations,
       TrnTravelStyle,
       TrnPrice,
+      TrnRating,
+      TrnDuration,
     },
-
-    data: () => ({
-      // search: null,
-      // travelStyle: null,
-
-      rating: ['⭐⭐⭐⭐ and up', '⭐⭐⭐ and up', '⭐⭐ and up'],
-      duration: ['1 day', '1 - 3 days', '4 - 7 days', '7+ days'],
-
-      // styleSelection: [],
-      ratingSelection: '',
-      durationSelection: '',
-    }),
   };
 </script>
 

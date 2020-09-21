@@ -29,7 +29,7 @@
     <v-container class="px-4 mt-6 pb-0">
       <TrnRating
         class="mt-n8 pb-0"
-        :ratings-average="tour.ratingsAverage"
+        :rating="tour.rating"
         :reviews-quantity="tour.reviewsQuantity"
       />
 

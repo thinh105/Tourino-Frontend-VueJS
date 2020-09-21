@@ -23,19 +23,20 @@ export default {
     Object.keys(apiQuery).forEach((item) => {
       if (item === 'price') {
         apiQuery.price = {
-          gt: +apiQuery.price[0] || undefined,
-          lt:
+          gte: +apiQuery.price[0] || undefined,
+          lte:
             +apiQuery.price[1] !== TRN_FILTER_MAX_PRICE
               ? apiQuery.price[1]
               : undefined,
         };
+      } else if (item === 'rating') {
+        apiQuery.rating = { gte: apiQuery.rating };
+      } else if (item === 'duration') {
+        apiQuery.duration = {
+          gte: +apiQuery.duration[0] || undefined,
+          lte: +apiQuery.duration[1] || undefined,
+        };
       } else apiQuery[item] = { all: [...apiQuery[item]] };
-
-      // {
-      //   apiQuery[item] = Array.isArray(apiQuery[item])
-      //     ? { all: [...apiQuery[item]] }
-      //     : { all: apiQuery[item] };
-      // }
     });
 
     apiQuery.limit = TRN_ITEMS_PER_PAGE;

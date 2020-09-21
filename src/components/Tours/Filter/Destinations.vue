@@ -11,7 +11,7 @@
     :loading="isOptionListLoading"
     no-data-text=""
     @change="search = ''"
-    @click="getOptionList"
+    @focus="getOptionList"
   >
     <template #selection="{ item }">
       <v-chip
@@ -32,6 +32,7 @@
 
 <script>
   import { FETCH_DESTINATIONS } from '@/store/type/actions.js';
+
   import getPredefinedOption from './mixins/getPredefinedOption';
   import syncSelectionWithUrl from './mixins/syncSelectionWithUrl';
 

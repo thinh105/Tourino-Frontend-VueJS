@@ -1,7 +1,7 @@
 <template>
   <div v-if="reviewsQuantity" style="width: 23%" class="text-center">
     <v-chip class="px-1" small color="secondary" text-color="white">
-      <h3 class="px-1">{{ ratingsAverage }}</h3>
+      <h3 class="px-1">{{ rating }}</h3>
       <v-icon color="white">mdi-star</v-icon>
     </v-chip>
 
@@ -16,7 +16,7 @@
 
   export default {
     props: {
-      ratingsAverage: {
+      rating: {
         type: Number,
         required: true,
       },

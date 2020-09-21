@@ -29,10 +29,17 @@
 
 <script>
   import { TRN_FILTER_MAX_PRICE } from '@/common/config.js';
-  import syncPriceWithUrl from './mixins/syncPriceWithUrl';
+  // import syncPriceWithUrl from './mixins/syncPriceWithUrl';
+
+  import syncSelectionWithUrl from './mixins/syncSelectionWithUrl';
+  import { multipleSelection, defaultSelection } from './mixins/selection';
 
   export default {
-    mixins: [syncPriceWithUrl],
+    mixins: [
+      syncSelectionWithUrl('price'),
+      multipleSelection('price'),
+      defaultSelection('price'), // need to put in last to override method
+    ],
     data: () => ({
       min: 0,
       max: TRN_FILTER_MAX_PRICE,

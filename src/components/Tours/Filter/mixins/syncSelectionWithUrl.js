@@ -1,4 +1,4 @@
-import isEqual from '../ultils/doArraysHasSameElements';
+import isEqual from '../ultils/isEqual';
 
 export default function (field) {
   return {
@@ -7,58 +7,67 @@ export default function (field) {
     }),
 
     watch: {
-      selection: 'setUrlFromSelection',
+      selection: 'syncSelectionToUrl',
 
       // Watch the route changed when using Back/Foward in browser
       $route: {
-        handler: 'setSelectionFromUrl',
+        handler: 'syncUrlToSelection',
         immediate: true, // run that above function in the create hook
       },
     },
 
     methods: {
-      setUrlFromSelection() {
+      syncSelectionToUrl() {
         // avoid deadlock after set selection based on URL
-        if (this.isDeadlock()) return;
+        if (this.isSynced()) return;
 
         const routeQueryClone = { ...this.$route.query };
-        const filterQuery = this.setFilterQuery(routeQueryClone);
+        // const filterQuery = this.setFilterQuery(routeQueryClone);
 
-        this.$router.push({ path: 'tours', query: filterQuery });
+        if (this.hasSelectionValue()) {
+          routeQueryClone[field] = this.selection;
+        } else {
+          // clean URL query when clean Selection
+          delete routeQueryClone[field];
+        }
+
+        this.$router.push({ path: 'tours', query: routeQueryClone });
         // .catch(() => {});
       },
 
-      isDeadlock() {
+      // setFilterQuery(filterQuery) {
+      //   if (this.hasSelectionValue()) {
+      //     filterQuery[field] = this.selection;
+      //   } else {
+      //     // clean URL query when clean Selection
+      //     delete filterQuery[field];
+      //   }
+
+      //   return filterQuery;
+      // },
+
+      isSynced() {
         return isEqual(this.selection, this.$route.query[field]);
       },
 
-      setFilterQuery(filterQuery) {
-        if (this.selection && this.selection.length > 0) {
-          filterQuery[field] = this.selection;
-        } else {
-          // clean URL query when use back/foward in browser
-          delete filterQuery[field];
-        }
-        return filterQuery;
+      syncUrlToSelection() {
+        // avoid deadlock after set URL based on selection
+        if (this.isSynced()) return;
+
+        if (!this.$route.query[field]) {
+          this.clearSelection();
+        } else this.setSelection();
       },
 
-      async setSelectionFromUrl() {
-        // avoid deadlock after set URL based on selection
-        if (this.isDeadlock()) return;
+      // setSelection() {
+      //   this.selection = +this.$route.query[field];
+      // },
 
-        // clean selection when use back/foward in browser
+      clearSelection() {
+        // clear selection when use back/foward in browser
         // to another Url not contains this field
         // but selection still have value
-        if (!this.$route.query[field]) {
-          this.selection = this.defaultSelection;
-          return;
-        }
-
-        // get Option List from API | from ./getPredefinedOption.js
-        if (typeof this.getOptionList === 'function')
-          await this.getOptionList();
-
-        this.selection = [...this.$route.query[field]]; // The route object is immutable
+        if (this.selection) this.selection = undefined;
       },
     },
   };

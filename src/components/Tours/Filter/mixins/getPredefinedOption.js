@@ -1,8 +1,11 @@
 import { mapActions, mapGetters } from 'vuex';
 import { FETCH_TOURS } from '@/store/type/actions.js';
 
+import { multipleSelection } from './selection';
+
 export default function (field, fetchFieldAction) {
   return {
+    mixins: [multipleSelection(field)],
     data: () => ({
       isOptionListLoading: false,
     }),
@@ -29,6 +32,13 @@ export default function (field, fetchFieldAction) {
             array.splice(i, 1);
           }
         }
+      },
+
+      setSelection() {
+        this.getOptionList().then(() => {
+          multipleSelection(field).methods.setSelection.call(this);
+          // this.selection = [...this.$route.query[field]];
+        });
       },
     },
   };

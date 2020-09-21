@@ -1,6 +1,4 @@
 <template>
-  <!-- :search-input.sync="search"
-    @change="search = ''" -->
   <v-select
     v-model="selection"
     clearable
@@ -11,7 +9,7 @@
     label="Travel Style"
     :loading="isOptionListLoading"
     no-data-text=""
-    @click="getOptionList"
+    @focus="getOptionList"
   >
     <template #selection="{ item }">
       <v-chip

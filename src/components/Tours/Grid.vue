@@ -4,15 +4,15 @@
     <TrnFilter />
 
     <div v-if="isToursLoading" class="text-center TrnLoading mb-3">
-      <TrnLoadingAnimation style="" />
+      <TrnLoadingAnimation />
     </div>
     <div v-else>
       <div v-if="returned === 0" class="text-center text-h5 TrnLoading">
         <TrnCompass style="font-size: 6em" />
         <br />
-        No results for your search criteria!!!
+        No results for your search criteria!
         <br />
-        Try clearing your filters to get more results!!!
+        Try clearing your filters to get more!
       </div>
       <div v-else>
         <div class="text-center mx-auto mt-n8 mb-4 text-body-1 primary--text">
@@ -55,7 +55,7 @@
   import TrnSort from '@/components/Tours/Sort.vue';
   import TrnFilter from '@/components/Tours/Filter/Filter.vue';
 
-  import TrnPagination from '@/components/Pagination.vue';
+  import TrnPagination from '@/components/Tours/Pagination.vue';
   import TrnLoadingAnimation from '@/components/core/LoadingAnimation.vue';
   import TrnCard from '@/components/Tours/Card/Card.vue';
 
