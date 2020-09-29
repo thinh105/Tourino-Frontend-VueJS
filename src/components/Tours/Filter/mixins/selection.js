@@ -13,22 +13,37 @@ export function multipleSelection(field) {
   };
 }
 
-export function singleSelection(field) {
+function hasSelectionValue() {
+  return !!this.selection;
+}
+
+export function singleStringSelection(field) {
   return {
     methods: {
       setSelection() {
         this.selection = this.$route.query[field];
       },
 
-      hasSelectionValue() {
-        return !!this.selection;
+      hasSelectionValue,
+    },
+  };
+}
+export function singleNumberSelection(field) {
+  return {
+    methods: {
+      setSelection() {
+        this.selection = +this.$route.query[field];
       },
+
+      hasSelectionValue,
     },
   };
 }
 
+// if selection is equal to the default, we clear it on the URL
+
+// need to put in last to override method hasSelectionValue()
 export function defaultSelection(field) {
-  // if selection is equal to the default, we clear it on the URL
   return {
     methods: {
       isSynced() {

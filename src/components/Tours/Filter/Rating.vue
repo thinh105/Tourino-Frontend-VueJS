@@ -23,15 +23,16 @@
 
 <script>
   import syncSelectionWithUrl from './mixins/syncSelectionWithUrl';
-  import { singleSelection } from './mixins/selection';
+  import { singleNumberSelection } from './mixins/selection';
 
   export default {
-    mixins: [syncSelectionWithUrl('rating'), singleSelection('rating')],
+    mixins: [syncSelectionWithUrl('rating'), singleNumberSelection('rating')],
     data: () => ({
       rating: [
-        { value: '4', label: '⭐⭐⭐⭐ and up' },
-        { value: '3', label: '⭐⭐⭐ and up' },
-        { value: '2', label: '⭐⭐ and up' },
+        { value: 5, label: '⭐⭐⭐⭐⭐' },
+        { value: 4, label: '⭐⭐⭐⭐ and up' },
+        { value: 3, label: '⭐⭐⭐ and up' },
+        { value: 2, label: '⭐⭐ and up' },
       ],
     }),
   };

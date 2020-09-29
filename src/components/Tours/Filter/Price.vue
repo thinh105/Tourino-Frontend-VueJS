@@ -39,7 +39,7 @@
     mixins: [
       syncSelectionWithUrl('price'),
       multipleSelection('price'),
-      defaultSelection('price'), // need to put in last to override method
+      defaultSelection('price'), // need to put in last to override method hasSelectionValue()
     ],
     data: () => ({
       min: 0,

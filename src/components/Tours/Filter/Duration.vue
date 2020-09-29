@@ -29,11 +29,11 @@
 
     data: () => ({
       duration: [
-        { value: ['1', '4'], label: '1 - 4 days' },
-        { value: ['5', '7'], label: '5 - 7 days' },
-        { value: ['8', '10'], label: '8 - 10 days' },
-        { value: ['11', '14'], label: '11 - 14 days' },
-        { value: ['15'], label: '14+ days' },
+        { value: ['1', '5'], label: '1 - 5 days' },
+        { value: ['6', '10'], label: '6 - 10 days' },
+        { value: ['11', '15'], label: '11 - 15 days' },
+        { value: ['16', '20'], label: '16 - 20 days' },
+        { value: ['21'], label: '21+ days' },
       ],
       selection: '',
     }),

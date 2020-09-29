@@ -21,7 +21,7 @@ export default function (field) {
         // avoid deadlock after set selection based on URL
         if (this.isSynced()) return;
 
-        const routeQueryClone = { ...this.$route.query };
+        const { page, ...routeQueryClone } = { ...this.$route.query };
         // const filterQuery = this.setFilterQuery(routeQueryClone);
 
         if (this.hasSelectionValue()) {

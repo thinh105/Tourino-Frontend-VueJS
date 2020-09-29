@@ -1,8 +1,8 @@
 import { TRN_ITEMS_PER_PAGE, TRN_FILTER_MAX_PRICE } from '@/common/config';
 import { apiService } from './api';
 
-const getBackendQuery = function (query) {
-  let { destinations, travelStyle, price, rating, duration, sort } = {
+const convertToBackendQuery = function (query) {
+  let { destinations, travelStyle, price, rating, duration, sort, page } = {
     ...query,
   };
 
@@ -33,6 +33,7 @@ const getBackendQuery = function (query) {
     duration,
     sort,
     limit,
+    page,
   };
 };
 
@@ -40,7 +41,7 @@ export default {
   query: (params) => apiService.query('tours', { params }),
 
   getTours: (query) => {
-    const backendQuery = getBackendQuery(query);
+    const backendQuery = convertToBackendQuery(query);
 
     return apiService.get('tours', backendQuery);
   },

@@ -20,7 +20,7 @@
     },
     computed: {
       sale() {
-        return (1 - this.price / this.oldPrice).toFixed(2) * 100;
+        return Math.round((1 - this.price / this.oldPrice) * 100);
       },
     },
   };
@@ -50,7 +50,7 @@
     position: relative;
     display: block;
 
-    right: 62px;
+    right: 65px;
     width: 60px;
 
     transform: rotate(315deg);

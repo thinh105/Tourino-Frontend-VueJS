@@ -1,6 +1,5 @@
 <template>
   <div class="title-box">
-    <!-- <span :class="{ background }"><slot /></span> -->
     <span v-if="background" class="background"><slot /></span>
     <div v-else class="d-flex align-center justify-end"><slot /></div>
   </div>

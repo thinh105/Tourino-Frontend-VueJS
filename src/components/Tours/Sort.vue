@@ -1,7 +1,4 @@
 <template>
-  <!-- <v-row justify="center" align="center" class="my-2"> -->
-
-  <!-- prepend-icon="mdi-filter-variant" -->
   <v-select
     v-model="selection"
     :items="sortBy"
@@ -12,7 +9,6 @@
     hide-details
   >
     <template #selection="{ item }">
-      <!-- close @click:close="selection = ''" -->
       <!-- <v-chip class="trn-chip-center" color="primary"> -->
       <v-icon class="pr-2">{{ item.prependIcon }}</v-icon> {{ item.label
       }}<v-icon right>{{ item.appendIcon }}</v-icon>
@@ -32,10 +28,10 @@
 
 <script>
   import syncSelectionWithUrl from './Filter/mixins/syncSelectionWithUrl';
-  import { singleSelection } from './Filter/mixins/selection';
+  import { singleStringSelection } from './Filter/mixins/selection';
 
   export default {
-    mixins: [syncSelectionWithUrl('sort'), singleSelection('sort')],
+    mixins: [syncSelectionWithUrl('sort'), singleStringSelection('sort')],
     data: () => ({
       sortBy: [
         {
