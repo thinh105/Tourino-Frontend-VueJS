@@ -10,8 +10,7 @@
           <TrnSavingRibbon :price="tour.price" :old-price="tour.oldPrice"
         /></v-img>
 
-        <TrnCardName
-          :class="
+        <!-- :class="
             tour.name.length > 60
               ? 'longCardName'
               : tour.name.length > 30
@@ -19,10 +18,8 @@
               : tour.name.length > 17
               ? 'shortCardName'
               : 'veryShortCardName'
-          "
-        >
-          {{ tour.name }}</TrnCardName
-        >
+          " -->
+        <TrnCardName :name="tour.name" />
       </router-link>
     </div>
 
@@ -103,25 +100,5 @@
   .card-header {
     position: relative;
     margin-bottom: 2em;
-  }
-
-  .longCardName {
-    bottom: -1.7em;
-    font-size: 1.45em;
-  }
-
-  .mediumCardName {
-    bottom: -1.2em;
-    font-size: 1.6em;
-  }
-
-  .shortCardName {
-    bottom: -1.3em;
-    font-size: 1.8em;
-  }
-
-  .veryShortCardName {
-    bottom: -0.7em;
-    font-size: 1.8em;
   }
 </style>

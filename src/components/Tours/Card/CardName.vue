@@ -1,6 +1,22 @@
 <template>
-  <TrnSkewText background class="card-name">
-    <slot />
+  <TrnSkewText
+    background
+    class="card-name"
+    :class="
+      name.length > 100
+        ? 'greater-than-100'
+        : name.length > 80
+        ? 'greater-than-80'
+        : name.length > 60
+        ? 'greater-than-60'
+        : name.length > 30
+        ? 'greater-than-30'
+        : name.length > 17
+        ? 'greater-than-17'
+        : 'less-than-17-chars'
+    "
+  >
+    {{ name }}
   </TrnSkewText>
 </template>
 
@@ -9,6 +25,12 @@
 
   export default {
     components: { TrnSkewText },
+    props: {
+      name: {
+        type: String,
+        required: true,
+      },
+    },
   };
 </script>
 
@@ -24,5 +46,35 @@
 
   .title-box span {
     font-weight: light;
+  }
+
+  .greater-than-100 {
+    bottom: -1.7em;
+    font-size: 1.2em;
+  }
+
+  .greater-than-80 {
+    bottom: -1.7em;
+    font-size: 1.28em;
+  }
+
+  .greater-than-60 {
+    bottom: -1.7em;
+    font-size: 1.45em;
+  }
+
+  .greater-than-30 {
+    bottom: -1.2em;
+    font-size: 1.6em;
+  }
+
+  .greater-than-17 {
+    bottom: -1.3em;
+    font-size: 1.8em;
+  }
+
+  .less-than-17-chars {
+    bottom: -0.7em;
+    font-size: 1.8em;
   }
 </style>
