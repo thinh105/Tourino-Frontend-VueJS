@@ -5,7 +5,7 @@
       <v-icon color="white">mdi-star</v-icon>
     </v-chip>
 
-    <div class="mt-n1">
+    <div class="">
       <span class="text-caption">{{ pluralizedReviewsQuantity }}</span>
     </div>
   </div>

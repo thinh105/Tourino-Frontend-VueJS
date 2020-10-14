@@ -1,25 +1,34 @@
-import axios from 'axios';
+import ToursService from '@/common/service/tours.api';
 
-export const state = () => ({
-  tours: [],
+import { FETCH_TOUR, FETCH_REVIEWS } from '../type/actions';
+import { SET_TOUR } from '../type/mutations';
+
+const state = () => ({
+  tour: [],
+  reviews: [],
 });
 
-export const getters = {
-  tours: (state) => state.tours,
+const getters = {
+  tour: (state) => state.tour,
+  reviews: (state) => state.reviews,
 };
 
-export const mutations = {
-  UPDATE_PRODUCTS: (state, payload) => {
-    state.value = payload;
+const actions = {
+  [FETCH_TOUR]: async ({ commit }, slug) => {
+    const response = await ToursService.getTour(slug);
+    if (response) commit(SET_TOUR, response.data.data);
   },
 };
 
-export const actions = {
-  async getTours({ commit }) {
-    const response = await axios.get('/api/products');
-    commit('UPDATE_PRODUCTS', response.data);
+const mutations = {
+  [SET_TOUR](state, tour) {
+    state.tour = tour;
   },
-  updateActionProduct({ commit }) {
-    commit('UPDATE_PRODUCT', payload);
-  },
+};
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations,
 };

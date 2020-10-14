@@ -7,3 +7,6 @@ export const TRN_GLOBAL_TRANSITION = 'scroll-y-transition';
 export const TRN_ITEMS_PER_PAGE = 15;
 
 export const TRN_FILTER_MAX_PRICE = 1050;
+
+export const TRN_MINIMUM_ALLOWED_BOOKING_DATE = 7;
+export const TRN_MAXIMUM_ALLOWED_BOOKING_DATE = 365;

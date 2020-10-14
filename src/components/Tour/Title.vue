@@ -1,5 +1,5 @@
 <template>
-  <SkewText class="card-name text-h4 text-sm-h3 text-md-h2">
+  <SkewText background class="card-name py-6">
     <slot />
   </SkewText>
 </template>
@@ -14,12 +14,11 @@
 
 <style scoped>
   .card-name {
-    text-align: right;
-    position: absolute;
-    max-width: 800px;
+    text-align: center;
+    margin: auto;
+    /* max-width: 300px; */
     bottom: 0.3em;
     line-height: 1.5em;
-    right: 1em;
-    width: 70%;
+    /* width: 70%; */
   }
 </style>

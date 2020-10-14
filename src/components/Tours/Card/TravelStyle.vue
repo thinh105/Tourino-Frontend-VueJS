@@ -1,14 +1,14 @@
 <template>
   <v-row no-gutters>
-    <v-icon class="primary--text"> mdi-hiking </v-icon>
+    <v-icon style="font-size: 2em" class="primary--text"> mdi-hiking </v-icon>
 
-    <v-col class="mx-4" align="center">
+    <v-col class="mx-5" align="center">
       <v-row v-if="!expand">
-        <span v-for="index in 2" :key="index" class="text-body-2 mr-3 mb-1">
+        <span v-for="index in 2" :key="index" class="mr-3 mb-1">
           <router-link
             style="text-decoration: none"
             :to="{
-              path: 'tours',
+              name: 'Tours',
               query: { travelStyle: [travelStyle[index - 1]] },
             }"
           >
@@ -28,15 +28,11 @@
       </v-row>
 
       <v-row v-if="expand">
-        <span
-          v-for="(style, j) in travelStyle"
-          :key="j"
-          class="text-body-2 mr-3 mb-1"
-        >
+        <span v-for="(style, j) in travelStyle" :key="j" class="mr-3 mb-1">
           <router-link
             style="text-decoration: none"
             :to="{
-              path: 'tours',
+              name: 'Tours',
               query: { travelStyle: [style] },
             }"
           >

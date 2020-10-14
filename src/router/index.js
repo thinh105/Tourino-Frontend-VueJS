@@ -19,7 +19,7 @@ const routes = [
   },
   {
     name: 'Tour',
-    path: '/tours/:slug',
+    path: '/tour/:slug',
     // path: '/tour/',
     component: () => import('@/views/Tour.vue'),
     props: true,

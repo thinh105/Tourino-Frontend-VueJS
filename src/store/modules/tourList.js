@@ -38,6 +38,7 @@ const actions = {
   [FETCH_TOURS]: async ({ commit }, query) => {
     commit(FETCH_START);
     const response = await ToursService.getTours(query);
+
     if (response) commit(FETCH_END, response.data.data);
   },
 

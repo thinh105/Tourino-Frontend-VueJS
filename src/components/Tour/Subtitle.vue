@@ -1,5 +1,5 @@
 <template>
-  <SkewText class="card-name text-h4">
+  <SkewText class="card-name text-h4 pt-n4 pb-4">
     <slot />
   </SkewText>
 </template>
@@ -14,11 +14,10 @@
 
 <style scoped>
   .card-name {
-    text-align: center;
+    text-align: left;
     margin: auto;
-    max-width: 300px;
-    bottom: 0.3em;
+    /* max-width: 300px; */
     line-height: 1.5em;
-    width: 70%;
+    /* width: 70%; */
   }
 </style>

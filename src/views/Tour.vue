@@ -1,98 +1,129 @@
 <template>
-  <div class="tour">
-    <div style="position: relative" class="mt-n16">
-      <v-img
-        height="70vh"
+  <div style="max-width: 1200px; margin: auto" class="primary--text">
+    <v-row class="mt-4">
+      <v-col cols="12" md="8">
+        <!-- class="mt-n16" -->
+        <div style="position: relative">
+          <!-- class="tourino-clip-path-bottom" -->
+          <!-- height="80vh" -->
+          <!-- class="white--text align-end" -->
+          <!-- <div>
+            <v-carousel
+              :key="i"
+              cycle
+              hide-delimiter-background
+              show-arrows-on-hover
+              hide-delimiters
+            >
+              <v-carousel-item v-for="(item, i) in tour.images" :key="i" eager>
+                <v-img :src="item" eager />
+              </v-carousel-item>
+            </v-carousel>
+          </div> -->
+
+          <TrnCarousels :items="tour.images" />
+
+          <!-- <TrnTourTitle>{{ tour.name }}</TrnTourTitle> -->
+          <!-- <v-img
+        height="80vh"
         class="white--text align-end tourino-clip-path-bottom"
-        :src="tour['image-thumbnail']"
-      />
-      <TrnTourTitle> {{ tour.name }}</TrnTourTitle>
-    </div>
+        :src="tour.imageCover"
+      /> -->
+        </div>
+      </v-col>
 
-    <v-container style="max-width: 1100px; margin: auto">
-      <TrnTourSubtitle> Những điểm đến bạn sẽ ghé thăm</TrnTourSubtitle>
+      <v-col cols="12" md="4">
+        <TrnTitle class="text-h4">{{ tour.name }}</TrnTitle>
 
-      <p>- Đà Nẵng - Hội An - Huế</p>
+        <TrnQuickFacts :tour="tour" style="font-size: 16px" v-on="$listeners" />
+      </v-col>
+    </v-row>
 
-      <v-divider />
+    <v-container class="mt-6">
       <v-row>
-        <v-col cols="12" md="6">
-          <TrnSubtitle
-            class="text-h4"
-            style="position: relative; max-width: 200px; text-align: center"
-          >
-            Tour này có gì hay</TrnSubtitle
-          >
-          <p>
-            - Chiêm ngưỡng sự phát triển hưng thịnh của thành phố Đà Nẵng – mệnh
-            danh là thành phố đáng sống nhất Việt Nam. - Tham quan Phố cổ Hội An
-            với nét đẹp cổ kính bên dòng sông Hoài. - Viếng chùa Linh Ứng Bãi
-            Bụt - chiêm bái tượng Phật Quan Thế Âm cao nhất Việt Nam. - Khám phá
-            Bà Nà Hills - bằng hệ thống cáp treo đạt 2 kỷ lục Guinness, ngắm
-            toàn cảnh núi non hùng vỹ và tận hưởng khí hậu trong lành.
-          </p>
-        </v-col>
+        <v-col cols="12" md="8">
+          <div class="text-h4">Book With Extra Flexibility</div>
+          <TrnBookFlexibility />
 
-        <v-col cols="12" md="6">
-          <!-- max-width: 70%; -->
-          <!-- style="max-width: 70%; margin: auto" -->
-          <TrnCarousels class="tourino-clip-path my-16" :items="items" />
+          <div class="text-h4">Introduction</div>
+          <!-- <div class="my-2" style="white-space: pre-line; line-height: 1.4em" /> -->
+          <div
+            v-for="(line, i) in splitedSummary"
+            :key="i"
+            class="text-body-1 py-1"
+          >
+            {{ line }}.
+          </div>
+
+          <div class="text-h4">Your Travel, Your Tour</div>
+          <TrnPrivateTourBlock />
+
+          <div class="text-h4">Itinerary</div>
+          <TrnTimeline :timeline="tour.timeline" />
         </v-col>
+        <v-col cols="12" md="4"
+          ><TrnCheckAvailability :duration="tour.duration" :price="tour.price"
+        /></v-col>
       </v-row>
-
-      <TrnTourSubtitle> Bạn sẽ đi đâu?</TrnTourSubtitle>
-      <TrnTimeline />
     </v-container>
   </div>
 </template>
 
 <script>
   // @ is an alias to /src
-
+  import store from '@/store';
   import TrnCarousels from '@/components/Carousels.vue';
   import TrnTimeline from '@/components/Timeline.vue';
-  import TrnTourTitle from '../components/Tour/Title.vue';
-  import TrnTourSubtitle from '../components/Tour/Subtitle.vue';
+  import TrnBookFlexibility from '@/components/Tour/BookFlexibilityBlock.vue';
+  import TrnPrivateTourBlock from '@/components/Tour/PrivateTourBlock.vue';
+  import TrnCheckAvailability from '@/components/Tour/CheckAvailability.vue';
+
+  import TrnTitle from '@/components/Tour/Title.vue';
+
+  import { mapGetters } from 'vuex';
+  import TrnQuickFacts from '@/components/Tours/Card/quickFacts.vue';
+
+  import { FETCH_TOUR, FETCH_REVIEWS } from '../store/type/actions.js';
 
   export default {
     name: 'Tour',
     components: {
-      TrnTourTitle,
-      TrnTourSubtitle,
+      TrnBookFlexibility,
+      TrnPrivateTourBlock,
       TrnCarousels,
+      TrnCheckAvailability,
       TrnTimeline,
+      TrnQuickFacts,
+      TrnTitle,
     },
-    data: () => ({
-      tour: require('@/data/tour.json')[1], // eslint-disable-line global-require,
-      items: [
-        {
-          src:
-            'https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/11/nha-trag-10.jpg',
-          text: 'Bãi Tắm Nha Trang',
-        },
-        {
-          src: 'https://cdn2.ivivu.com/2018/03/20/15/ivivu-bai-dai.jpg',
-          text: 'Bãi Dài Nha Trang',
-        },
-        {
-          src: 'https://cdn2.ivivu.com/2018/03/13/16/ivivu-i-resort.jpg',
-          text: 'I Resort',
-        },
-        {
-          src: 'https://cdn2.ivivu.com/2018/03/20/15/ivivu-vinpearl-land.jpg',
-          text: 'Vinperland Nha Trang',
-        },
-        {
-          src: 'https://cdn2.ivivu.com/2019/09/23/15/ivivu-nha-trang4.jpg',
-          text: 'Vịnh Nha Trang',
-        },
-        {
-          src:
-            'https://cdn2.ivivu.com/2019/03/01/16/ivivu-tour-nha-trang-dao-bich-dam.jpg',
-          text: 'Đảo Bích Đầm',
-        },
-      ],
-    }),
+
+    props: {
+      slug: {
+        type: String,
+        required: true,
+      },
+    },
+
+    beforeRouteEnter(to, from, next) {
+      Promise.all([
+        store.dispatch(FETCH_TOUR, to.params.slug),
+        // store.dispatch(FETCH_REVIEWS, to.params.slug),
+      ]).then(() => {
+        next();
+      });
+    },
+
+    computed: {
+      ...mapGetters(['tour']),
+      splitedSummary() {
+        return (
+          this.tour.summary
+            .trim()
+            // .substring(0, this.tour.summary.length - 1)
+            .split(/\. |\. |! |\n/)
+        );
+      },
+    },
   };
 </script>
 
@@ -102,6 +133,12 @@
   }
 
   .tourino-clip-path-bottom {
-    clip-path: polygon(0 0, 100% 0%, 100% 70%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0%, 100% 75%, 0% 100%);
+  }
+
+  .tour-page {
+    max-width: 800px;
+    /* max-height: 800px; */
+    /* margin: auto; */
   }
 </style>

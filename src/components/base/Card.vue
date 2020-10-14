@@ -1,5 +1,5 @@
 <template>
-  <v-card class="base-card rounded-tr-xl rounded-bl-xl">
+  <v-card flat class="base-card rounded-tr-xl rounded-bl-xl">
     <slot />
   </v-card>
 </template>
@@ -13,11 +13,12 @@
     margin: auto;
     height: 100%;
     width: 100%;
-    background: #0000;
+    background: #e8fdff7b;
   }
 
   .base-card:hover {
-    background: rgb(241, 252, 255);
+    background: #ebfeffd7;
+    /* rgb(209, 243, 255); */
     transition: transform 500ms ease-in-out;
     transform: scale(1.05);
   }

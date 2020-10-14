@@ -1,6 +1,7 @@
 <template>
   <v-select
     v-model="selection"
+    style="width: 250px"
     :items="sortBy"
     clearable
     label="Sort By"
@@ -9,7 +10,7 @@
     hide-details
   >
     <template #selection="{ item }">
-      <!-- <v-chip class="trn-chip-center" color="primary"> -->
+      <!-- <v-chip  color="primary"> -->
       <v-icon class="pr-2">{{ item.prependIcon }}</v-icon> {{ item.label
       }}<v-icon right>{{ item.appendIcon }}</v-icon>
       <!-- </v-chip> -->

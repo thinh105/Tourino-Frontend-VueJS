@@ -8,16 +8,12 @@
       grow
       dark
     >
-      <v-tab href="#login" class="text-capitalize">
-        Login
-      </v-tab>
+      <v-tab href="#login" class="text-capitalize"> Login </v-tab>
       <v-tab-item value="login">
         <TrnLogin />
       </v-tab-item>
 
-      <v-tab href="#signup" class="text-capitalize">
-        Sign Up
-      </v-tab>
+      <v-tab href="#signup" class="text-capitalize"> Sign Up </v-tab>
       <v-tab-item value="signup">
         <TrnSignUp />
       </v-tab-item>

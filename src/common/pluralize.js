@@ -1,2 +1,4 @@
-export default (count, noun, suffix = 's') =>
-  `${count} ${noun}${count > 1 ? suffix : ''}`;
+export default (count, singular, plural) => {
+  if (!plural) return `${count} ${singular}${count > 1 ? 's' : ''}`;
+  return `${count} ${plural}`;
+};

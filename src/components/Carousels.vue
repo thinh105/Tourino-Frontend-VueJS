@@ -2,13 +2,18 @@
   <v-carousel
     cycle
     hide-delimiter-background
-    delimiter-icon="mdi-star"
     show-arrows-on-hover
-    height="65vh"
+    hide-delimiters
     vertical
+    progress
   >
-    <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src">
-      <router-link v-if="item.link" :to="item.link" class="image-link" />
+    <v-carousel-item
+      v-for="(item, i) in items"
+      :key="i"
+      eager
+      :src="item.src ? item.src : item"
+    >
+      <router-link v-if="link" :to="item.link" class="image-link" />
       <v-row class="fill-height pb-6" align="end" justify="start">
         <v-col cols="auto" md="1" />
         <v-col cols="auto">
@@ -26,8 +31,6 @@
 </template>
 
 <script>
-  import { TRN_GLOBAL_TRANSITION } from '@/common/config.js';
-
   export default {
     props: {
       items: {
@@ -35,11 +38,10 @@
         default: undefined,
         // required: true,
       },
+      link: {
+        type: Boolean,
+      },
     },
-
-    data: () => ({
-      TRN_GLOBAL_TRANSITION,
-    }),
   };
 </script>
 

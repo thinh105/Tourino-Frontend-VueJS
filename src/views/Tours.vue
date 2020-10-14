@@ -1,17 +1,6 @@
 <template>
   <div>
-    <div class="TourList">
-      <!-- <v-row v-if="!$vuetify.breakpoint.mobile">
-          <v-col cols="2">
-            <TrnFilter />
-          </v-col>
-          <v-col cols="10">
-            <TrnSort />
-            <TrnGrid ref="grid" :tours="tours" />  -->
-      <!-- <Grid v-if="(!isLoading)" :tours="tours" /> -->
-      <!-- </v-col>
-        </v-row> -->
-
+    <div class="tour-list">
       <TrnGrid />
     </div>
   </div>
@@ -36,8 +25,8 @@
 </script>
 
 <style scoped>
-  .TourList {
-    max-width: 1100px !important;
+  .tour-list {
+    max-width: 1080px !important;
     /* min-height: 800px; */
     margin: auto;
   }

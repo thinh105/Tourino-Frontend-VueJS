@@ -2,11 +2,12 @@
 export const FETCH_START = 'setLoading';
 export const FETCH_END = 'setTour';
 
-export const UPDATE_TOUR_IN_LIST = 'updateTourInList';
-
 // tourList - Filter
 export const SET_DESTINATIONS = 'fetchDestinations';
 export const SET_TRAVELSTYLE = 'fetchTravelStyle';
+
+// tour
+export const SET_TOUR = 'setTour';
 
 // auth
 export const SET_AUTH = 'setUser';

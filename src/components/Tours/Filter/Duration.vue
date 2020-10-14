@@ -9,13 +9,9 @@
     :class="{ 'trn-no-border': hasSelectionValue() }"
   >
     <template #selection="{ item }">
-      <v-chip
-        class="trn-chip-center"
-        color="primary"
-        close
-        @click:close="selection = ''"
-        >{{ item.label }}</v-chip
-      >
+      <v-chip color="primary" close @click:close="selection = ''">{{
+        item.label
+      }}</v-chip>
     </template>
   </v-select>
 </template>

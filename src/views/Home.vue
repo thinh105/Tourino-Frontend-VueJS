@@ -1,6 +1,11 @@
 <template>
   <div>
-    <TrnCarousels class="mt-n16" :items="getFeaturedTours" />
+    <TrnCarousels
+      style="height: 80vh"
+      class="mt-n16"
+      :items="getFeaturedTours"
+      link
+    />
 
     <div class="TourList">
       <!-- <v-row v-if="!$vuetify.breakpoint.mobile">
@@ -44,7 +49,7 @@
 
 <style scoped>
   .TourList {
-    max-width: 1100px !important;
+    max-width: 1080px !important;
     /* min-height: 800px; */
     margin: auto;
   }

@@ -16,49 +16,26 @@ TrnApi.interceptors.response.use((response) => response, errorResponseHandler);
 
 // Vue.prototype.$http = TrnApi;
 
+const queryStringify = (query) =>
+  qs.stringify(query, {
+    encode: false,
+    indices: false,
+    arrayFormat: 'comma',
+    addQueryPrefix: true,
+  });
+
 export const apiService = {
-  query(resource) {
-    return TrnApi.get(resource);
-    // .catch((error) => {
-    //   throw new Error(`[Tourino] ApiService ${error}`);
-    // });
-  },
+  query: (resource) => TrnApi.get(resource),
 
-  get(resourse, query) {
-    const queryString = qs.stringify(query, {
-      encode: false,
-      indices: false,
-      arrayFormat: 'comma',
-      addQueryPrefix: true,
-    });
+  get: (resourse, query) => TrnApi.get(resourse + queryStringify(query)),
 
-    return TrnApi.get(resourse + queryString);
-  },
-  // get(resource, slug = '') {
-  //   return TrnApi.get(`${resource}/${slug}`);
-  //   // .catch((error) => {
-  //   // throw new Error(`[Tourino] ApiService ${error}`);
-  //   // });
-  // },
+  post: (resource, params) => TrnApi.post(`${resource}`, params),
 
-  post(resource, params) {
-    return TrnApi.post(`${resource}`, params);
-  },
+  update: (resource, slug, params) => TrnApi.put(`${resource}/${slug}`, params),
 
-  update(resource, slug, params) {
-    return TrnApi.put(`${resource}/${slug}`, params);
-  },
+  put: (resource, params) => TrnApi.put(`${resource}`, params),
 
-  put(resource, params) {
-    return TrnApi.put(`${resource}`, params);
-  },
-
-  delete(resource) {
-    return TrnApi.delete(resource);
-    // .catch((error) => {
-    //   throw new Error(`[RWV] ApiService ${error}`);
-    // });
-  },
+  delete: (resource) => TrnApi.delete(resource),
 };
 
 export const TagsService = {

@@ -1,7 +1,7 @@
 import { TRN_ITEMS_PER_PAGE, TRN_FILTER_MAX_PRICE } from '@/common/config';
 import { apiService } from './api';
 
-const convertToBackendQuery = function (query) {
+const backendQuerify = function (query) {
   let { destinations, travelStyle, price, rating, duration, sort, page } = {
     ...query,
   };
@@ -12,19 +12,19 @@ const convertToBackendQuery = function (query) {
       lte: +price[1] !== TRN_FILTER_MAX_PRICE ? price[1] : undefined,
     };
 
-  rating = rating ? { gte: rating } : undefined;
+  if (rating) rating = { gte: rating };
 
-  if (duration) {
+  if (duration)
     duration = {
       gte: +duration[0] || undefined,
       lte: +duration[1] || undefined,
     };
-  }
 
-  destinations = destinations ? { all: [...destinations] } : undefined;
+  if (destinations) destinations = { all: [...destinations] };
+  if (travelStyle) travelStyle = { all: [...travelStyle] };
 
-  travelStyle = travelStyle ? { all: [...travelStyle] } : undefined;
   const limit = TRN_ITEMS_PER_PAGE;
+
   return {
     destinations,
     travelStyle,
@@ -40,18 +40,14 @@ const convertToBackendQuery = function (query) {
 export default {
   query: (params) => apiService.query('tours', { params }),
 
-  getTours: (query) => {
-    const backendQuery = convertToBackendQuery(query);
-
-    return apiService.get('tours', backendQuery);
-  },
+  getTours: (query) => apiService.get('tours', backendQuerify(query)),
 
   getDestinations: () => apiService.get('tours/destinations'),
-  getTravelStyle() {
-    return apiService.get('tours/travelStyle');
-  },
+
+  getTravelStyle: () => apiService.get('tours/travelStyle'),
+
   getTour(slug) {
-    return apiService.get('tours', slug);
+    return apiService.get(`tours/slug/${slug}`);
   },
   create(params) {
     return apiService.post('tours', { tour: params });

@@ -13,20 +13,21 @@
         Try clearing your filters to get more!
       </div>
       <div v-else>
-        <v-row align="center">
+        <v-row align="center" justify="center">
           <v-col>
             <TrnSort class="pb-2 pt-0" />
           </v-col>
-          <v-spacer />
-          <!-- <v-col class="text-center text-body-1 primary--text">
+
+          <v-col class="text-center text-body-1 primary--text">
             We found
             <span class="font-weight-medium secondary--text text--darken-1">{{
               tourQuantity
             }}</span>
             for you!
-          </v-col> -->
+          </v-col>
           <v-col class="text-right">
             <TrnPagination
+              v-if="total"
               no-button
               :length="pageQuantity"
               :returned="returned"
@@ -53,6 +54,7 @@
         </stack>
 
         <TrnPagination
+          v-if="total"
           class="text-center"
           :length="pageQuantity"
           :returned="returned"
@@ -102,7 +104,13 @@
     },
 
     watch: {
-      tours: 'reloadGrid',
+      // tours() {
+      //   if (this.tours) {
+      //     this.reloadGrid();
+      //   } else {
+      //     console.log('teng');
+      //   }
+      // },
 
       $route: {
         handler: 'fetchTours',
@@ -143,9 +151,9 @@
   .trn-no-border.v-text-field > .v-input__control > .v-input__slot:after {
     border-style: none;
   }
-  .trn-chip-center {
+  /* .trn-chip-center {
     left: 50%;
     z-index: 4;
     transform: translate(-50%);
-  }
+  } */
 </style>

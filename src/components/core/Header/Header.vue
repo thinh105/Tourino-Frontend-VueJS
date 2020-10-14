@@ -55,8 +55,8 @@
       menu: [
         {
           icon: 'mdi-compass',
-          text: 'Tour',
-          route: '/tour',
+          text: 'Tours',
+          route: '/tours',
         },
         {
           icon: 'mdi-map-marker',

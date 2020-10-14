@@ -1,22 +1,19 @@
 <template>
   <v-row no-gutters>
-    <v-icon class="primary--text">mdi-map-marker-outline</v-icon>
+    <v-icon style="font-size: 2em" class="primary--text pr-2"
+      >mdi-map-marker-outline</v-icon
+    >
 
-    <v-col class="mx-4">
-      <v-row>
-        <span
-          v-for="(destination, j) in destinations"
-          :key="j"
-          class="text-body-2 pr-3 pb-1"
+    <!-- <v-col class="mx-4"> -->
+    <v-col>
+      <span v-for="(destination, j) in destinations" :key="j" class="pr-3 pb-1">
+        <router-link
+          style="text-decoration: none"
+          :to="{ name: 'Tours', query: { destinations: [destination] } }"
         >
-          <router-link
-            style="text-decoration: none"
-            :to="{ path: 'tours', query: { destinations: [destination] } }"
-          >
-            {{ destination }}
-          </router-link>
-        </span>
-      </v-row>
+          {{ destination }}
+        </router-link>
+      </span>
     </v-col>
   </v-row>
 </template>
