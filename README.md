@@ -1,12 +1,12 @@
-# Tourino
-
-## About this project
+# About this project
 
 A Single Page Application Front-end using `Vue.js`, `Vuex`, `Vuetify`, `Axios` for the Tourino Project
 
-### Live Demo : https://tourino.netlify.app/
+## Live Demo
 
-### Account Demo:
+https://tourino.netlify.app/
+
+## Account Demo:
 
 Email
 
@@ -18,11 +18,20 @@ mariedang@mailinator.com
 
 pass: ![](https://i.imgur.com/RYL5fc9.png)
 
-## Features
+# Tech Stacks:
 
-- Unique UI that I designed and coded from scratch, not using any pre-made template on the internet.
-- Responsive UI (Desktop and Mobile).
+- Vue 2
+- Vue Router
+- Vuex
+- Vuetify
+- Axios
+- Material Design Icons
+
+# Features
+
+- Unique Responsive UI that was designed and coded from scratch, not using any pre-made template on the internet.
 - Fetch and show tours with paginations from Tourino Backend API.
+- Fetch and show detail tour page from Tourino Backend API.
 - Filter tours by
   - Destinations, (multi-choice)
   - Travel Style, (multi-choice)
@@ -45,24 +54,12 @@ pass: ![](https://i.imgur.com/RYL5fc9.png)
   - When Backend API are not response
   - Display Error messages from API
 
-## Project setup
+# To do list
 
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [ ] Show list of reviews with filter/sort/pagination on the detail tour page
+- [ ] Alow Users to create/edit/delete their review
+- [ ] Wishlist feature - allow Users add any tour to thier wishlist by click Heart.
+- [ ] User's detail page
+  - [ ] show list of wishlist feature
+  - [ ] show list of reviews and their corresponding tours that Users had made
+- [ ] Booking Feature
