@@ -1,6 +1,6 @@
 # About this project
 
-A Single Page Application Front-end using `Vue.js`, `Vuex`, `Vuetify`, `Axios` for the Tourino Project
+A Single Page Application Front-end using `Vue.js`, `Vuex`, `Vuetify`, `Axios` for the Tourino Project - A Travel Agency Website
 
 ## Live Demo
 
@@ -49,7 +49,7 @@ pass: ![](https://i.imgur.com/RYL5fc9.png)
   - User can click the back/forward button on the browser and the selections will be sync with the URL.
 - Authentication & Authorization
   - Log in, sign up, reset the password.
-  - If an anonymous visit the authorized link, they will be redirected to the Authentication page
+  - If an anonymous visit the authorized link, they will be redirected to the `Authentication` page
 - Error handling
   - When Backend API are not response
   - Display Error messages from API
