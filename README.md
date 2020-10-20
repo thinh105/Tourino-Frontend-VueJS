@@ -18,10 +18,6 @@ It's kind of a feature, not a bug! 😅 😆
 
 I want to play fair and will not use some tricks to abuse their server every 30 minutes just to keep my small project from sleeping. That's not my style!
 
-Hope you understand and continue to support me!
-
-**Thank you for your patience!**
-
 ## Account Demo:
 
 Email
