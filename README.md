@@ -1,3 +1,5 @@
+![](Tourino-banner-front-end.png)
+
 # About this project
 
 A Single Page Application Front-end using `Vue.js`, `Vuex`, `Vuetify`, `Axios` for the Tourino Project - A Travel Agency Website

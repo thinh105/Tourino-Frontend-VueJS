@@ -1,11 +1,6 @@
 <template>
   <div>
-    <TrnCarousels
-      style="height: 80vh"
-      class="mt-n16"
-      :items="getFeaturedTours"
-      link
-    />
+    <TrnCarousels class="mt-n16" :items="getFeaturedTours" link />
 
     <div class="TourList">
       <!-- <v-row v-if="!$vuetify.breakpoint.mobile">
