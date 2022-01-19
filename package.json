@@ -8,7 +8,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.6.5",
     "date-fns": "^2.16.1",
